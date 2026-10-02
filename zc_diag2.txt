@@ -1,0 +1,34 @@
+== PWD ==
+/home/runner/work/zc-signal-terminal/zc-signal-terminal
+== LS ==
+total 48
+drwxr-xr-x 6 runner runner 4096 Oct  2 16:52 .
+drwxr-xr-x 3 runner runner 4096 Oct  2 16:52 ..
+drwxr-xr-x 7 runner runner 4096 Oct  2 16:52 .git
+drwxr-xr-x 3 runner runner 4096 Oct  2 16:52 .github
+-rw-r--r-- 1 runner runner   54 Oct  2 16:52 .gitignore
+-rw-r--r-- 1 runner runner  250 Oct  2 16:52 package-lock.json
+-rw-r--r-- 1 runner runner  498 Oct  2 16:52 package.json
+drwxr-xr-x 3 runner runner 4096 Oct  2 16:52 storage
+drwxr-xr-x 2 runner runner 4096 Oct  2 16:52 tools
+-rw-r--r-- 1 runner runner 2273 Oct  2 16:52 zc_diag.txt
+-rw-r--r-- 1 runner runner   75 Oct  2 16:52 zc_diag2.txt
+-rw-r--r-- 1 runner runner  552 Oct  2 16:52 zc_glass_log.txt
+== GIT LS-FILES ==
+.github/workflows/zc-signal-terminal.yml
+.gitignore
+package-lock.json
+package.json
+"storage/emulated/0/\345\267\245\344\275\234\345\214\272/models/_manifest.json"
+"storage/emulated/0/\345\267\245\344\275\234\345\214\272/models/shizuku/expressions/f01.exp.json"
+tools/fetch_models.py
+tools/filescan.py
+tools/glass_skin.py
+zc_diag.txt
+zc_glass_log.txt
+== FIND 8 ==
+== REPO SIZE ==
+500K	.
+== SCRIPT CHECK ==
+找不到目标文件：/home/runner/work/zc-signal-terminal/zc-signal-terminal/8.js
+rc=2
