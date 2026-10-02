@@ -1,0 +1,20 @@
+== PY_COMPILE ==
+COMPILE_OK
+== SELFTEST ==
+运行 8.js 玻璃皮肤注入器自检 …
+  [ok] 注入成功（4 项变更）
+  [ok] 重复注入幂等（第二次无变更）
+  [ok] 四类标记各出现恰好 1 次
+  [ok] 回滚后与原文完全一致（CSS 1 处、HTML 层 1 处、脚本 1 处、设置项 1 处）
+  [ok] 漂移 / 光泽 / 光晕 / 减少动效 / 降级兜底 全部就位
+  [ok] node --check 通过（语法有效）
+  [skip] 未找到 8.js（无法校验真实锚点）
+
+自检未通过 ✘
+  - JS 含 </（会被 script 标签提前结束）
+selftest_rc=1
+== CHECK ==
+找不到目标文件：/home/runner/work/zc-signal-terminal/zc-signal-terminal/8.js
+check_rc=2
+== NODE ==
+v22.23.3

@@ -560,7 +560,7 @@ def selftest():
             if r.returncode != 0:
                 bad.append("node --check 未通过：%s" % (r.stderr.strip().splitlines()[:2]))
             else:
-                ok("node --check 通过（%s）" % r"--"[0:0] or "语法有效")
+                ok("node --check 通过（语法有效）")
     else:
         print("  [skip] 本机没有 node，跳过 node --check")
 
