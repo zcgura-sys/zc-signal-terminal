@@ -1,102 +1,110 @@
 {
-  "generatedAt": "2026-10-02T08:15:19Z",
+  "version": 1,
+  "generatedAt": "2026-10-02T08:17:00Z",
+  "pathBase": "relative to models/ (the directory containing this file)",
   "source": "https://github.com/guansss/pixi-live2d-display (test/assets)",
-  "license": "Model assets are Live2D Inc. sample data under the Live2D Free Material License Agreement (NOT MIT). See models/README.md.",
-  "cubism4Core": "https://cubism.live2d.com/sdk-web/cubismcore/live2dcubismcore.min.js",
-  "cubism2Core": "https://cdn.jsdelivr.net/gh/dylanNew/live2d/webgl/Live2D/lib/live2d.min.js",
+  "license": "Model assets are Live2D Inc. sample data under the Live2D Free Material License Agreement (NOT MIT, NOT covered by this repo's license). See models/README.md.",
+  "cores": {
+    "cubism4": "https://cubism.live2d.com/sdk-web/cubismcore/live2dcubismcore.min.js",
+    "cubism2": "https://cdn.jsdelivr.net/gh/dylanNew/live2d/webgl/Live2D/lib/live2d.min.js"
+  },
   "models": [
     {
       "id": "haru",
       "name": "Haru",
       "runtime": "cubism4",
-      "entry": "models/haru/haru_greeter_t03.model3.json",
-      "moc": "models/haru/haru_greeter_t03.moc3",
+      "entry": "haru/haru_greeter_t03.model3.json",
+      "moc": "haru/haru_greeter_t03.moc3",
       "textures": [
-        "models/haru/haru_greeter_t03.2048/texture_00.png",
-        "models/haru/haru_greeter_t03.2048/texture_01.png"
+        "haru/haru_greeter_t03.2048/texture_00.png",
+        "haru/haru_greeter_t03.2048/texture_01.png"
       ],
-      "physics": "models/haru/haru_greeter_t03.physics3.json",
-      "pose": "models/haru/haru_greeter_t03.pose3.json",
-      "expressions": [
-        "F01", "F02", "F03", "F04", "F05", "F06", "F07", "F08"
-      ],
+      "physics": "haru/haru_greeter_t03.physics3.json",
+      "pose": "haru/haru_greeter_t03.pose3.json",
+      "expressions": ["f00", "f01", "f02", "f03", "f04", "f05", "f06", "f07"],
       "motions": {
-        "Idle": ["models/haru/motion/haru_g_idle.motion3.json"],
-        "TapBody": [
-          "models/haru/motion/haru_g_m05.motion3.json",
-          "models/haru/motion/haru_g_m07.motion3.json",
-          "models/haru/motion/haru_g_m14.motion3.json",
-          "models/haru/motion/haru_g_m15.motion3.json"
+        "Idle": [
+          "haru/motion/haru_g_idle.motion3.json",
+          "haru/motion/haru_g_m07.motion3.json",
+          "haru/motion/haru_g_m15.motion3.json"
+        ],
+        "Tap": [
+          "haru/motion/haru_g_m14.motion3.json",
+          "haru/motion/haru_g_m05.motion3.json"
         ]
       },
-      "sounds": [],
-      "sizeBytes": 3310000
+      "sounds": [
+        "../shizuku/sounds/flickHead_00.mp3",
+        "../shizuku/sounds/flickHead_01.mp3"
+      ],
+      "sizeBytes": 3310000,
+      "notes": "motion3.json 的 Tap 动作音效指向 ../shizuku/sounds/*.mp3（跨模型相对路径，指向本目录内文件）。DisplayInfo (cdi3.json) 上游未提供，为可选项。"
     },
     {
       "id": "shizuku",
       "name": "Shizuku",
       "runtime": "cubism2",
-      "entry": "models/shizuku/shizuku.model.json",
-      "moc": "models/shizuku/shizuku.moc",
+      "entry": "shizuku/shizuku.model.json",
+      "moc": "shizuku/shizuku.moc",
       "textures": [
-        "models/shizuku/shizuku.1024/texture_00.png",
-        "models/shizuku/shizuku.1024/texture_01.png",
-        "models/shizuku/shizuku.1024/texture_02.png",
-        "models/shizuku/shizuku.1024/texture_03.png",
-        "models/shizuku/shizuku.1024/texture_04.png",
-        "models/shizuku/shizuku.1024/texture_05.png"
+        "shizuku/shizuku.1024/texture_00.png",
+        "shizuku/shizuku.1024/texture_01.png",
+        "shizuku/shizuku.1024/texture_02.png",
+        "shizuku/shizuku.1024/texture_03.png",
+        "shizuku/shizuku.1024/texture_04.png",
+        "shizuku/shizuku.1024/texture_05.png"
       ],
-      "physics": "models/shizuku/shizuku.physics.json",
-      "pose": "models/shizuku/shizuku.pose.json",
+      "physics": "shizuku/shizuku.physics.json",
+      "pose": "shizuku/shizuku.pose.json",
       "expressions": ["f01", "f02", "f03", "f04"],
       "motions": {
         "Idle": [
-          "models/shizuku/motions/idle_00.mtn",
-          "models/shizuku/motions/idle_01.mtn",
-          "models/shizuku/motions/idle_02.mtn"
+          "shizuku/motions/idle_00.mtn",
+          "shizuku/motions/idle_01.mtn",
+          "shizuku/motions/idle_02.mtn"
         ],
         "TapBody": [
-          "models/shizuku/motions/tapBody_00.mtn",
-          "models/shizuku/motions/tapBody_01.mtn",
-          "models/shizuku/motions/tapBody_02.mtn"
+          "shizuku/motions/tapBody_00.mtn",
+          "shizuku/motions/tapBody_01.mtn",
+          "shizuku/motions/tapBody_02.mtn"
         ],
         "FlickHead": [
-          "models/shizuku/motions/flickHead_00.mtn",
-          "models/shizuku/motions/flickHead_01.mtn",
-          "models/shizuku/motions/flickHead_02.mtn"
+          "shizuku/motions/flickHead_00.mtn",
+          "shizuku/motions/flickHead_01.mtn",
+          "shizuku/motions/flickHead_02.mtn"
         ],
         "Shake": [
-          "models/shizuku/motions/shake_00.mtn",
-          "models/shizuku/motions/shake_01.mtn",
-          "models/shizuku/motions/shake_02.mtn"
+          "shizuku/motions/shake_00.mtn",
+          "shizuku/motions/shake_01.mtn",
+          "shizuku/motions/shake_02.mtn"
         ],
         "PinchIn": [
-          "models/shizuku/motions/pinchIn_00.mtn",
-          "models/shizuku/motions/pinchIn_01.mtn",
-          "models/shizuku/motions/pinchIn_02.mtn"
+          "shizuku/motions/pinchIn_00.mtn",
+          "shizuku/motions/pinchIn_01.mtn",
+          "shizuku/motions/pinchIn_02.mtn"
         ],
         "PinchOut": [
-          "models/shizuku/motions/pinchOut_00.mtn",
-          "models/shizuku/motions/pinchOut_01.mtn",
-          "models/shizuku/motions/pinchOut_02.mtn"
+          "shizuku/motions/pinchOut_00.mtn",
+          "shizuku/motions/pinchOut_01.mtn",
+          "shizuku/motions/pinchOut_02.mtn"
         ]
       },
       "sounds": [
-        "models/shizuku/sounds/flickHead_00.mp3",
-        "models/shizuku/sounds/flickHead_01.mp3",
-        "models/shizuku/sounds/flickHead_02.mp3",
-        "models/shizuku/sounds/pinchIn_00.mp3",
-        "models/shizuku/sounds/pinchIn_01.mp3",
-        "models/shizuku/sounds/pinchIn_02.mp3",
-        "models/shizuku/sounds/pinchOut_00.mp3",
-        "models/shizuku/sounds/pinchOut_01.mp3",
-        "models/shizuku/sounds/pinchOut_02.mp3",
-        "models/shizuku/sounds/shake_00.mp3",
-        "models/shizuku/sounds/shake_01.mp3",
-        "models/shizuku/sounds/shake_02.mp3",
-        "models/shizuku/sounds/tapBody_00.mp3",
-        "models/shizuku/sounds/tapBody_01.mp3",
-        "models/shizuku/sounds/tapBody_02.mp3"
+        "shizuku/sounds/flickHead_00.mp3",
+        "shizuku/sounds/flickHead_01.mp3",
+        "shizuku/sounds/flickHead_02.mp3",
+        "shizuku/sounds/pinchIn_00.mp3",
+        "shizuku/sounds/pinchIn_01.mp3",
+        "shizuku/sounds/pinchIn_02.mp3",
+        "shizuku/sounds/pinchOut_00.mp3",
+        "shizuku/sounds/pinchOut_01.mp3",
+        "shizuku/sounds/pinchOut_02.mp3",
+        "shizuku/sounds/shake_00.mp3",
+        "shizuku/sounds/shake_01.mp3",
+        "shizuku/sounds/shake_02.mp3",
+        "shizuku/sounds/tapBody_00.mp3",
+        "shizuku/sounds/tapBody_01.mp3",
+        "shizuku/sounds/tapBody_02.mp3"
       ],
       "sizeBytes": 6900000
     }
