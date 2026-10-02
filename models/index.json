@@ -34,11 +34,11 @@
         ]
       },
       "sounds": [
-        "../shizuku/sounds/flickHead_00.mp3",
-        "../shizuku/sounds/flickHead_01.mp3"
+        "shizuku/sounds/flickHead_00.mp3",
+        "shizuku/sounds/flickHead_01.mp3"
       ],
       "sizeBytes": 3310000,
-      "notes": "motion3.json 的 Tap 动作音效指向 ../shizuku/sounds/*.mp3（跨模型相对路径，指向本目录内文件）。DisplayInfo (cdi3.json) 上游未提供，为可选项。"
+      "notes": "haru_greeter_t03.model3.json 内部用 ../shizuku/sounds/*.mp3 引用这两段音效（上游原始写法），因此 haru/ 不能单独拷走。DisplayInfo (haru_greeter_t03.cdi3.json) 上游未提供，属可选项，缺失不影响渲染。"
     },
     {
       "id": "shizuku",
