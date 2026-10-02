@@ -37,7 +37,7 @@ JS_START = "/* ZC-GLASS SCRIPT START */"
 JS_END = "/* ZC-GLASS SCRIPT END */"
 
 SVG_ANCHOR = '<svg width="0" height="0" style="position:absolute"'
-SEG_ANCHOR = '<div class="seg" id="segFont">'
+SETTINGS_ROW_HEAD = '<div class="seg" id="segFont">'
 
 
 # ---------------------------------------------------------------------------
@@ -120,21 +120,22 @@ html.zc-glass .toast{
 html.zc-glass .toast.error{background:color-mix(in srgb,var(--danger) 92%,transparent)}
 html.zc-glass .toast.ok{background:color-mix(in srgb,var(--ok) 92%,transparent)}
 
-/* ---------- 面板内的小卡片：半透明 + 顶部高光（不再叠加 backdrop-filter，
-              父级已模糊，避免聊天区大量小卡片拖慢滚动） ---------- */
+/* ---------- 面板内的小卡片：半透明 + 顶部高光 ----------
+   父级已经模糊过，这里不再叠加 backdrop-filter，避免聊天区
+   存在大量小卡片时拖慢滚动（性能取舍）。 */
 html.zc-glass .code,
 html.zc-glass .fcard,
 html.zc-glass .think,
 html.zc-glass .astep,
 html.zc-glass .agent-sum,
-html.zc-glass .chip-att,
-html.zc-glass .msg.user .bubble{
+html.zc-glass .chip-att{
   background:color-mix(in srgb,var(--surface) 76%,transparent);
   border-color:var(--zc-glass-line);
   box-shadow:inset 0 1px 0 var(--zc-glass-hi);
 }
 html.zc-glass .msg.user .bubble{
   background:color-mix(in srgb,var(--bg-3) 74%,transparent);
+  box-shadow:inset 0 1px 0 var(--zc-glass-hi);
 }
 html.zc-glass .fcard .fc-b,
 html.zc-glass .code pre{background:color-mix(in srgb,var(--code-bg) 82%,transparent)}
@@ -226,59 +227,59 @@ SETTINGS_ROW = (
 
 # ---------------------------------------------------------------------------
 # 4) 脚本：偏好读写 + 指针视差
-#    注意：不得出现反引号与 ${，也不得出现 </ 序列（会被所在模板/标签截断）
+#    注意：不得出现反引号与 ${，也不得出现 </ 序列（会被所在模板 / 标签截断）
 # ---------------------------------------------------------------------------
 JS = (
     "<script>\n"
-    JS_START + "\n"
-    "(function () {\n"
-    "  'use strict';\n"
-    "  try {\n"
-    "    var root = document.documentElement;\n"
-    "    var KEY = 'zc_gura_glass';\n"
-    "    var reduced = false;\n"
-    "    try { reduced = !!(window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches); } catch (e) {}\n"
-    "    function read() {\n"
-    "      try { var v = localStorage.getItem(KEY); return v === null ? true : v === '1'; } catch (e) { return true; }\n"
-    "    }\n"
-    "    function write(on) { try { localStorage.setItem(KEY, on ? '1' : '0'); } catch (e) {} }\n"
-    "    function apply(on) {\n"
-    "      root.classList.toggle('zc-glass', !!on);\n"
-    "      var cb = document.getElementById('sGlass');\n"
-    "      if (cb) {\n"
-    "        cb.checked = !!on;\n"
-    "        if (!cb.zcBound) {\n"
-    "          cb.zcBound = 1;\n"
-    "          cb.addEventListener('change', function () { apply(cb.checked); write(cb.checked); });\n"
-    "        }\n"
-    "      }\n"
-    "    }\n"
-    "    apply(read());\n"
-    "\n"
-    "    // 指针视差：背板随指针做极小位移，让前景玻璃有层次感。\n"
-    "    // 只改 CSS 变量，且用 rAF 合帧，滚动与输入不受影响。\n"
-    "    if (!reduced) {\n"
-    "      var cx = 0, cy = 0, tx = 0, ty = 0, raf = 0;\n"
-    "      function tick() {\n"
-    "        raf = 0;\n"
-    "        cx += (tx - cx) * 0.12;\n"
-    "        cy += (ty - cy) * 0.12;\n"
-    "        root.style.setProperty('--zx', cx.toFixed(1) + 'px');\n"
-    "        root.style.setProperty('--zy', cy.toFixed(1) + 'px');\n"
-    "        if (Math.abs(tx - cx) > 0.4 || Math.abs(ty - cy) > 0.4) raf = requestAnimationFrame(tick);\n"
-    "      }\n"
-    "      window.addEventListener('pointermove', function (e) {\n"
-    "        if (e.pointerType === 'touch') return;\n"
-    "        if (!root.classList.contains('zc-glass')) return;\n"
-    "        tx = (e.clientX / window.innerWidth - 0.5) * 26;\n"
-    "        ty = (e.clientY / window.innerHeight - 0.5) * 20;\n"
-    "        if (!raf) raf = requestAnimationFrame(tick);\n"
-    "      }, { passive: true });\n"
-    "    }\n"
-    "  } catch (e) { /* 皮肤失败不应影响主功能 */ }\n"
-    "})();\n"
-    JS_END + "\n"
-    "</script>\n"
+    + JS_START + "\n"
+    + "(function () {\n"
+    + "  'use strict';\n"
+    + "  try {\n"
+    + "    var root = document.documentElement;\n"
+    + "    var KEY = 'zc_gura_glass';\n"
+    + "    var reduced = false;\n"
+    + "    try { reduced = !!(window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches); } catch (e) {}\n"
+    + "    function read() {\n"
+    + "      try { var v = localStorage.getItem(KEY); return v === null ? true : v === '1'; } catch (e) { return true; }\n"
+    + "    }\n"
+    + "    function write(on) { try { localStorage.setItem(KEY, on ? '1' : '0'); } catch (e) {} }\n"
+    + "    function apply(on) {\n"
+    + "      root.classList.toggle('zc-glass', !!on);\n"
+    + "      var cb = document.getElementById('sGlass');\n"
+    + "      if (cb) {\n"
+    + "        cb.checked = !!on;\n"
+    + "        if (!cb.zcBound) {\n"
+    + "          cb.zcBound = 1;\n"
+    + "          cb.addEventListener('change', function () { apply(cb.checked); write(cb.checked); });\n"
+    + "        }\n"
+    + "      }\n"
+    + "    }\n"
+    + "    apply(read());\n"
+    + "\n"
+    + "    // 指针视差：背板随指针做极小位移，让前景玻璃有层次感。\n"
+    + "    // 只改 CSS 变量，并用 rAF 合帧，滚动与输入不受影响。\n"
+    + "    if (!reduced) {\n"
+    + "      var cx = 0, cy = 0, tx = 0, ty = 0, raf = 0;\n"
+    + "      function tick() {\n"
+    + "        raf = 0;\n"
+    + "        cx += (tx - cx) * 0.12;\n"
+    + "        cy += (ty - cy) * 0.12;\n"
+    + "        root.style.setProperty('--zx', cx.toFixed(1) + 'px');\n"
+    + "        root.style.setProperty('--zy', cy.toFixed(1) + 'px');\n"
+    + "        if (Math.abs(tx - cx) > 0.4 || Math.abs(ty - cy) > 0.4) raf = requestAnimationFrame(tick);\n"
+    + "      }\n"
+    + "      window.addEventListener('pointermove', function (e) {\n"
+    + "        if (e.pointerType === 'touch') return;\n"
+    + "        if (!root.classList.contains('zc-glass')) return;\n"
+    + "        tx = (e.clientX / window.innerWidth - 0.5) * 26;\n"
+    + "        ty = (e.clientY / window.innerHeight - 0.5) * 20;\n"
+    + "        if (!raf) raf = requestAnimationFrame(tick);\n"
+    + "      }, { passive: true });\n"
+    + "    }\n"
+    + "  } catch (e) { /* 皮肤失败不应影响主功能 */ }\n"
+    + "})();\n"
+    + JS_END + "\n"
+    + "</script>\n"
 )
 
 
@@ -306,7 +307,7 @@ def do_patch(text):
     text = text[:i] + CSS + "\n" + text[i:]
     notes.append("样式块 %d 字节" % len(CSS))
 
-    m = re.search(r'<div class="seg" id="segFont">.*?</div></div>', text, re.S)
+    m = re.search(re.escape(SETTINGS_ROW_HEAD) + r".*?</div></div>", text, re.S)
     if not m:
         raise SystemExit("锚点异常：未找到 外观面板 中的字号设置行")
     text = text[:m.end()] + "\n          " + SETTINGS_ROW + text[m.end():]
@@ -342,15 +343,16 @@ def check(text):
     print("  玻璃皮肤          : %s" % ("已注入" if ok else "未注入"))
     if ok:
         for needle, label in ((CSS_START, "样式块"), (HTML_START, "背板容器"), (JS_START, "脚本"), ('id="sGlass"', "设置开关")):
-            print("    [ok] %-8s 存在" % label)
+            print("    [ok] %-10s 存在" % label)
         for needle, label in (("zcDrift", "色斑漂移"), ("zcSheen", "光泽扫过"), ("zcBreath", "呼吸光晕"), ("prefers-reduced-motion", "减少动效")):
-            print("    [ok] %-8s keyframes/规则 存在" % label)
+            print("    [ok] %-10s 关键帧 / 规则 存在" % label)
     return ok
 
 
 def main(argv):
     if not TARGET.exists():
-        raise SystemExit("找不到目标文件：%s" % TARGET)
+        print("找不到目标文件：%s" % TARGET)
+        return 2
     src = TARGET.read_text(encoding="utf-8")
     cmd = (argv[1] if len(argv) > 1 else "patch").lower()
 
