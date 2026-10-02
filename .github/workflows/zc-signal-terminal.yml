@@ -24,6 +24,15 @@ jobs:
     timeout-minutes: ${{ fromJSON(github.event.inputs.timeout || '10') }}
     steps:
       - uses: actions/checkout@v4
+      - name: Cache deps (npm / pip)
+        uses: actions/cache@v4
+        with:
+          path: |
+            ~/.npm
+            ~/.cache/pip
+          key: zc-deps-${{ runner.os }}-${{ hashFiles('**/package-lock.json', '**/package.json', '**/requirements.txt') }}
+          restore-keys: |
+            zc-deps-${{ runner.os }}-
       - name: Run
         shell: bash
         env:
