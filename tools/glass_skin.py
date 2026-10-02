@@ -516,7 +516,8 @@ def selftest():
 
     # 5) 模板安全：不得出现反引号、${ 、</
     _banned(CSS, "CSS", bad)
-    _banned(JS, "JS", bad)
+    script_body = JS.split("<script>", 1)[1].rsplit("</script>", 1)[0]
+    _banned(script_body, "JS", bad)
     _banned(HTML_LAYER, "HTML", bad)
     if not bad:
         ok("片段不含反引号 / ${ / </ 等模板危险序列")
@@ -551,7 +552,6 @@ def selftest():
     import tempfile
 
     node = shutil.which("node")
-    script_body = JS.split("<script>\n", 1)[1].rsplit("\n</script>\n", 1)[0]
     if node:
         with tempfile.TemporaryDirectory() as d:
             p = Path(d) / "zc_glass.js"

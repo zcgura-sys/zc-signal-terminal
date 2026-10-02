@@ -1,0 +1,53 @@
+== PY_COMPILE ==
+COMPILE_OK
+== SELFTEST ==
+运行 8.js 玻璃皮肤注入器自检 …
+  [ok] 注入成功（4 项变更）
+  [ok] 重复注入幂等（第二次无变更）
+  [ok] 四类标记各出现恰好 1 次
+  [ok] 回滚后与原文完全一致（CSS 1 处、HTML 层 1 处、脚本 1 处、设置项 1 处）
+  [ok] 漂移 / 光泽 / 光晕 / 减少动效 / 降级兜底 全部就位
+  [ok] 片段不含反引号 / ${ / </ 等模板危险序列
+  [ok] CSS / JS 括号配平
+  [ok] 插入位置正确（样式在 </style> 前、背板在首个 <svg> 前、脚本在 </body> 前）
+  [ok] node --check 通过（语法有效）
+  [skip] 未找到 8.js（无法校验真实锚点）
+自检全部通过 ✔
+selftest_rc=0
+== EXPORT ==
+已导出：
+  glass-skin.css（6840 字节）
+  glass-skin.js（1906 字节）
+把 css 粘到 8.js 的 <style> 末尾，把 js 粘成 </body> 前的一个 <script>，
+并在 <body> 首个元素前加：
+  <!-- ZC-GLASS LAYER START --><div class="zc-aurora" id="zcAurora" aria-hidden="true" focusable="false"><i></i><i></i><i></i></div><!-- ZC-GLASS LAYER END -->
+export_rc=0
+== GIT LOG ==
+3c2dc5c zc: sync local workspace (15 files)
+== ALL PATHS IN HISTORY ==
+"storage/emulated/0/\345\267\245\344\275\234\345\214\272/models/_manifest.json"
+"storage/emulated/0/\345\267\245\344\275\234\345\214\272/models/shizuku/expressions/f01.exp.json"
+.github/workflows/zc-signal-terminal.yml
+.gitignore
+package-lock.json
+package.json
+tools/_sync_probe.js
+tools/fetch_models.py
+tools/filescan.py
+tools/glass_skin.py
+zc_diag.txt
+zc_diag2.txt
+zc_glass_log.txt
+zc_probe.txt
+zc_selftest.txt
+== ALLOWED COMMANDS ==
+tools/glass_skin.py:3:"""为 8.js（ZC-GURA 单文件 Cloudflare Worker）注入「玻璃拟态 + 流光动画」皮肤。
+tools/glass_skin.py:16:工程约束（重要）：8.js 的前端 HTML 位于 String.raw 模板字符串中，
+tools/glass_skin.py:25:    python3 tools/glass_skin.py --selftest   内置自检（不需要 8.js 存在）
+tools/glass_skin.py:33:TARGET = ROOT / "8.js"
+tools/glass_skin.py:43:# ---- 8.js 中唯一存在的插入锚点 ----
+tools/glass_skin.py:297:        raise SystemExit("锚点异常：%s 在 8.js 中出现 %d 次（期望恰好 1 次）" % (what, n))
+tools/glass_skin.py:352:    print("  8.js 体积 : %d 字节" % len(text.encode("utf-8")))
+tools/glass_skin.py:373:    """校验真实 8.js 里的四个锚点各自唯一。"""
+tools/glass_skin.py:391:# 与 8.js 同构的最小样本：同样的四个锚点、同样的 String.raw 包裹方式
+tools/glass_skin.py:392:FIXTURE = """// 最小同构样本（结构与 8.js 一致：前端 HTML 包在 String.raw 模板里）
