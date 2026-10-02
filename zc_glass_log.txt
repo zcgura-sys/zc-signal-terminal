@@ -1,0 +1,17 @@
+== CHECK ==
+  File "/home/runner/work/zc-signal-terminal/zc-signal-terminal/tools/glass_skin.py", line 232
+    "<script>\n"
+    ^^^^^^^^^^^^
+SyntaxError: invalid syntax. Perhaps you forgot a comma?
+check_rc=1
+== PATCH ==
+  File "/home/runner/work/zc-signal-terminal/zc-signal-terminal/tools/glass_skin.py", line 232
+    "<script>\n"
+    ^^^^^^^^^^^^
+SyntaxError: invalid syntax. Perhaps you forgot a comma?
+patch_rc=1
+== SIZE ==
+wc: 8.js: No such file or directory
+== GREP ==
+grep: 8.js: No such file or directory
+grep: 8.js: No such file or directory
