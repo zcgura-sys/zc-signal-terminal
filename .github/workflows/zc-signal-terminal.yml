@@ -44,6 +44,8 @@ jobs:
         run: |
           git config user.name "zc-signal-bot"
           git config user.email "zc-signal-bot@users.noreply.github.com"
+          [ -f .gitignore ] || printf "node_modules/\n__pycache__/\n*.pyc\n.venv/\nvenv/\n.cache/\n" > .gitignore
           git add -A
+          git rm -r --cached -q --ignore-unmatch node_modules __pycache__ .venv venv .cache 2>/dev/null || true
           git commit -m "zc-signal: run ${{ github.run_id }}" || true
           git push || true
