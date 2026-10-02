@@ -1,0 +1,43 @@
+=== PWD ===
+/home/runner/work/zc-signal-terminal/zc-signal-terminal
+=== BEFORE ===
+total 8
+drwxr-xr-x 2 runner runner 4096 Oct  2 08:23 .
+drwxr-xr-x 3 runner runner 4096 Oct  2 08:23 ..
+-rw-r--r-- 1 runner runner    0 Oct  2 08:23 .gitkeep
+=== AFTER: tree (depth overview) ===
+storage/emulated/0/工作区
+storage/emulated/0/工作区/models
+storage/emulated/0/工作区/models/haru
+storage/emulated/0/工作区/models/haru/expressions
+storage/emulated/0/工作区/models/haru/haru_greeter_t03.2048
+storage/emulated/0/工作区/models/haru/motion
+storage/emulated/0/工作区/models/shizuku
+storage/emulated/0/工作区/models/shizuku/expressions
+storage/emulated/0/工作区/models/shizuku/motions
+storage/emulated/0/工作区/models/shizuku/shizuku.1024
+storage/emulated/0/工作区/models/shizuku/sounds
+=== FILE COUNT IN DEST ===
+71
+=== SIZE ===
+9.7M	storage/emulated/0/工作区
+=== DIR/FILE SUMMARY PER MODEL ===
+-- haru : 19 files, 3.2M
+-- shizuku : 47 files, 6.6M
+=== ENTRY POINTS EXIST? ===
+OK   models/index.json  (4117 bytes)
+OK   models/haru/haru_greeter_t03.model3.json  (1991 bytes)
+OK   models/shizuku/shizuku.model.json  (2357 bytes)
+OK   models/haru/haru_greeter_t03.2048/texture_00.png  (1526786 bytes)
+OK   models/shizuku/shizuku.moc  (691643 bytes)
+OK   models/shizuku/sounds/tapBody_00.mp3  (51570 bytes)
+=== MAGIC BYTES (binary integrity) ===
+models/haru/haru_greeter_t03.moc3                       4d4f4333
+models/shizuku/shizuku.moc                              6d6f6309
+models/haru/haru_greeter_t03.2048/texture_00.png        89504e47
+models/shizuku/sounds/tapBody_00.mp3                    49443304
+=== SHA256 SPOT CHECK (compare src vs dest) ===
+sha256 match=70 mismatch=0
+=== index.json parse ===
+models: ['haru', 'shizuku']
+=== DONE ===

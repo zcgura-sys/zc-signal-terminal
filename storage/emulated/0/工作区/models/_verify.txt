@@ -1,0 +1,8 @@
+[1] JSON files scanned        : 24  (all parsed OK)
+[2] unique asset refs         : 121
+[3] missing refs (whole tree) : 1
+      MISSING  models/haru/haru_greeter_t03.model3.json  ->  haru_greeter_t03.cdi3.json
+[4] refs escaping models/     : 0
+[5] index.json path resolution: all OK  (2 models)
+[6] re-serializable           : OK (0ms)
+[7] inventory                 : 70 files, 9.48 MB
