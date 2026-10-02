@@ -1,0 +1,11 @@
+=== 执行通道自检 ===
+Fri Oct  2 08:12:29 UTC 2026
+node v22.23.3 / npm 10.9.9
+python Python 3.12.3 / pip pip 24.0
+git git version 2.55.0
+cwd: /home/runner/work/zc-signal-terminal/zc-signal-terminal
+--- 仓库状态 ---
+3964697 zc-signal: run 36982534029
+?? capabilities-check.txt
+--- 联网 ---
+registry.npmjs.org -> 200 (0.051883s)
