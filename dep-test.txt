@@ -1,0 +1,20 @@
+=== NPM TEST ===
+
+added 69 packages in 2s
+
+real	0m1.821s
+user	0m1.424s
+sys	0m0.448s
+--- installed ---
+lodash 4.18.1
+express 5.2.1
+_.chunk -> [[1,2],[3,4]]
+--- node_modules count: 66 ---
+
+=== PIP TEST ===
+requests 2.34.2
+
+=== REGISTRY REACHABILITY ===
+registry.npmjs.org 200 0.071390s
+pypi.org 200 0.222220s
+=== DONE ===
