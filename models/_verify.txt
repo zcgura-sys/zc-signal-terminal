@@ -1,0 +1,35 @@
+total files        : 70
+json files         : 24 | parsed OK: 24 | failed: 0
+missing refs       : 0
+total size         : 9.48 MB
+--- model entries ---
+models/haru/haru_greeter_t03.model3.json  textures=0 expressions=0 motions=0
+models/shizuku/shizuku.model.json  textures=6 expressions=4 motions=18
+--- by extension ---
+.json:24  .md:1  .moc:1  .moc3:1  .mp3:15  .mtn:18  .png:8  .txt:2
+--- magic bytes ---
+89504e470d0a1a0a  models/haru/haru_greeter_t03.2048/texture_00.png
+89504e470d0a1a0a  models/haru/haru_greeter_t03.2048/texture_01.png
+4d4f433301000000  models/haru/haru_greeter_t03.moc3
+89504e470d0a1a0a  models/shizuku/shizuku.1024/texture_00.png
+89504e470d0a1a0a  models/shizuku/shizuku.1024/texture_01.png
+89504e470d0a1a0a  models/shizuku/shizuku.1024/texture_02.png
+89504e470d0a1a0a  models/shizuku/shizuku.1024/texture_03.png
+89504e470d0a1a0a  models/shizuku/shizuku.1024/texture_04.png
+89504e470d0a1a0a  models/shizuku/shizuku.1024/texture_05.png
+6d6f630981088109  models/shizuku/shizuku.moc
+4944330400000000  models/shizuku/sounds/flickHead_00.mp3
+4944330400000000  models/shizuku/sounds/flickHead_01.mp3
+4944330400000000  models/shizuku/sounds/flickHead_02.mp3
+4944330400000000  models/shizuku/sounds/pinchIn_00.mp3
+4944330400000000  models/shizuku/sounds/pinchIn_01.mp3
+4944330400000000  models/shizuku/sounds/pinchIn_02.mp3
+4944330400000000  models/shizuku/sounds/pinchOut_00.mp3
+4944330400000000  models/shizuku/sounds/pinchOut_01.mp3
+4944330400000000  models/shizuku/sounds/pinchOut_02.mp3
+4944330400000000  models/shizuku/sounds/shake_00.mp3
+4944330400000000  models/shizuku/sounds/shake_01.mp3
+4944330400000000  models/shizuku/sounds/shake_02.mp3
+4944330400000000  models/shizuku/sounds/tapBody_00.mp3
+4944330400000000  models/shizuku/sounds/tapBody_01.mp3
+4944330400000000  models/shizuku/sounds/tapBody_02.mp3
