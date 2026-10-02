@@ -1,89 +1,16 @@
-node:internal/modules/cjs/loader:1433
-  throw err;
-  ^
-
-Error: Cannot find module '/tmp/verify2.js'
-    at Function._resolveFilename (node:internal/modules/cjs/loader:1430:15)
-    at defaultResolveImpl (node:internal/modules/cjs/loader:1040:19)
-    at resolveForCJSWithHooks (node:internal/modules/cjs/loader:1045:22)
-    at Function._load (node:internal/modules/cjs/loader:1216:25)
-    at wrapModuleLoad (node:internal/modules/cjs/loader:254:19)
-    at Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:171:5)
-    at node:internal/main/run_main_module:36:49 {
-  code: 'MODULE_NOT_FOUND',
-  requireStack: []
-}
-
-Node.js v22.23.3
-tracked files under models/ : 70
-total size                  : 9.48 MB
-models/README.md
-models/_report.txt
-models/_verify.txt
-models/haru/expressions/F01.exp3.json
-models/haru/expressions/F02.exp3.json
-models/haru/expressions/F03.exp3.json
-models/haru/expressions/F04.exp3.json
-models/haru/expressions/F05.exp3.json
-models/haru/expressions/F06.exp3.json
-models/haru/expressions/F07.exp3.json
-models/haru/expressions/F08.exp3.json
-models/haru/haru_greeter_t03.2048/texture_00.png
-models/haru/haru_greeter_t03.2048/texture_01.png
-models/haru/haru_greeter_t03.moc3
-models/haru/haru_greeter_t03.model3.json
-models/haru/haru_greeter_t03.physics3.json
-models/haru/haru_greeter_t03.pose3.json
-models/haru/motion/haru_g_idle.motion3.json
-models/haru/motion/haru_g_m05.motion3.json
-models/haru/motion/haru_g_m07.motion3.json
-models/haru/motion/haru_g_m14.motion3.json
-models/haru/motion/haru_g_m15.motion3.json
-models/index.json
-models/shizuku/expressions/f01.exp.json
-models/shizuku/expressions/f02.exp.json
-models/shizuku/expressions/f03.exp.json
-models/shizuku/expressions/f04.exp.json
-models/shizuku/motions/flickHead_00.mtn
-models/shizuku/motions/flickHead_01.mtn
-models/shizuku/motions/flickHead_02.mtn
-models/shizuku/motions/idle_00.mtn
-models/shizuku/motions/idle_01.mtn
-models/shizuku/motions/idle_02.mtn
-models/shizuku/motions/pinchIn_00.mtn
-models/shizuku/motions/pinchIn_01.mtn
-models/shizuku/motions/pinchIn_02.mtn
-models/shizuku/motions/pinchOut_00.mtn
-models/shizuku/motions/pinchOut_01.mtn
-models/shizuku/motions/pinchOut_02.mtn
-models/shizuku/motions/shake_00.mtn
-models/shizuku/motions/shake_01.mtn
-models/shizuku/motions/shake_02.mtn
-models/shizuku/motions/tapBody_00.mtn
-models/shizuku/motions/tapBody_01.mtn
-models/shizuku/motions/tapBody_02.mtn
-models/shizuku/shizuku.1024/texture_00.png
-models/shizuku/shizuku.1024/texture_01.png
-models/shizuku/shizuku.1024/texture_02.png
-models/shizuku/shizuku.1024/texture_03.png
-models/shizuku/shizuku.1024/texture_04.png
-models/shizuku/shizuku.1024/texture_05.png
-models/shizuku/shizuku.moc
-models/shizuku/shizuku.model.json
-models/shizuku/shizuku.physics.json
-models/shizuku/shizuku.pose.json
-models/shizuku/sounds/flickHead_00.mp3
-models/shizuku/sounds/flickHead_01.mp3
-models/shizuku/sounds/flickHead_02.mp3
-models/shizuku/sounds/pinchIn_00.mp3
-models/shizuku/sounds/pinchIn_01.mp3
-models/shizuku/sounds/pinchIn_02.mp3
-models/shizuku/sounds/pinchOut_00.mp3
-models/shizuku/sounds/pinchOut_01.mp3
-models/shizuku/sounds/pinchOut_02.mp3
-models/shizuku/sounds/shake_00.mp3
-models/shizuku/sounds/shake_01.mp3
-models/shizuku/sounds/shake_02.mp3
-models/shizuku/sounds/tapBody_00.mp3
-models/shizuku/sounds/tapBody_01.mp3
-models/shizuku/sounds/tapBody_02.mp3
+json scanned          : 24 | all parse OK
+unique asset refs     : 121
+missing refs          : 3
+   MISSING  models/haru/haru_greeter_t03.model3.json  ->  haru_greeter_t03.cdi3.json
+   MISSING  models/index.json  ->  ../shizuku/sounds/flickHead_00.mp3
+   MISSING  models/index.json  ->  ../shizuku/sounds/flickHead_01.mp3
+refs leaving models/  : 0
+--- index.json entry resolution ---
+   haru  refs=13  missing=2 -> ../shizuku/sounds/flickHead_00.mp3,../shizuku/sounds/flickHead_01.mp3
+   shizuku  refs=43  missing=0
+--- required-for-render ---
+   models/haru/haru_greeter_t03.model3.json  core=5 missing=0
+   models/shizuku/shizuku.model.json  core=0 missing=0
+--- inventory ---
+   files=70  size=9.48 MB
+   model entries found: 2
