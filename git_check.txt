@@ -1,0 +1,15 @@
+=== git status (short) ===
+?? git_check.txt
+=== tracked files under dest ===
+71
+=== tracked binary sample ===
+=== check-ignore test ===
+NOT-IGNORED  <-  storage/emulated/0/工作区/models/haru/haru_greeter_t03.moc3
+NOT-IGNORED  <-  storage/emulated/0/工作区/models/shizuku/sounds/tapBody_00.mp3
+NOT-IGNORED  <-  storage/emulated/0/工作区/models/haru/haru_greeter_t03.2048/texture_00.png
+=== last commit ===
+b2b0284 zc-signal: run 36983777529
+=== gitattributes/lfs? ===
+ls: cannot access '.gitattributes': No such file or directory
+no .gitattributes
+=== DONE ===
