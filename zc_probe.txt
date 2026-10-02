@@ -1,0 +1,24 @@
+== GIT LS-FILES ==
+.github/workflows/zc-signal-terminal.yml
+.gitignore
+package-lock.json
+package.json
+"storage/emulated/0/\345\267\245\344\275\234\345\214\272/models/_manifest.json"
+"storage/emulated/0/\345\267\245\344\275\234\345\214\272/models/shizuku/expressions/f01.exp.json"
+tools/_sync_probe.js
+tools/fetch_models.py
+tools/filescan.py
+tools/glass_skin.py
+zc_diag.txt
+zc_diag2.txt
+zc_glass_log.txt
+== TOOLS DIR ==
+total 56
+drwxr-xr-x 2 runner runner  4096 Oct  2 16:54 .
+drwxr-xr-x 6 runner runner  4096 Oct  2 16:54 ..
+-rw-r--r-- 1 runner runner   316 Oct  2 16:54 _sync_probe.js
+-rw-r--r-- 1 runner runner 14502 Oct  2 16:54 fetch_models.py
+-rw-r--r-- 1 runner runner  8999 Oct  2 16:54 filescan.py
+-rw-r--r-- 1 runner runner 15903 Oct  2 16:54 glass_skin.py
+== PROBE EXISTS ==
+YES
