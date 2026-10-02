@@ -1,0 +1,107 @@
+@@@ ENV
+/home/runner/work/zc-signal-terminal/zc-signal-terminal
+total 36
+drwxr-xr-x 6 runner runner 4096 Oct  2 12:02 .
+drwxr-xr-x 3 runner runner 4096 Oct  2 12:02 ..
+drwxr-xr-x 7 runner runner 4096 Oct  2 12:02 .git
+drwxr-xr-x 3 runner runner 4096 Oct  2 12:02 .github
+-rw-r--r-- 1 runner runner   54 Oct  2 12:02 .gitignore
+-rw-r--r-- 1 runner runner   97 Oct  2 12:02 package-lock.json
+drwxr-xr-x 3 runner runner 4096 Oct  2 12:02 storage
+drwxr-xr-x 2 runner runner 4096 Oct  2 12:02 tools
+-rw-r--r-- 1 runner runner   64 Oct  2 12:02 zc_diag.txt
+
+@@@ TOOLS
+total 36
+drwxr-xr-x 2 runner runner  4096 Oct  2 12:02 .
+drwxr-xr-x 6 runner runner  4096 Oct  2 12:02 ..
+-rw-r--r-- 1 runner runner 14502 Oct  2 12:02 fetch_models.py
+-rw-r--r-- 1 runner runner  8999 Oct  2 12:02 filescan.py
+
+@@@ PKGJSON
+package.json: ABSENT
+
+@@@ LOCK
+package-lock.json: PRESENT
+{
+  "name": "zc-signal-terminal",
+  "lockfileVersion": 3,
+  "requires": true,
+  "packages": {}
+}
+
+@@@ VERSIONS
+10.9.9
+v22.23.3
+Python 3.12.3
+
+@@@ NPM_INSTALL
+npm error code ENOENT
+npm error syscall open
+npm error path /home/runner/work/zc-signal-terminal/zc-signal-terminal/package.json
+npm error errno -2
+npm error enoent Could not read package.json: Error: ENOENT: no such file or directory, open '/home/runner/work/zc-signal-terminal/zc-signal-terminal/package.json'
+npm error enoent This is related to npm not being able to find a file.
+npm error enoent
+npm error A complete log of this run can be found in: /home/runner/.npm/_logs/2026-10-02T12_02_42_160Z-debug-0.log
+INSTALL_EXIT=254
+
+@@@ NPM_TEST
+npm error code ENOENT
+npm error syscall open
+npm error path /home/runner/work/zc-signal-terminal/zc-signal-terminal/package.json
+npm error errno -2
+npm error enoent Could not read package.json: Error: ENOENT: no such file or directory, open '/home/runner/work/zc-signal-terminal/zc-signal-terminal/package.json'
+npm error enoent This is related to npm not being able to find a file.
+npm error enoent
+npm error A complete log of this run can be found in: /home/runner/.npm/_logs/2026-10-02T12_02_43_564Z-debug-0.log
+TEST_EXIT=254
+
+@@@ FILESCAN_SELFTEST
+运行内置自检 …
+  [ok] 扫描到 7 个文件
+  [ok] 总体积 11012 B
+  [ok] 识别出 1 组重复
+  [ok] 重复组正是 a.txt 与其副本
+  [ok] 空文件不参与重复判定
+  [ok] 可回收空间 = 500 B
+  [ok] --ignore-hidden 后只剩 6 个文件
+  [ok] --min-size 1000 只剩 1 个文件
+  [ok] 过滤后无重复
+  [ok] human(0) == '0 B'
+  [ok] human(1024) == '1.00 KB'
+  [ok] human(11012) == '10.75 KB'
+  [ok] 报告可被 JSON 序列化/反序列化
+  [ok] 文本报告包含重复文件路径
+自检全部通过 ✔
+PIPE_STATUS=0
+
+@@@ FETCH_SELFTEST
+  [ok] git blob sha1(b'hello world\n')
+  [ok] magic: png
+  [ok] magic: moc3
+  [ok] magic: moc
+  [ok] magic: mp3
+  [ok] magic_of 后缀判定正确
+  [ok] check_file 接受正确文件
+  [ok] check_file 检出 size 不符
+  [ok] check_file 检出 sha 不符
+  [ok] check_file 检出 magic 不符
+  [ok] check_file 检出缺失文件
+  [ok] 清单 66 个文件
+  [ok] haru 19 个文件
+  [ok] shizuku 47 个文件
+  [ok] 总字节 9929134
+  [ok] 清单声明与实算一致
+  [ok] 相对路径无重复
+  [ok] 相对路径无越界(..)
+  [ok] sha1 均为 40 位十六进制
+  [ok] 每个文件大小 > 0
+  [ok] haru 入口存在
+  [ok] shizuku 入口存在
+  [ok] 两套运行时标注正确
+  [ok] 两个模型各含 moc/moc3
+自检全部通过 ✔
+PIPE_STATUS=0
+
+@@@ DONE
