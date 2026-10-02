@@ -1,0 +1,14 @@
+{
+  "name": "zc-signal-terminal",
+  "version": "0.0.0",
+  "private": true,
+  "description": "npm 门面。本项目本体是零第三方依赖的 Python 工具集（tools/），npm test 仅桥接到其内置自检。",
+  "scripts": {
+    "test": "python3 tools/filescan.py --selftest && python3 tools/fetch_models.py --selftest",
+    "test:filescan": "python3 tools/filescan.py --selftest",
+    "test:models": "python3 tools/fetch_models.py --selftest"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}
