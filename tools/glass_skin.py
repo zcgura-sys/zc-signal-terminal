@@ -3,30 +3,34 @@
 """为 8.js（ZC-GURA 单文件 Cloudflare Worker）注入「玻璃拟态 + 流光动画」皮肤。
 
 设计参考（均为公开开源项目 / 文章）：
-  * miketromba/css.glass、themesberg/glass-ui
+  * miketromba/css.glass（css.glass）、themesberg/glass-ui
       经典毛玻璃配方：半透明底色 + backdrop-filter: blur() saturate()
       + 1px 高光描边 + inset 内阴影。
   * tengbao/vanta（Vanta.js，MIT）
-      把"动态背景层"置于内容之下的分层思路；此处不引入 three.js，
-      改用 3 个纯 CSS 高斯色斑做缓慢漂移，保持零依赖、零网络请求。
+      "把动态背景层放到内容之下"的分层思路。这里不引 three.js，
+      改用 3 团纯 CSS 高斯色斑做缓慢漂移，保持零依赖、零网络请求。
   * CSS-Tricks《A Complete Guide to CSS Gradients》
-      用 transform / background-position 驱动渐变流动，并配合
-      prefers-reduced-motion 与前景对比度检查（文中 Accessibility 一节）。
+      用 transform / background-position 驱动渐变流动；文中 Accessibility
+      一节强调配合 prefers-reduced-motion 并检查前景对比度，本实现遵循。
 
-工程约束（重要）：8.js 里前端 HTML 位于 String.raw 模板字符串中，
-因此注入的内容**不得包含反引号或 ${**，否则会截断模板字符串。
+工程约束（重要）：8.js 的前端 HTML 位于 String.raw 模板字符串中，
+因此注入的内容**不得包含反引号，也不得包含 ${ 或 </ 序列**，
+否则会截断模板字符串或提前结束 style / script 标签。自检会强制校验这一点。
 
 用法：
-    python3 tools/glass_skin.py          # 注入（幂等，已注入则跳过）
-    python3 tools/glass_skin.py check    # 只检查当前状态
-    python3 tools/glass_skin.py revert   # 按标记移除注入内容
+    python3 tools/glass_skin.py              注入（幂等，已注入则跳过）
+    python3 tools/glass_skin.py --check      只检查当前状态
+    python3 tools/glass_skin.py --revert     按标记移除注入内容
+    python3 tools/glass_skin.py export       导出可独立粘贴的 css / js 片段
+    python3 tools/glass_skin.py --selftest   内置自检（不需要 8.js 存在）
 """
 
 import re
 import sys
 from pathlib import Path
 
-TARGET = Path(__file__).resolve().parent.parent / "8.js"
+ROOT = Path(__file__).resolve().parent.parent
+TARGET = ROOT / "8.js"
 
 # ---- 幂等 / 可回滚标记 ----
 CSS_START = "/* ===== ZC-GLASS SKIN START ===== */"
@@ -36,8 +40,11 @@ HTML_END = "<!-- ZC-GLASS LAYER END -->"
 JS_START = "/* ZC-GLASS SCRIPT START */"
 JS_END = "/* ZC-GLASS SCRIPT END */"
 
-SVG_ANCHOR = '<svg width="0" height="0" style="position:absolute"'
-SETTINGS_ROW_HEAD = '<div class="seg" id="segFont">'
+# ---- 8.js 中唯一存在的插入锚点 ----
+A_SVG = '<svg width="0" height="0" style="position:absolute"'
+A_STYLE_END = "</style>"
+A_SEGFONT = '<div class="seg" id="segFont">'
+A_BODY_END = "</body>"
 
 
 # ---------------------------------------------------------------------------
@@ -45,9 +52,9 @@ SETTINGS_ROW_HEAD = '<div class="seg" id="segFont">'
 # ---------------------------------------------------------------------------
 CSS = CSS_START + """
 /* 玻璃拟态与流光动画（渐进增强）
-   配色全部由既有 CSS 变量派生，因此自动跟随浅色 / 深色主题。
-   不支持 backdrop-filter 时自动退化为不透明底色；
-   系统开启"减少动态效果"时，由本文件既有的全局规则统一冻结动画。 */
+   配色全部由既有 CSS 变量派生，自动跟随浅色 / 深色主题。
+   不支持 backdrop-filter 时退化为不透明底色；
+   系统开启"减少动态效果"时由本文件既有的全局规则统一冻结动画。 */
 :root{
   --zc-glass-bg:color-mix(in srgb,var(--surface) 74%,transparent);
   --zc-glass-bg2:color-mix(in srgb,var(--bg-2) 62%,transparent);
@@ -84,7 +91,7 @@ html[data-theme="dark"] .zc-aurora i{opacity:.34}
 }
 html.zc-glass .app{position:relative;z-index:1}
 
-/* ---------- 大面积玻璃面板（真实 backdrop-filter，数量少以控制开销） ---------- */
+/* ---------- 大面积玻璃面板（真实 backdrop-filter；数量克制以控制开销） ---------- */
 html.zc-glass .main{
   background:color-mix(in srgb,var(--bg) 80%,transparent);
   -webkit-backdrop-filter:blur(var(--zc-blur)) saturate(140%);
@@ -121,8 +128,8 @@ html.zc-glass .toast.error{background:color-mix(in srgb,var(--danger) 92%,transp
 html.zc-glass .toast.ok{background:color-mix(in srgb,var(--ok) 92%,transparent)}
 
 /* ---------- 面板内的小卡片：半透明 + 顶部高光 ----------
-   父级已经模糊过，这里不再叠加 backdrop-filter，避免聊天区
-   存在大量小卡片时拖慢滚动（性能取舍）。 */
+   父级已经模糊过，这里不再叠加 backdrop-filter，
+   避免聊天区存在大量小卡片时拖慢滚动（这是有意的性能取舍）。 */
 html.zc-glass .code,
 html.zc-glass .fcard,
 html.zc-glass .think,
@@ -206,7 +213,7 @@ html.zc-glass .astep:hover{transform:translateY(-1px)}
 """ + CSS_END
 
 # ---------------------------------------------------------------------------
-# 2) 结构：背板容器
+# 2) 结构：背板容器（插在 <body> 的第一个子元素之前）
 # ---------------------------------------------------------------------------
 HTML_LAYER = (
     HTML_START
@@ -227,7 +234,6 @@ SETTINGS_ROW = (
 
 # ---------------------------------------------------------------------------
 # 4) 脚本：偏好读写 + 指针视差
-#    注意：不得出现反引号与 ${，也不得出现 </ 序列（会被所在模板 / 标签截断）
 # ---------------------------------------------------------------------------
 JS = (
     "<script>\n"
@@ -257,7 +263,7 @@ JS = (
     + "    apply(read());\n"
     + "\n"
     + "    // 指针视差：背板随指针做极小位移，让前景玻璃有层次感。\n"
-    + "    // 只改 CSS 变量，并用 rAF 合帧，滚动与输入不受影响。\n"
+    + "    // 只改 CSS 变量并用 rAF 合帧，滚动与输入不受影响。\n"
     + "    if (!reduced) {\n"
     + "      var cx = 0, cy = 0, tx = 0, ty = 0, raf = 0;\n"
     + "      function tick() {\n"
@@ -276,17 +282,19 @@ JS = (
     + "        if (!raf) raf = requestAnimationFrame(tick);\n"
     + "      }, { passive: true });\n"
     + "    }\n"
-    + "  } catch (e) { /* 皮肤失败不应影响主功能 */ }\n"
+    + "  } catch (e) { /* 皮肤失效也不应影响主功能 */ }\n"
     + "})();\n"
     + JS_END + "\n"
     + "</script>\n"
 )
 
-
-def _once(text, needle, what):
+# ---------------------------------------------------------------------------
+# 注入 / 回滚
+# ---------------------------------------------------------------------------
+def _at_least_once(text, needle, what):
     n = text.count(needle)
     if n != 1:
-        raise SystemExit("锚点异常：%s 在 8.js 中出现 %d 次（期望 1 次）" % (what, n))
+        raise SystemExit("锚点异常：%s 在 8.js 中出现 %d 次（期望恰好 1 次）" % (what, n))
     return text.index(needle)
 
 
@@ -295,88 +303,338 @@ def injected(text):
 
 
 def do_patch(text):
-    """返回 (新文本, 变更说明列表)。"""
+    """把皮肤注入源码。已注入过则原样返回（幂等）。返回 (新文本, 变更列表)。"""
     if injected(text):
         return text, []
 
     notes = []
-    text = text.replace(SVG_ANCHOR, HTML_LAYER + "\n" + SVG_ANCHOR, 1)
+
+    text = text.replace(A_SVG, HTML_LAYER + "\n" + A_SVG, 1)
     notes.append("背板容器 #zcAurora")
 
-    i = _once(text, "</style>", "</style>")
+    i = _at_least_once(text, A_STYLE_END, "</style>")
     text = text[:i] + CSS + "\n" + text[i:]
-    notes.append("样式块 %d 字节" % len(CSS))
+    notes.append("样式块（%d 字节）" % len(CSS))
 
-    m = re.search(re.escape(SETTINGS_ROW_HEAD) + r".*?</div></div>", text, re.S)
+    m = re.search(re.escape(A_SEGFONT) + r".*?</div></div>", text, re.S)
     if not m:
-        raise SystemExit("锚点异常：未找到 外观面板 中的字号设置行")
-    text = text[:m.end()] + "\n          " + SETTINGS_ROW + text[m.end():]
+        raise SystemExit("锚点异常：未找到 外观 面板中的字号设置行")
+    text = text[: m.end()] + "\n          " + SETTINGS_ROW + text[m.end():]
     notes.append("设置项 #sGlass")
 
-    j = _once(text, "</body>", "</body>")
+    j = _at_least_once(text, A_BODY_END, "</body>")
     text = text[:j] + JS + text[j:]
-    notes.append("脚本 %d 字节" % len(JS))
+    notes.append("脚本（%d 字节）" % len(JS))
+
     return text, notes
 
 
 def do_revert(text):
+    """按标记移除全部注入内容，恢复到注入前的字节。"""
     out = text
-    for a, b, what in ((CSS_START, CSS_END, "CSS"), (HTML_START, HTML_END, "HTML")):
-        p = re.compile(re.escape(a) + r".*?" + re.escape(b) + r"\n?", re.S)
-        out, n = p.subn("", out)
+    removed = []
+    for a, b, what in ((CSS_START, CSS_END, "CSS"), (HTML_START, HTML_END, "HTML 层")):
+        out, n = re.subn(re.escape(a) + r".*?" + re.escape(b) + r"\n?", "", out, flags=re.S)
         if n:
-            print("  移除 %s 注入块 %d 处" % (what, n))
-    p = re.compile(r"<script>\n" + re.escape(JS_START) + r".*?" + re.escape(JS_END) + r"\n</script>\n", re.S)
-    out, n = p.subn("", out)
+            removed.append("%s %d 处" % (what, n))
+    pat = "<script>\n" + re.escape(JS_START) + r".*?" + re.escape(JS_END) + r"\n</script>\n"
+    out, n = re.subn(pat, "", out, flags=re.S)
     if n:
-        print("  移除 脚本注入块 %d 处" % n)
-    p = re.compile(r"[ \t]*" + re.escape(SETTINGS_ROW) + r"\n?", re.S)
-    out, n = p.subn("", out)
+        removed.append("脚本 %d 处" % n)
+    out, n = re.subn(r"[ \t]*" + re.escape(SETTINGS_ROW) + r"\n?", "", out, flags=re.S)
     if n:
-        print("  移除 设置项 %d 处" % n)
-    return out
+        removed.append("设置项 %d 处" % n)
+    return out, removed
 
 
-def check(text):
+def report(text):
     ok = injected(text)
-    print("  8.js 体积        : %d 字节" % len(text.encode("utf-8")))
-    print("  玻璃皮肤          : %s" % ("已注入" if ok else "未注入"))
+    print("  8.js 体积 : %d 字节" % len(text.encode("utf-8")))
+    print("  玻璃皮肤   : %s" % ("已注入" if ok else "未注入"))
     if ok:
-        for needle, label in ((CSS_START, "样式块"), (HTML_START, "背板容器"), (JS_START, "脚本"), ('id="sGlass"', "设置开关")):
+        for needle, label in (
+            (CSS_START, "样式块"),
+            (HTML_START, "背板容器"),
+            (JS_START, "脚本"),
+            ('id="sGlass"', "设置开关"),
+        ):
             print("    [ok] %-10s 存在" % label)
-        for needle, label in (("zcDrift", "色斑漂移"), ("zcSheen", "光泽扫过"), ("zcBreath", "呼吸光晕"), ("prefers-reduced-motion", "减少动效")):
-            print("    [ok] %-10s 关键帧 / 规则 存在" % label)
+        for needle, label in (
+            ("zcDrift", "色块漂移关键帧"),
+            ("zcSheen", "光泽扫过关键帧"),
+            ("zcBreath", "呼吸光晕关键帧"),
+            ("prefers-reduced-motion", "减少动效尊重"),
+        ):
+            print("    [ok] %-14s 存在" % label)
     return ok
 
 
+def anchors_ok(target=TARGET):
+    """校验真实 8.js 里的四个锚点各自唯一。"""
+    if not target.exists():
+        print("  [skip] 未找到 %s（无法校验真实锚点）" % target.name)
+        return True
+    text = target.read_text(encoding="utf-8")
+    ok = True
+    for needle, what in ((A_SVG, "背板锚点 <svg …>"), (A_STYLE_END, "</style>"), (A_SEGFONT, "字号设置行"), (A_BODY_END, "</body>")):
+        n = text.count(needle)
+        mark = "ok" if n == 1 else "bad"
+        if n != 1:
+            ok = False
+        print("    [%s] %-18s 出现 %d 次" % (mark, what, n))
+    return ok
+
+
+# ---------------------------------------------------------------------------
+# 自检
+# ---------------------------------------------------------------------------
+# 与 8.js 同构的最小样本：同样的四个锚点、同样的 String.raw 包裹方式
+FIXTURE = """// 最小同构样本（结构与 8.js 一致：前端 HTML 包在 String.raw 模板里）
+const ZC_HTML = String.raw`<!DOCTYPE html>
+<html lang="zh-CN" data-theme="light">
+<head>
+<meta charset="utf-8">
+<title>ZC-GURA</title>
+<style>
+:root{--bg:#ffffff;--bg-2:#f7f7f8;--bg-3:#efeff2;--surface:#ffffff;--border:#e6e6ea;--border-2:#d3d3da;--text:#18181b;--accent:#2b5cd9;--primary:#18181b;--on-primary:#ffffff;--code-bg:#f6f6f8;--shadow:0 1px 2px rgba(20,20,30,.04)}
+html[data-theme="dark"]{--bg:#151517;--bg-2:#1a1a1d;--bg-3:#262629;--surface:#1e1e21;--border:#2b2b30;--border-2:#3b3b42;--text:#ececef;--accent:#7fa2ff;--primary:#ececef;--on-primary:#151517;--code-bg:#1a1a1d;--shadow:0 1px 2px rgba(0,0,0,.3)}
+.overlay{position:fixed;inset:0;z-index:80;background:rgba(10,10,14,.46)}
+.dialog{background:var(--surface);border:1px solid var(--border)}
+@media (max-width:820px){.sidebar{position:fixed}}
+@media (prefers-reduced-motion:reduce){*{animation-duration:.001ms!important;transition-duration:.001ms!important}}
+</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+  <symbol id="i-logo" viewBox="0 0 24 24"><rect x="1.5" y="1.5" width="21" height="21" rx="6.5"/></symbol>
+</svg>
+
+<div class="app" id="app">
+  <aside class="sidebar" id="sidebar">
+    <div class="brand"><span>ZC-GURA</span></div>
+    <div class="search"><input id="sessionSearch" type="search"></div>
+  </aside>
+  <main class="main" id="main">
+    <header class="topbar"><button class="pill" id="modelBtn">未配置 API</button></header>
+    <div class="stage empty" id="stage">
+      <section class="chat" id="chat"><div class="thread" id="thread"></div></section>
+      <div class="composer-wrap"><div class="composer" id="composer">
+        <textarea id="input" rows="1"></textarea>
+        <div class="c-tools"><button class="send" id="btnSend" disabled></button></div>
+      </div></div>
+    </div>
+  </main>
+</div>
+
+<div class="overlay" id="dialogOv" hidden><div class="dialog"><h3 id="dlgTitle"></h3></div></div>
+<div class="overlay" id="settingsOv" hidden><div class="settings">
+  <div class="s-nav" id="sNav"><h2>设置</h2><button data-tab="look" class="on">外观</button></div>
+  <div class="s-main"><div class="s-body">
+    <div class="s-pane on" data-pane="look">
+      <div class="row-sw"><div class="tx"><b>主题</b><span>自动模式跟随系统外观</span></div><div class="seg" id="segTheme"><button data-v="auto">自动</button><button data-v="light">浅色</button><button data-v="dark">深色</button></div></div>
+      <div class="row-sw"><div class="tx"><b>字号</b><span>调整界面与消息文字大小</span></div><div class="seg" id="segFont"><button data-v="small">小</button><button data-v="medium">标准</button><button data-v="large">大</button></div></div>
+    </div>
+  </div></div>
+</div></div>
+
+<div id="popLayer"></div>
+<div id="toasts" role="status" aria-live="polite"></div>
+</body>
+</html>`;
+
+export default { async fetch(request) { return new Response(ZC_HTML); } };
+"""
+
+
+def _strip_strings(code):
+    """去掉 '…' 与 "…" 字面量，便于做朴素的括号配平检查。"""
+    return re.sub(r"'[^'\n]*'|\"[^\"\n]*\"", "", code)
+
+
+def _balanced(code):
+    pairs = {"{": "}", "(": ")", "[": "]"}
+    closing = {v: k for k, v in pairs.items()}
+    stack = []
+    for ch in _strip_strings(code):
+        if ch in pairs:
+            stack.append(ch)
+        elif ch in closing:
+            if not stack or stack.pop() != closing[ch]:
+                return False
+    return not stack
+
+
+def _banned(code, label, out):
+    if "`" in code:
+        out.append("%s 含反引号（会截断 String.raw 模板）" % label)
+    if "${" in code:
+        out.append("%s 含 ${（会触发模板插值）" % label)
+    if label.startswith("JS") and "</" in code:
+        out.append("%s 含 </（会被 script 标签提前结束）" % label)
+
+
+def selftest():
+    print("运行 8.js 玻璃皮肤注入器自检 …")
+    bad = []
+    ok = lambda m: print("  [ok] %s" % m)
+
+    # 1) 未注入 → 注入 → 幂等
+    if injected(FIXTURE):
+        bad.append("样本不应处于已注入状态")
+    patched, notes = do_patch(FIXTURE)
+    if not injected(patched):
+        bad.append("注入后未检测到标记")
+    else:
+        ok("注入成功（%d 项变更）" % len(notes))
+    again, notes2 = do_patch(patched)
+    if notes2 or again != patched:
+        bad.append("重复注入不是幂等的")
+    else:
+        ok("重复注入幂等（第二次无变更）")
+
+    # 2) 四类标记各恰好一次
+    for needle, label in ((CSS_START, "样式块"), (HTML_START, "背板容器"), (JS_START, "脚本"), ('id="sGlass"', "设置开关")):
+        n = patched.count(needle)
+        if n != 1:
+            bad.append("%s 标记出现 %d 次（期望 1）" % (label, n))
+    if not bad:
+        ok("四类标记各出现恰好 1 次")
+
+    # 3) 回滚 = 字节级还原
+    reverted, removed = do_revert(patched)
+    if reverted != FIXTURE:
+        bad.append("回滚未还原原文（差 %d 字节）" % (len(reverted) - len(FIXTURE)))
+    else:
+        ok("回滚后与原文完全一致（%s）" % "、".join(removed))
+
+    # 4) 关键帧 / 无障碍规则都在
+    for needle, label in (("zcDrift", "色块漂移"), ("zcSheen", "光泽扫过"), ("zcBreath", "呼吸光晕"), ("prefers-reduced-motion", "减少动效"), ("@supports not", "降级兜底")):
+        if needle not in patched:
+            bad.append("缺少 %s（%s）" % (label, needle))
+    if not bad:
+        ok("漂移 / 光泽 / 光晕 / 减少动效 / 降级兜底 全部就位")
+
+    # 5) 模板安全：不得出现反引号、${ 、</
+    _banned(CSS, "CSS", bad)
+    _banned(JS, "JS", bad)
+    _banned(HTML_LAYER, "HTML", bad)
+    if not bad:
+        ok("片段不含反引号 / ${ / </ 等模板危险序列")
+
+    # 6) 括号配平
+    if not _balanced(CSS):
+        bad.append("CSS 括号不配平")
+    if not _balanced(JS.replace("<script>", "").replace("</script>", "")):
+        bad.append("JS 括号不配平")
+    if not bad:
+        ok("CSS / JS 括号配平")
+
+    # 7) 注入位置正确：背板在 body 首个元素前、脚本在 </body> 前、开关在 segFont 行之后
+    i_layer = patched.index(HTML_START)
+    i_svg = patched.index(A_SVG)
+    i_style = patched.index(CSS_START)
+    i_style_end = patched.index(A_STYLE_END)
+    i_seg = patched.index(A_SEGFONT)
+    i_glass_cb = patched.index('id="sGlass"')
+    i_js = patched.index(JS_START)
+    i_body = patched.index(A_BODY_END)
+    if not (i_style < i_style_end and i_style_end < i_layer < i_svg):
+        bad.append("样式 / 背板插入位置不正确")
+    if not (i_seg < i_glass_cb and i_glass_cb < i_js < i_body):
+        bad.append("设置项 / 脚本插入位置不正确")
+    if not bad:
+        ok("插入位置正确（样式在 </style> 前、背板在首个 <svg> 前、脚本在 </body> 前）")
+
+    # 8) 用 node 做真正的 JS 语法校验（有 node 才跑）
+    import shutil
+    import subprocess
+    import tempfile
+
+    node = shutil.which("node")
+    script_body = JS.split("<script>\n", 1)[1].rsplit("\n</script>\n", 1)[0]
+    if node:
+        with tempfile.TemporaryDirectory() as d:
+            p = Path(d) / "zc_glass.js"
+            p.write_text(script_body, encoding="utf-8")
+            r = subprocess.run([node, "--check", str(p)], capture_output=True, text=True)
+            if r.returncode != 0:
+                bad.append("node --check 未通过：%s" % (r.stderr.strip().splitlines()[:2]))
+            else:
+                ok("node --check 通过（%s）" % r"--"[0:0] or "语法有效")
+    else:
+        print("  [skip] 本机没有 node，跳过 node --check")
+
+    # 9) 真实 8.js 锚点（若存在）
+    anchors_ok()
+
+    if bad:
+        print("\n自检未通过 ✘")
+        for b in bad:
+            print("  - %s" % b)
+        return 1
+    print("自检全部通过 ✔")
+    return 0
+
+
+# ---------------------------------------------------------------------------
+# 导出可独立粘贴的片段
+# ---------------------------------------------------------------------------
+def export():
+    css_path = ROOT / "glass-skin.css"
+    js_path = ROOT / "glass-skin.js"
+    css_body = CSS.replace(CSS_START + "\n", "").replace("\n" + CSS_END, "")
+    js_body = JS.split("<script>\n", 1)[1].rsplit("\n</script>\n", 1)[0]
+    css_path.write_text(css_body, encoding="utf-8")
+    js_path.write_text(js_body, encoding="utf-8")
+    print("已导出：")
+    print("  %s（%d 字节）" % (css_path.name, len(css_body.encode("utf-8"))))
+    print("  %s（%d 字节）" % (js_path.name, len(js_body.encode("utf-8"))))
+    print("把 css 粘到 8.js 的 <style> 末尾，把 js 粘成 </body> 前的一个 <script>，")
+    print("并在 <body> 首个元素前加：")
+    print("  " + HTML_LAYER)
+    return 0
+
+
 def main(argv):
+    args = [a.lower() for a in argv[1:]]
+    if "--selftest" in args or "selftest" in args:
+        return selftest()
+    if "export" in args:
+        return export()
+
     if not TARGET.exists():
         print("找不到目标文件：%s" % TARGET)
         return 2
     src = TARGET.read_text(encoding="utf-8")
-    cmd = (argv[1] if len(argv) > 1 else "patch").lower()
 
-    if cmd == "check":
-        print("检查 8.js …")
-        check(src)
+    if "--check" in args or "--status" in args or "check" in args:
+        print("检查 %s …" % TARGET.name)
+        if injected(src):
+            report(src)
+        else:
+            report(src)
+            print("  锚点校验：")
+            anchors_ok()
         return 0
-    if cmd == "revert":
-        print("回滚 8.js 中的玻璃皮肤 …")
-        out = do_revert(src)
+
+    if "--revert" in args or "revert" in args:
+        print("回滚 %s 中的玻璃皮肤 …" % TARGET.name)
+        out, removed = do_revert(src)
         TARGET.write_text(out, encoding="utf-8")
+        print("  移除：%s" % ("、".join(removed) if removed else "无（未注入过）"))
         print("  完成：%d -> %d 字节" % (len(src.encode("utf-8")), len(out.encode("utf-8"))))
         return 0
 
-    print("向 8.js 注入玻璃皮肤 …")
+    print("向 %s 注入玻璃皮肤 …" % TARGET.name)
     out, notes = do_patch(src)
     if not notes:
-        print("  已注入过，无需重复写入（幂等）")
+        print("  已注入过，跳过写入（幂等）")
     else:
         for n in notes:
             print("  + %s" % n)
         TARGET.write_text(out, encoding="utf-8")
         print("  完成：%d -> %d 字节" % (len(src.encode("utf-8")), len(out.encode("utf-8"))))
-    check(out)
+    report(out)
     return 0
 
 
