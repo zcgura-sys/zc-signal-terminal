@@ -1,63 +1,12 @@
-@@@ ENV
-/home/runner/work/zc-signal-terminal/zc-signal-terminal
-total 36
-drwxr-xr-x 6 runner runner 4096 Oct  2 12:02 .
-drwxr-xr-x 3 runner runner 4096 Oct  2 12:02 ..
-drwxr-xr-x 7 runner runner 4096 Oct  2 12:02 .git
-drwxr-xr-x 3 runner runner 4096 Oct  2 12:02 .github
--rw-r--r-- 1 runner runner   54 Oct  2 12:02 .gitignore
--rw-r--r-- 1 runner runner   97 Oct  2 12:02 package-lock.json
-drwxr-xr-x 3 runner runner 4096 Oct  2 12:02 storage
-drwxr-xr-x 2 runner runner 4096 Oct  2 12:02 tools
--rw-r--r-- 1 runner runner   64 Oct  2 12:02 zc_diag.txt
+@@@ NPM_INSTALL_AND_TEST
 
-@@@ TOOLS
-total 36
-drwxr-xr-x 2 runner runner  4096 Oct  2 12:02 .
-drwxr-xr-x 6 runner runner  4096 Oct  2 12:02 ..
--rw-r--r-- 1 runner runner 14502 Oct  2 12:02 fetch_models.py
--rw-r--r-- 1 runner runner  8999 Oct  2 12:02 filescan.py
+up to date, audited 1 package in 2s
 
-@@@ PKGJSON
-package.json: ABSENT
+found 0 vulnerabilities
 
-@@@ LOCK
-package-lock.json: PRESENT
-{
-  "name": "zc-signal-terminal",
-  "lockfileVersion": 3,
-  "requires": true,
-  "packages": {}
-}
+> zc-signal-terminal@0.0.0 test
+> python3 tools/filescan.py --selftest && python3 tools/fetch_models.py --selftest
 
-@@@ VERSIONS
-10.9.9
-v22.23.3
-Python 3.12.3
-
-@@@ NPM_INSTALL
-npm error code ENOENT
-npm error syscall open
-npm error path /home/runner/work/zc-signal-terminal/zc-signal-terminal/package.json
-npm error errno -2
-npm error enoent Could not read package.json: Error: ENOENT: no such file or directory, open '/home/runner/work/zc-signal-terminal/zc-signal-terminal/package.json'
-npm error enoent This is related to npm not being able to find a file.
-npm error enoent
-npm error A complete log of this run can be found in: /home/runner/.npm/_logs/2026-10-02T12_02_42_160Z-debug-0.log
-INSTALL_EXIT=254
-
-@@@ NPM_TEST
-npm error code ENOENT
-npm error syscall open
-npm error path /home/runner/work/zc-signal-terminal/zc-signal-terminal/package.json
-npm error errno -2
-npm error enoent Could not read package.json: Error: ENOENT: no such file or directory, open '/home/runner/work/zc-signal-terminal/zc-signal-terminal/package.json'
-npm error enoent This is related to npm not being able to find a file.
-npm error enoent
-npm error A complete log of this run can be found in: /home/runner/.npm/_logs/2026-10-02T12_02_43_564Z-debug-0.log
-TEST_EXIT=254
-
-@@@ FILESCAN_SELFTEST
 运行内置自检 …
   [ok] 扫描到 7 个文件
   [ok] 总体积 11012 B
@@ -74,9 +23,9 @@ TEST_EXIT=254
   [ok] 报告可被 JSON 序列化/反序列化
   [ok] 文本报告包含重复文件路径
 自检全部通过 ✔
-PIPE_STATUS=0
-
-@@@ FETCH_SELFTEST
+运行内置自检 …
+  [ok] git blob sha1(空 blob)
+  [ok] git blob sha1(b'abc')
   [ok] git blob sha1(b'hello world\n')
   [ok] magic: png
   [ok] magic: moc3
@@ -102,6 +51,42 @@ PIPE_STATUS=0
   [ok] 两套运行时标注正确
   [ok] 两个模型各含 moc/moc3
 自检全部通过 ✔
-PIPE_STATUS=0
+CHAIN_EXIT=0
+
+@@@ ARTIFACTS_CHECK
+total 40
+drwxr-xr-x 6 runner runner 4096 Oct  2 12:03 .
+drwxr-xr-x 3 runner runner 4096 Oct  2 12:03 ..
+drwxr-xr-x 7 runner runner 4096 Oct  2 12:03 .git
+drwxr-xr-x 3 runner runner 4096 Oct  2 12:03 .github
+-rw-r--r-- 1 runner runner   54 Oct  2 12:03 .gitignore
+-rw-r--r-- 1 runner runner  250 Oct  2 12:03 package-lock.json
+-rw-r--r-- 1 runner runner  498 Oct  2 12:03 package.json
+drwxr-xr-x 3 runner runner 4096 Oct  2 12:03 storage
+drwxr-xr-x 2 runner runner 4096 Oct  2 12:03 tools
+-rw-r--r-- 1 runner runner 1605 Oct  2 12:03 zc_diag.txt
+--- node_modules? ---
+node_modules: 不存在（无依赖，符合预期）
+
+@@@ LOCKFILE_AFTER
+{
+  "name": "zc-signal-terminal",
+  "version": "0.0.0",
+  "lockfileVersion": 3,
+  "requires": true,
+  "packages": {
+    "": {
+      "name": "zc-signal-terminal",
+      "version": "0.0.0",
+      "engines": {
+        "node": ">=18"
+      }
+    }
+  }
+}
+
+@@@ GIT_STATUS
+ M package-lock.json
+ M zc_diag.txt
 
 @@@ DONE
