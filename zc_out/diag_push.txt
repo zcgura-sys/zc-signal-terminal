@@ -1,0 +1,28 @@
+=== git ls-files zc_out ===
+zc_out/7probe.js
+zc_out/diag_ignore.txt
+zc_out/dl_pkg.json
+zc_out/gh_sample.txt
+zc_out/glass_report.txt
+zc_out/probe_plain.js
+zc_out/py_probe.json
+zc_out/repo_ls.txt
+zc_out/report.txt
+zc_out/t.txt
+=== ls zc_out ===
+total 52
+drwxr-xr-x 2 runner runner 4096 Oct  4 04:13 .
+drwxr-xr-x 9 runner runner 4096 Oct  4 04:13 ..
+-rw-r--r-- 1 runner runner   33 Oct  4 04:13 7probe.js
+-rw-r--r-- 1 runner runner  354 Oct  4 04:13 diag_ignore.txt
+-rw-r--r-- 1 runner runner  243 Oct  4 04:13 diag_push.txt
+-rw-r--r-- 1 runner runner  284 Oct  4 04:13 dl_pkg.json
+-rw-r--r-- 1 runner runner   13 Oct  4 04:13 gh_sample.txt
+-rw-r--r-- 1 runner runner 1612 Oct  4 04:13 glass_report.txt
+-rw-r--r-- 1 runner runner   33 Oct  4 04:13 probe_plain.js
+-rw-r--r-- 1 runner runner  210 Oct  4 04:13 py_probe.json
+-rw-r--r-- 1 runner runner 2117 Oct  4 04:13 repo_ls.txt
+-rw-r--r-- 1 runner runner  915 Oct  4 04:13 report.txt
+-rw-r--r-- 1 runner runner    2 Oct  4 04:13 t.txt
+=== ls root ===
+-rw-r--r-- 1 runner runner 1906 Oct  4 04:13 glass-skin.js
