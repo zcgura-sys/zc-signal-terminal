@@ -1,0 +1,66 @@
+total 12
+drwxr-xr-x 2 runner runner 4096 Oct  4 04:30 .
+drwxr-xr-x 9 runner runner 4096 Oct  4 04:30 ..
+-rw-r--r-- 1 runner runner   54 Oct  4 04:30 .gitignore
+---FIND7---
+-rw-r--r-- 1 runner runner 35 Oct  4 04:30 ./zc_out/7.js
+---ALL---
+.
+./.github
+./.github/workflows
+./.github/workflows/zc-signal-terminal.yml
+./.gitignore
+./backups
+./backups/7.js.bak1
+./backups/7.js.bak2_20261003_102613
+./glass-skin.css
+./glass-skin.js
+./package-lock.json
+./package.json
+./storage
+./storage/emulated
+./storage/emulated/0
+./sync_probe.txt
+./tools
+./tools/_sync_probe.js
+./tools/check_7.mjs
+./tools/fetch_models.py
+./tools/filescan.py
+./tools/glass.css
+./tools/glass.js
+./tools/glass_skin.py
+./tools/patch_glass.py
+./zc_check_report.txt
+./zc_cloud_report.txt
+./zc_diag.txt
+./zc_diag2.txt
+./zc_glass_log.txt
+./zc_ls_report.txt
+./zc_out
+./zc_out/6.js
+./zc_out/7.js
+./zc_out/7probe.js
+./zc_out/diag2.txt
+./zc_out/diag3.txt
+./zc_out/diag4.txt
+./zc_out/diag5.txt
+./zc_out/diag_ignore.txt
+./zc_out/diag_push.txt
+./zc_out/dl_pkg.json
+./zc_out/gh_sample.txt
+./zc_out/glass_report.txt
+./zc_out/prev_logs.txt
+./zc_out/probe_120k.txt
+./zc_out/probe_330k.txt
+./zc_out/probe_plain.js
+./zc_out/py_probe.json
+./zc_out/repo_ls.txt
+./zc_out/report.txt
+./zc_out/t.txt
+./zc_patch_report.txt
+./zc_probe.txt
+./zc_selftest.txt
+./zc_selftest2.txt
+./zc_tree_report.txt
+./工作区
+./工作区/.gitignore
