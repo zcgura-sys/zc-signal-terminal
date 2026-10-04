@@ -1,0 +1,39 @@
+== node/python ==
+v22.23.3
+Python 3.12.3
+== counts ==
+grep: 7.js: No such file or directory
+grep: 7.js: No such file or directory
+grep: 7.js: No such file or directory
+== patch ==
+Traceback (most recent call last):
+  File "/home/runner/work/zc-signal-terminal/zc-signal-terminal/tools/patch_glass.py", line 59, in <module>
+    sys.exit(main())
+             ^^^^^^
+  File "/home/runner/work/zc-signal-terminal/zc-signal-terminal/tools/patch_glass.py", line 28, in main
+    src = read(TARGET)
+          ^^^^^^^^^^^^
+  File "/home/runner/work/zc-signal-terminal/zc-signal-terminal/tools/patch_glass.py", line 18, in read
+    with io.open(p, encoding='utf-8', newline='') as f:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+FileNotFoundError: [Errno 2] No such file or directory: '/home/runner/work/zc-signal-terminal/zc-signal-terminal/7.js'
+patch_exit:1
+== check ==
+node:fs:440
+    return binding.readFileUtf8(path, stringToFlags(options.flag));
+                   ^
+
+Error: ENOENT: no such file or directory, open '/home/runner/work/zc-signal-terminal/zc-signal-terminal/7.js'
+    at Object.readFileSync (node:fs:440:20)
+    at file:///home/runner/work/zc-signal-terminal/zc-signal-terminal/tools/check_7.mjs:13:16
+    at ModuleJob.run (node:internal/modules/esm/module_job:343:25)
+    at async onImport.tracePromise.__proto__ (node:internal/modules/esm/loader:681:26)
+    at async asyncRunEntryPointWithESMLoader (node:internal/modules/run_main:117:5) {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/home/runner/work/zc-signal-terminal/zc-signal-terminal/7.js'
+}
+
+Node.js v22.23.3
+check_exit:1
