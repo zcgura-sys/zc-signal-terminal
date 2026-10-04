@@ -1,0 +1,29 @@
+total 8
+drwxr-xr-x 2 runner runner 4096 Oct  4 04:15 .
+drwxr-xr-x 9 runner runner 4096 Oct  4 04:15 ..
+-rw-r--r-- 1 runner runner    0 Oct  4 04:15 7.js.bak1
+-rw-r--r-- 1 runner runner    0 Oct  4 04:15 7.js.bak2_20261003_102613
+=== du ===
+0	backups
+20	sync_probe.txt
+54	工作区
+71	storage/emulated/0/工作区/models/shizuku
+71	storage/emulated/0/工作区/models/shizuku/expressions
+250	package-lock.json
+344	zc_cloud_report.txt
+498	package.json
+552	zc_glass_log.txt
+707	zc_selftest.txt
+789	zc_probe.txt
+1254	zc_diag2.txt
+1906	glass-skin.js
+2273	zc_diag.txt
+2647	zc_selftest2.txt
+6772	storage
+6772	storage/emulated
+6772	storage/emulated/0
+6772	storage/emulated/0/工作区
+6772	storage/emulated/0/工作区/models
+6840	glass-skin.css
+8317	zc_out
+68190	tools
