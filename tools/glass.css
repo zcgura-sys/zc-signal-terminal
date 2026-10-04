@@ -1,0 +1,141 @@
+/* ==========================================================================
+ * 液态玻璃（Liquid Glass）· 参考的开源实现：
+ *   · github.com/kevinbism/liquid-glass-effect —— 纯 CSS 玻璃配方：半透明着色 +
+ *     backdrop blur/saturate + 亮描边 + 内高光 / 外投影的组合
+ *   · github.com/nikdelvin/liquid-glass —— iOS 26 的边缘折射与色散，这里用「遮罩
+ *     渐变描边」做轻量近似，不引入 SVG 位移滤镜，保证长文本可读性与渲染性能
+ *   · github.com/winaviation/liquid-glass-demo（kube.io） —— 随光源移动的镜面高光
+ * 全部为 CSS + 一小段 JS，零外部依赖；不支持 backdrop-filter / mask 的浏览器会
+ * 自动退化为半透明着色面板，文字对比度不受影响。
+ * ========================================================================== */
+
+/* ---------- 指针光源坐标（由下方 JS 实时写入） ---------- */
+:root{--zc-lx:50%;--zc-ly:-20%;--zc-ring-op:.55}
+html[data-theme="dark"]{--zc-ring-op:.45}
+
+/* ---------- 背景光场：玻璃需要有内容才能被“折射”出来 ---------- */
+body::before{
+  content:"";position:fixed;inset:-12% -8%;z-index:-1;pointer-events:none;opacity:.5;will-change:transform;
+  background:
+    radial-gradient(44% 46% at 14% 18%,rgba(64,124,255,.34) 0%,rgba(64,124,255,0) 66%),
+    radial-gradient(46% 44% at 86% 12%,rgba(0,196,255,.26) 0%,rgba(0,196,255,0) 64%),
+    radial-gradient(52% 50% at 82% 88%,rgba(255,110,190,.24) 0%,rgba(255,110,190,0) 66%),
+    radial-gradient(46% 46% at 18% 86%,rgba(60,224,180,.22) 0%,rgba(60,224,180,0) 64%),
+    radial-gradient(72% 62% at 50% 45%,rgba(255,255,255,.10) 0%,rgba(255,255,255,0) 72%);
+  animation:zcAurora 42s ease-in-out infinite alternate
+}
+html[data-theme="dark"] body::before{opacity:.34}
+@keyframes zcAurora{
+  0%{transform:translate3d(-2%,-2%,0) scale(1)}
+  50%{transform:translate3d(3%,3%,0) scale(1.09)}
+  100%{transform:translate3d(-3%,2%,0) scale(1.04)}
+}
+
+/* ---------- 大面积玻璃：主区 / 侧栏 / Agent 面板 / 思考卡片 ---------- */
+.main{background:color-mix(in srgb,var(--bg) 82%,transparent);backdrop-filter:blur(30px) saturate(165%);-webkit-backdrop-filter:blur(30px) saturate(165%)}
+.sidebar{background:color-mix(in srgb,var(--bg-2) 76%,transparent);backdrop-filter:blur(26px) saturate(165%);-webkit-backdrop-filter:blur(26px) saturate(165%);border-right-color:color-mix(in srgb,var(--text) 10%,transparent)}
+.agent-panel{background:color-mix(in srgb,var(--bg-2) 80%,transparent);backdrop-filter:blur(24px) saturate(160%);-webkit-backdrop-filter:blur(24px) saturate(160%)}
+.think{background:color-mix(in srgb,var(--bg-2) 86%,transparent);backdrop-filter:blur(12px) saturate(140%);-webkit-backdrop-filter:blur(12px) saturate(140%);border-color:color-mix(in srgb,var(--text) 10%,transparent)}
+
+/* ---------- 输入区：主玻璃面板 ---------- */
+.composer{
+  position:relative;isolation:isolate;
+  background:linear-gradient(158deg,color-mix(in srgb,var(--surface) 78%,transparent) 0%,color-mix(in srgb,var(--surface) 54%,transparent) 52%,color-mix(in srgb,var(--accent) 14%,transparent) 100%);
+  border-color:color-mix(in srgb,var(--text) 12%,transparent);
+  backdrop-filter:blur(24px) saturate(185%) brightness(1.04);
+  -webkit-backdrop-filter:blur(24px) saturate(185%) brightness(1.04);
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.62),inset 0 -12px 26px -20px rgba(255,255,255,.95),0 1px 2px rgba(18,22,54,.06),0 18px 44px -20px rgba(18,22,54,.45)
+}
+
+/* ---------- 浮层玻璃：菜单 / 对话框 / 设置 / 登录卡 / 通知 ---------- */
+.pop{
+  background:color-mix(in srgb,var(--surface) 78%,transparent);
+  backdrop-filter:blur(26px) saturate(190%);-webkit-backdrop-filter:blur(26px) saturate(190%);
+  border-color:color-mix(in srgb,var(--text) 12%,transparent);
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.5),0 22px 50px -22px rgba(14,16,40,.6),0 2px 8px rgba(14,16,40,.14)
+}
+.dialog{
+  position:relative;isolation:isolate;
+  background:color-mix(in srgb,var(--surface) 86%,transparent);
+  backdrop-filter:blur(30px) saturate(185%);-webkit-backdrop-filter:blur(30px) saturate(185%);
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.55),0 32px 74px -32px rgba(10,12,34,.75),0 4px 14px rgba(10,12,34,.18)
+}
+.settings{
+  position:relative;isolation:isolate;
+  background:color-mix(in srgb,var(--surface) 88%,transparent);
+  backdrop-filter:blur(32px) saturate(185%);-webkit-backdrop-filter:blur(32px) saturate(185%);
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.5),0 44px 96px -44px rgba(10,12,34,.8)
+}
+.auth-card{
+  position:relative;isolation:isolate;
+  background:color-mix(in srgb,var(--surface) 86%,transparent);
+  backdrop-filter:blur(28px) saturate(185%);-webkit-backdrop-filter:blur(28px) saturate(185%);
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.6),0 32px 74px -34px rgba(10,12,34,.75)
+}
+.auth-screen{background:color-mix(in srgb,var(--bg-2) 70%,transparent);backdrop-filter:blur(10px) saturate(150%);-webkit-backdrop-filter:blur(10px) saturate(150%)}
+.toast{
+  position:relative;isolation:isolate;
+  background:color-mix(in srgb,var(--primary) 88%,transparent);
+  backdrop-filter:blur(16px) saturate(160%);-webkit-backdrop-filter:blur(16px) saturate(160%);
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.3),0 16px 36px -16px rgba(10,12,34,.75)
+}
+.toast.error{background:color-mix(in srgb,var(--danger) 90%,transparent)}
+.toast.ok{background:color-mix(in srgb,var(--ok) 90%,transparent)}
+.overlay{backdrop-filter:blur(8px) saturate(140%);-webkit-backdrop-filter:blur(8px) saturate(140%)}
+.drop{backdrop-filter:blur(14px) saturate(150%);-webkit-backdrop-filter:blur(14px) saturate(150%)}
+
+/* ---------- 小玻璃：顶栏胶囊 / 按钮 ---------- */
+.pill{
+  background:color-mix(in srgb,var(--surface) 55%,transparent);
+  backdrop-filter:blur(14px) saturate(165%);-webkit-backdrop-filter:blur(14px) saturate(165%);
+  border:1px solid color-mix(in srgb,var(--text) 10%,transparent);
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.5)
+}
+.pill:hover{background:color-mix(in srgb,var(--surface) 74%,transparent);border-color:color-mix(in srgb,var(--text) 22%,transparent);box-shadow:inset 0 1px 0 rgba(255,255,255,.6),0 8px 20px -12px rgba(18,22,54,.6)}
+.hero .status{background:color-mix(in srgb,var(--surface) 55%,transparent);backdrop-filter:blur(14px) saturate(165%);-webkit-backdrop-filter:blur(14px) saturate(165%);box-shadow:inset 0 1px 0 rgba(255,255,255,.5)}
+.hero .status:hover{border-color:color-mix(in srgb,var(--text) 24%,transparent);box-shadow:inset 0 1px 0 rgba(255,255,255,.6),0 8px 20px -12px rgba(18,22,54,.55)}
+.icon-btn,.tool,.new-chat,.side-link,.seg button,.s-nav button,.act,.fc-act button,.code-h button,.think-h,.send{
+  transition:background .16s ease,color .16s ease,box-shadow .2s ease,border-color .2s ease,transform .2s ease,opacity .15s ease
+}
+.icon-btn:hover,.tool:hover,.new-chat:hover,.side-link:hover,.seg button:hover,.s-nav button:hover{
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.55),0 8px 18px -10px rgba(18,22,54,.6);
+  border-color:color-mix(in srgb,var(--text) 24%,transparent)
+}
+.send{box-shadow:inset 0 1px 0 rgba(255,255,255,.34),inset 0 -8px 14px -8px rgba(0,0,0,.55),0 10px 22px -10px rgba(18,22,54,.7)}
+.send:not(:disabled):active{box-shadow:inset 0 2px 6px rgba(0,0,0,.4),0 4px 10px -6px rgba(18,22,54,.7)}
+
+/* ---------- 镜面高光：随指针移动（JS 写入 --zc-lx / --zc-ly） ---------- */
+.composer::after,.dialog::after,.settings::after,.auth-card::after,.pop::after,.toast::after{
+  content:"";position:absolute;inset:0;border-radius:inherit;pointer-events:none;z-index:-1;
+  background:radial-gradient(260px 190px at var(--zc-lx,50%) var(--zc-ly,-20%),rgba(255,255,255,.55),rgba(255,255,255,0) 72%)
+}
+html[data-theme="dark"] .composer::after,html[data-theme="dark"] .dialog::after,html[data-theme="dark"] .settings::after,
+html[data-theme="dark"] .auth-card::after,html[data-theme="dark"] .pop::after,html[data-theme="dark"] .toast::after{
+  background:radial-gradient(260px 190px at var(--zc-lx,50%) var(--zc-ly,-20%),rgba(186,214,255,.4),rgba(186,214,255,0) 72%)
+}
+
+/* ---------- 边缘折射 / 色散描边：仅在支持遮罩裁剪时启用，避免盖住内容 ---------- */
+@supports ((mask-composite: exclude) and (mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0))) or ((-webkit-mask-composite: xor) and (-webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0))) {
+  .composer::before,.dialog::before,.settings::before,.auth-card::before,.pop::before,.toast::before{
+    content:"";position:absolute;inset:0;border-radius:inherit;padding:1px;pointer-events:none;opacity:var(--zc-ring-op);
+    background:linear-gradient(135deg,rgba(255,255,255,.95) 0%,color-mix(in srgb,var(--accent) 70%,transparent) 30%,rgba(255,255,255,.5) 48%,rgba(255,166,96,.55) 70%,rgba(255,255,255,.92) 100%);
+    background-size:240% 240%;
+    background-position:var(--zc-lx,50%) var(--zc-ly,-20%);
+    -webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);
+    mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);
+    -webkit-mask-composite:xor;
+    mask-composite:exclude
+  }
+  .composer::before{animation:zcEdge 16s linear infinite}
+}
+/* 输入框边缘的流光：色带沿边缘缓慢流动，让“液态”感持续存在 */
+@keyframes zcEdge{from{background-position:0% 0%}to{background-position:240% 100%}}
+
+/* ---------- 移动端降低模糊半径，保证流畅 ---------- */
+@media (max-width:820px){
+  .main{backdrop-filter:blur(18px) saturate(150%);-webkit-backdrop-filter:blur(18px) saturate(150%)}
+  .sidebar{backdrop-filter:blur(16px) saturate(150%);-webkit-backdrop-filter:blur(16px) saturate(150%)}
+  .composer{backdrop-filter:blur(16px) saturate(170%);-webkit-backdrop-filter:blur(16px) saturate(170%)}
+  .dialog,.settings,.auth-card{backdrop-filter:blur(22px) saturate(170%);-webkit-backdrop-filter:blur(22px) saturate(170%)}
+}
+.app.drawer .scrim,.app.agentDrawer .ag-scrim{backdrop-filter:blur(5px) saturate(130%);-webkit-backdrop-filter:blur(5px) saturate(130%)}
