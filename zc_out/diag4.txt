@@ -1,0 +1,11 @@
+=== probes in git ===
+zc_out/7probe.js
+zc_out/probe_120k.txt
+zc_out/probe_330k.txt
+zc_out/probe_plain.js
+zc_out/py_probe.json
+=== sizes on disk ===
+-rw-r--r-- 1 runner runner 109910 Oct  4 04:20 zc_out/probe_120k.txt
+-rw-r--r-- 1 runner runner 174604 Oct  4 04:20 zc_out/probe_330k.txt
+=== git status ===
+?? zc_out/diag4.txt
