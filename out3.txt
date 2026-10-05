@@ -1,0 +1,67 @@
+=== zc_out/probe_jquery.txt ===
+/*!
+ * jQuery JavaScript Library v3.7.1
+ * https://jquery.com/
+ *
+ * Copyright OpenJS Foundation and other contributors
+ * Released under the MIT license
+ * https://jquery.org/license
+ *
+ * Date: 2023-08-28T13:37Z
+ */
+( function( global, factory ) {
+
+	"use strict";
+
+	if ( typeof module === "object" 
+=== zc_out/probe_120k.txt ===
+/**
+ * @license React
+ * react.development.js
+ *
+ * Copyright (c) Facebook, Inc. and its affiliates.
+ *
+ * This source code is licensed under the MIT license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+(function (global, factory) {
+  typeof exports === 'object' && typ
+=== zc_out/probe_330k.txt ===
+//! moment.js
+//! version : 2.29.4
+//! authors : Tim Wood, Iskren Chernev, Moment.js contributors
+//! license : MIT
+//! momentjs.com
+
+;(function (global, factory) {
+    typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory() :
+    typeof define === 'function' && def
+=== zc_out/probe_540k.txt ===
+/**
+ * @license
+ * Lodash <https://lodash.com/>
+ * Copyright OpenJS Foundation and other contributors <https://openjsf.org/>
+ * Released under MIT license <https://lodash.com/license>
+ * Based on Underscore.js 1.8.3 <http://underscorejs.org/LICENSE>
+ * Copyright Jeremy Ashkenas, DocumentCloud and In
+=== zc_out/dl_pkg.json ===
+{
+  "name": "zc-gura-agent",
+  "private": true,
+  "version": "2.1.0",
+  "type": "module",
+  "scripts": {
+    "deploy": "wrangler deploy",
+    "dev": "wrangler dev"
+  },
+  "dependencies": {
+    "@cloudflare/sandbox": "^0.4.2"
+  },
+  "devDependencies": {
+    "wrangler": "^4.0.0"
+  }
+}
+
+=== zc_out/gh_sample.txt ===
+Hello World!
+
