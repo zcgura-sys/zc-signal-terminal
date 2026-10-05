@@ -1,0 +1,24 @@
+=== find dirs ===
+.
+./zc_out
+./tools
+./storage
+./storage/emulated
+./storage/emulated/0
+./storage/emulated/0/工作区
+./storage/emulated/0/工作区/models
+./storage/emulated/0/工作区/models/shizuku
+./storage/emulated/0/工作区/models/shizuku/expressions
+./.github
+./.github/workflows
+./backups
+./工作区
+=== names with 库 ===
+=== gitignore ===
+node_modules/
+__pycache__/
+*.pyc
+.venv/
+venv/
+.cache/
+=== node_modules? ===
