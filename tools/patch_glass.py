@@ -36,18 +36,28 @@ def main():
         assert '</script>' not in block.lower(), '%s 含有 </script>' % name
 
     # 2) 注入点必须唯一
-    assert src.count(STYLE_ANCHOR) == 1, 'style 结束标签数量异常: %s' % src.count(STYLE_ANCHOR)
+    # 文件里有两处 </style>：管理页 ZC_ADMIN_HTML + 主页 ZC_HTML；只注入最后一处
+    assert src.count(STYLE_ANCHOR) == 2, 'style 结束标签数量异常: %s' % src.count(STYLE_ANCHOR)
     assert src.count(JS_ANCHOR) == 1, 'Toast 锚点数量异常: %s' % src.count(JS_ANCHOR)
 
     if MARKER in src:
         print('[skip] 7.js 已包含液态玻璃代码，无需重复注入')
         return 0
 
-    src = src.replace(STYLE_ANCHOR, css.rstrip('\n') + '\n' + STYLE_ANCHOR, 1)
+    # 注入到 ZC_HTML 的样式块（最后一处 </style>）
+    html_i = src.find('const ZC_HTML = String.raw')
+    assert html_i > 0, '未定位到 ZC_HTML 模板'
+    style_i = src.rfind(STYLE_ANCHOR)
+    assert style_i > html_i, '最后一处 </style> 不在 ZC_HTML 内'
+    assert STYLE_ANCHOR not in css and JS_ANCHOR not in css, 'glass.css 含有注入锚点'
+    assert JS_ANCHOR not in js, 'glass.js 含有注入锚点'
+
+    src = src[:style_i] + css.rstrip('\n') + '\n' + STYLE_ANCHOR + src[style_i + len(STYLE_ANCHOR):]
     src = src.replace(JS_ANCHOR, js.rstrip('\n') + '\n\n' + JS_ANCHOR, 1)
 
     assert MARKER in src and 'zcGlassLight' in src, '注入后校验失败'
-    assert src.count(STYLE_ANCHOR) == 1 and src.count(JS_ANCHOR) == 1, '注入破坏了锚点'
+    assert src.count(STYLE_ANCHOR) == 2 and src.count(JS_ANCHOR) == 1, '注入破坏了锚点'
+    assert src.rfind(MARKER) < src.rfind(STYLE_ANCHOR), 'CSS 未注入到 ZC_HTML 样式块内'
 
     write(TARGET, src)
     print('[ok] 已把液态玻璃 CSS（%d 字符）与 JS（%d 字符）注入 7.js' % (len(css), len(js)))

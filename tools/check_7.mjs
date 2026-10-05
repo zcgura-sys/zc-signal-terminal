@@ -71,7 +71,7 @@ else {
 }
 
 // ---- 3) 液态玻璃注入标记 ----
-const marks = ['液态玻璃（Liquid Glass）', 'zcGlassLight', 'zcAurora', 'zcEdge', '--zc-lx'];
+const marks = ['液态玻璃（Liquid Glass）', 'zcGlassLight', 'zcAurora', 'zcEdge', '--zc-lx', 'zcSpin', 'zcSweep', 'zcCondense', '--zc-dx', 'think.active', 'send.busy'];
 marks.forEach((k) => { if (src.indexOf(k) < 0) bad('缺少标记：' + k); });
 if (!failed) ok('液态玻璃注入标记齐全');
 
