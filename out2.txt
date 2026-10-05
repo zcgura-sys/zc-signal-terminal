@@ -1,0 +1,6 @@
+=== lib-like files ===
+./backups/7.js.bak1
+./backups/7.js.bak2_20261003_102613
+=== vendor/dist/node_modules ===
+=== all files count ===
+59
