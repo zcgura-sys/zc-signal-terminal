@@ -1,9 +1,9 @@
 {
-  "generated_at": "2026-10-18T15:23:40.852118+00:00",
+  "generated_at": "2026-10-18T15:25:26.931163+00:00",
   "runtime": {
     "env": {
       "ok": true,
-      "cost_ms": 4,
+      "cost_ms": 5,
       "python": "3.12.3",
       "impl": "CPython",
       "platform": "Linux-6.17.0-1022-azure-x86_64-with-glibc2.39",
@@ -11,13 +11,13 @@
       "cpu_count": 4,
       "cwd": "/home/runner/work/zc-signal-terminal/zc-signal-terminal",
       "env_ci": "true",
-      "run_id": "39140247540"
+      "run_id": "39140382498"
     }
   },
   "deps": {
     "import": {
       "ok": true,
-      "cost_ms": 134,
+      "cost_ms": 167,
       "found": {
         "requests": "2.34.2",
         "httpx": "0.28.1",
@@ -34,22 +34,22 @@
   "network": {
     "dns": {
       "ok": true,
-      "cost_ms": 107,
+      "cost_ms": 162,
       "wttr.in_resolved": [
         "5.9.243.187"
       ]
     },
     "http": {
       "ok": true,
-      "cost_ms": 832,
+      "cost_ms": 790,
       "status": 200,
-      "latency_ms": 831,
-      "bytes": 39512,
+      "latency_ms": 789,
+      "bytes": 25383,
       "city": "Luoyang",
       "temp_C": "18",
-      "desc_zh": "Overcast ",
-      "humidity": "38",
-      "wind_kmph": "5",
+      "desc_zh": "Patchy rain nearby",
+      "humidity": "43",
+      "wind_kmph": "8",
       "today_max_min_C": [
         "22",
         "13"
@@ -63,11 +63,11 @@
   "compute": {
     "sha256": {
       "ok": true,
-      "cost_ms": 9,
+      "cost_ms": 10,
       "sha256": "66ab6c0ec57f476f",
       "mb_hashed": 13.7,
-      "ms": 8.0,
-      "throughput_mbps": 1720.9
+      "ms": 9.1,
+      "throughput_mbps": 1509.1
     },
     "json": {
       "ok": true,
