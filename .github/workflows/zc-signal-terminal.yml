@@ -95,6 +95,7 @@ jobs:
           TARGET="$GITHUB_WORKSPACE/${ZC_DIR:-.}"
           [ -d "$TARGET" ] || TARGET="$GITHUB_WORKSPACE"
           cd "$TARGET"
+          mkdir -p "$GITHUB_WORKSPACE/logs"
           echo "[cwd] $(pwd)"
           bash -lc "$ZC_CMD" 2>&1 | tee -a "$GITHUB_WORKSPACE/logs/run-$(date -u +%Y%m%dT%H%M%SZ).log" || RC=$?
           echo "EXIT_CODE=${RC:-0}"
