@@ -1,0 +1,84 @@
+{
+  "generated_at": "2026-10-18T15:21:34.286666+00:00",
+  "runtime": {
+    "env": {
+      "ok": true,
+      "cost_ms": 5,
+      "python": "3.12.3",
+      "impl": "CPython",
+      "platform": "Linux-6.17.0-1022-azure-x86_64-with-glibc2.39",
+      "machine": "x86_64",
+      "cpu_count": 4,
+      "cwd": "/home/runner/work/zc-signal-terminal/zc-signal-terminal",
+      "env_ci": "true",
+      "run_id": "39140090834"
+    }
+  },
+  "deps": {
+    "import": {
+      "ok": true,
+      "cost_ms": 106,
+      "found": {
+        "requests": "2.34.2",
+        "httpx": "0.28.1",
+        "rich": "imported",
+        "psutil": "7.2.2"
+      },
+      "missing": [
+        "yaml",
+        "numpy",
+        "pandas"
+      ]
+    }
+  },
+  "network": {
+    "dns": {
+      "ok": true,
+      "cost_ms": 269,
+      "wttr.in_resolved": [
+        "5.9.243.187"
+      ]
+    },
+    "http": {
+      "ok": true,
+      "cost_ms": 646,
+      "status": 200,
+      "latency_ms": 645,
+      "bytes": 39512,
+      "city": "Luoyang",
+      "temp_C": "18",
+      "desc_zh": "Overcast ",
+      "humidity": "38",
+      "wind_kmph": "5",
+      "today_max_min_C": [
+        "22",
+        "13"
+      ],
+      "headers": {
+        "server": null,
+        "via": null
+      }
+    }
+  },
+  "compute": {
+    "sha256": {
+      "ok": true,
+      "cost_ms": 10,
+      "sha256": "66ab6c0ec57f476f",
+      "mb_hashed": 13.7,
+      "ms": 9.1,
+      "throughput_mbps": 1504.6
+    },
+    "json": {
+      "ok": true,
+      "cost_ms": 0,
+      "bytes": 4920,
+      "equal": true
+    }
+  },
+  "errors": [],
+  "summary": {
+    "total_steps": 6,
+    "failed_steps": 0
+  }
+}
