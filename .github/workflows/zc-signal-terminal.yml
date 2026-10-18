@@ -107,22 +107,21 @@ jobs:
           mkdir -p logs
           git config user.name  "zc-agent-bot"
           git config user.email "zc-agent-bot@users.noreply.github.com"
-          git add -A -- logs scripts
-          if [ -n "$(git status --porcelain)" ]; then
-            git commit -m "chore(zc-agent): 云端运行产物 [skip ci]" || true
-            # 仓库可能被其他通道并发推过，fetch+rebase 重试三次
-            for i in 1 2 3; do
-              if git fetch -q origin main && git rebase -q origin/main; then
-                git push && { echo "第 ${i} 次 push 成功"; break; }
-              else
-                git rebase --abort 2>/dev/null || true
-                echo "第 ${i} 次同步失败，重试"
-              fi
-              sleep 5
-            done
-          else
-            echo "无产物变更，跳过提交"
-          fi
+          # 产物先备份到 /tmp，再以远端最新 main 为基线提交，避开并发 rebase 冲突
+          rm -rf /tmp/zc-logs && mkdir -p /tmp/zc-logs
+          cp -a logs/. /tmp/zc-logs/ 2>/dev/null || true
+          for i in 1 2 3; do
+            git fetch -q origin main || { echo "fetch 失败，重试"; sleep 4; continue; }
+            git reset --hard -q origin/main || true
+            mkdir -p logs && cp -a /tmp/zc-logs/. logs/ 2>/dev/null || true
+            git add -A -- logs
+            if git diff --cached --quiet; then
+              echo "无新增产物，跳过提交"; break
+            fi
+            git commit -q -m "chore(zc-agent): 云端运行产物 [skip ci]" || true
+            if git push -q origin main; then echo "产物回写成功（第 ${i} 次尝试）"; break; fi
+            echo "第 ${i} 次 push 被拒，重试"; sleep 4
+          done
 
       - name: Upload log artifact
         if: always()
