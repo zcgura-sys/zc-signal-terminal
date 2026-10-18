@@ -110,7 +110,16 @@ jobs:
           git add -A -- logs scripts
           if [ -n "$(git status --porcelain)" ]; then
             git commit -m "chore(zc-agent): 云端运行产物 [skip ci]" || true
-            git push || true
+            # 仓库可能被其他通道并发推过，fetch+rebase 重试三次
+            for i in 1 2 3; do
+              if git fetch -q origin main && git rebase -q origin/main; then
+                git push && { echo "第 ${i} 次 push 成功"; break; }
+              else
+                git rebase --abort 2>/dev/null || true
+                echo "第 ${i} 次同步失败，重试"
+              fi
+              sleep 5
+            done
           else
             echo "无产物变更，跳过提交"
           fi
