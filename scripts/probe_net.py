@@ -74,7 +74,7 @@ def step_http():
     import requests  # 只有装了才走这条
 
     t0 = time.perf_counter()
-    r = requests.get("https://wttr.in/Luoyang?format=j1", timeout=20,
+    r = requests.get("https://wttr.in/Luoyang?format=j1&lang=zh", timeout=20,
                      headers={"User-Agent": "zc-probe/1.0"})
     ms = round((time.perf_counter() - t0) * 1000)
     body = r.json()
