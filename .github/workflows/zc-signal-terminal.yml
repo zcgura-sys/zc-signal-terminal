@@ -1,0 +1,124 @@
+name: zc-signal-terminal
+
+# 云端执行入口：
+#   1) workflow_dispatch —— 供云端执行器（run_command）按需派发命令
+#   2) push —— 作为自触发通道：改 scripts/** 即自动跑探针，产物提交回 logs/
+on:
+  workflow_dispatch:
+    inputs:
+      command:
+        description: '要执行的 shell 命令'
+        required: false
+        default: ''
+      cmd:
+        description: '同 command（兼容别名）'
+        required: false
+        default: ''
+      script:
+        description: '要执行的脚本内容/路径（兼容别名）'
+        required: false
+        default: ''
+      cwd:
+        description: '工作目录（相对仓库根）'
+        required: false
+        default: '.'
+      workdir:
+        description: '同 cwd（兼容别名）'
+        required: false
+        default: ''
+      timeout_ms:
+        description: '超时毫秒'
+        required: false
+        default: '600000'
+      timeout:
+        description: '同 timeout_ms（兼容别名）'
+        required: false
+        default: ''
+  push:
+    branches: [ main ]
+    paths:
+      - 'scripts/**'
+      - '.github/workflows/zc-signal-terminal.yml'
+      - 'trigger.txt'
+
+permissions:
+  contents: write
+
+concurrency:
+  group: zc-signal-terminal-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  zc-run:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Resolve command
+        id: resolve
+        env:
+          IN_COMMAND: ${{ inputs.command }}
+          IN_CMD: ${{ inputs.cmd }}
+          IN_SCRIPT: ${{ inputs.script }}
+          IN_CWD: ${{ inputs.cwd }}
+          IN_WORKDIR: ${{ inputs.workdir }}
+        run: |
+          CMD="$(printf '%s' "${IN_COMMAND:-${IN_CMD:-${IN_SCRIPT:-}}}")"
+          if [ -z "$CMD" ]; then
+            CMD="bash scripts/cloud_probe.sh"
+            echo "未收到命令输入，执行默认探针"
+          fi
+          DIR="${IN_CWD:-.}"
+          [ -n "${IN_WORKDIR:-}" ] && DIR="$IN_WORKDIR"
+          {
+            echo 'cmd<<ZC_EOF'
+            echo "$CMD"
+            echo 'ZC_EOF'
+            echo "dir=$DIR"
+          } >> "$GITHUB_OUTPUT"
+          echo "---- 待执行 ----"
+          echo "$CMD"
+          echo "---- 目录: $DIR ----"
+
+      - name: Run in cloud runner
+        continue-on-error: false
+        env:
+          ZC_CMD: ${{ steps.resolve.outputs.cmd }}
+          ZC_DIR: ${{ steps.resolve.outputs.dir }}
+        run: |
+          set -o pipefail
+          cd "$GITHUB_WORKSPACE" || exit 1
+          TARGET="$GITHUB_WORKSPACE/${ZC_DIR:-.}"
+          [ -d "$TARGET" ] || TARGET="$GITHUB_WORKSPACE"
+          cd "$TARGET"
+          echo "[cwd] $(pwd)"
+          bash -lc "$ZC_CMD" 2>&1 | tee -a "$GITHUB_WORKSPACE/logs/run-$(date -u +%Y%m%dT%H%M%SZ).log" || RC=$?
+          echo "EXIT_CODE=${RC:-0}"
+
+      - name: Persist artifacts
+        if: always()
+        run: |
+          cd "$GITHUB_WORKSPACE"
+          mkdir -p logs
+          git config user.name  "zc-agent-bot"
+          git config user.email "zc-agent-bot@users.noreply.github.com"
+          git add -A -- logs scripts
+          if [ -n "$(git status --porcelain)" ]; then
+            git commit -m "chore(zc-agent): 云端运行产物 [skip ci]" || true
+            git push || true
+          else
+            echo "无产物变更，跳过提交"
+          fi
+
+      - name: Upload log artifact
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: zc-logs-${{ github.run_id }}
+          path: logs/
+          if-no-files-found: ignore
+          retention-days: 7
