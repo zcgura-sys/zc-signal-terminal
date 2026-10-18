@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-18T15:25:26.931163+00:00",
+  "generated_at": "2026-10-18T15:25:56.890352+00:00",
   "runtime": {
     "env": {
       "ok": true,
@@ -11,13 +11,13 @@
       "cpu_count": 4,
       "cwd": "/home/runner/work/zc-signal-terminal/zc-signal-terminal",
       "env_ci": "true",
-      "run_id": "39140382498"
+      "run_id": "39140390627"
     }
   },
   "deps": {
     "import": {
       "ok": true,
-      "cost_ms": 167,
+      "cost_ms": 187,
       "found": {
         "requests": "2.34.2",
         "httpx": "0.28.1",
@@ -34,16 +34,16 @@
   "network": {
     "dns": {
       "ok": true,
-      "cost_ms": 162,
+      "cost_ms": 189,
       "wttr.in_resolved": [
         "5.9.243.187"
       ]
     },
     "http": {
       "ok": true,
-      "cost_ms": 790,
+      "cost_ms": 517,
       "status": 200,
-      "latency_ms": 789,
+      "latency_ms": 516,
       "bytes": 25383,
       "city": "Luoyang",
       "temp_C": "18",
@@ -67,7 +67,7 @@
       "sha256": "66ab6c0ec57f476f",
       "mb_hashed": 13.7,
       "ms": 9.1,
-      "throughput_mbps": 1509.1
+      "throughput_mbps": 1510.2
     },
     "json": {
       "ok": true,

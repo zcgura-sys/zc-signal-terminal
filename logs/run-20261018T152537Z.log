@@ -1,0 +1,10 @@
+PROBE_EXIT=0
+--- 产物文件 ---
+-rw-r--r-- 1 runner runner 2141 Oct 18 15:25 probe-20261018T152321Z.log
+-rw-r--r-- 1 runner runner 2151 Oct 18 15:25 probe-20261018T152538Z.log
+-rw-r--r-- 1 runner runner 1624 Oct 18 15:25 probe_result.json
+-rw-r--r-- 1 runner runner 2188 Oct 18 15:25 run-20261018T152212Z.log
+-rw-r--r-- 1 runner runner 2187 Oct 18 15:25 run-20261018T152321Z.log
+-rw-r--r-- 1 runner runner   34 Oct 18 15:25 run-20261018T152537Z.log
+--- 关键字段 ---
+{"failed":0,"py":"3.12.3","city":"Luoyang","temp":"18","desc":"Patchy rain nearby","today":["22","13"],"deps":["httpx","psutil","requests","rich"],"missing":["yaml","numpy","pandas"],"sha_mbps":1510.2,"http_ms":516}
