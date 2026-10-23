@@ -87,11 +87,20 @@ def cstr_list(blob):
     return [s.decode("utf-8", "replace") for s in blob.split(b"\x00") if len(s) > 1]
 
 
+U16_PAT = re.compile(
+    rb"(?:[\x20-\x7e]\x00"          # ASCII 可打印 (UTF-16LE 低字节)
+    rb"|[\x00-\xff][\x4e-\x9f]"      # CJK 统一汉字 U+4E00-U+9FFF
+    rb"|[\x00-\x3f]\x30"              # CJK 标点 U+3000-U+303F
+    rb"|[\x00-\xff]\xff){3,}"          # 全角字符 U+FF00-U+FFFF
+)
+
+
 def utf16_list(data):
-    """扫 UTF-16LE 可打印串，长度 >= 3 字符"""
+    """扫 UTF-16LE 串（ASCII + 中文），长度 >= 3 字符"""
     res = []
-    pat = re.compile(rb"(?:[\x20-\x7e\u4e00-\u9fff]\x00|[\x00-\xff][\x4e-\x9f]){3,}")
-    for m in pat.finditer(data):
+    if len(data) % 2:
+        data = data[:-1]
+    for m in U16_PAT.finditer(data):
         raw = m.group(0)
         if len(raw) % 2:
             raw = raw[:-1]
