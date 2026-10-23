@@ -1,9 +1,9 @@
 {
-  "generated_at": "2026-10-23T05:52:52.831383+00:00",
+  "generated_at": "2026-10-23T05:44:52.779156+00:00",
   "runtime": {
     "env": {
       "ok": true,
-      "cost_ms": 4,
+      "cost_ms": 5,
       "python": "3.12.3",
       "impl": "CPython",
       "platform": "Linux-6.17.0-1022-azure-x86_64-with-glibc2.39",
@@ -11,13 +11,13 @@
       "cpu_count": 4,
       "cwd": "/home/runner/work/zc-signal-terminal/zc-signal-terminal",
       "env_ci": "true",
-      "run_id": "39908129232"
+      "run_id": "39907430305"
     }
   },
   "deps": {
     "import": {
       "ok": true,
-      "cost_ms": 78,
+      "cost_ms": 192,
       "found": {
         "requests": "2.34.2",
         "httpx": "0.28.1",
@@ -34,16 +34,16 @@
   "network": {
     "dns": {
       "ok": true,
-      "cost_ms": 154,
+      "cost_ms": 652,
       "wttr.in_resolved": [
         "5.9.243.187"
       ]
     },
     "http": {
       "ok": true,
-      "cost_ms": 733,
+      "cost_ms": 1120,
       "status": 200,
-      "latency_ms": 731,
+      "latency_ms": 1119,
       "bytes": 25247,
       "city": "Luoyang",
       "temp_C": "16",
@@ -63,11 +63,11 @@
   "compute": {
     "sha256": {
       "ok": true,
-      "cost_ms": 9,
+      "cost_ms": 11,
       "sha256": "66ab6c0ec57f476f",
       "mb_hashed": 13.7,
-      "ms": 8.0,
-      "throughput_mbps": 1722.7
+      "ms": 10.3,
+      "throughput_mbps": 1330.3
     },
     "json": {
       "ok": true,
