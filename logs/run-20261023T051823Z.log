@@ -1,0 +1,42 @@
+== binaries ==
+Kimi.app/Frameworks/ClearSword.framework/ClearSword     63440 strings=   232 buckets=anti_debug,dynamic_code,jailbreak_detect,kb_swipe_env,remote_payload
+Kimi.app/Frameworks/DarkSword.framework/DarkSword     97712 strings=   321 buckets=anti_debug,dynamic_code,jailbreak_detect,kb_swipe_env,license_auth,remote_payload
+Kimi.app/Frameworks/kfd.framework/kfd             136416 strings=   368 buckets=anti_debug,dynamic_code,jailbreak_detect,kb_swipe_env,remote_payload
+Kimi.app/Kimi                                   44572128 strings= 55588 buckets=anti_debug,dynamic_code,file_theft_filesystem,file_theft_keychain,file_theft_screen,jailbreak_detect,kb_swipe_env,license_auth,obfuscation,process_spawn,remote_payload
+Kimi.app/libchoma.dylib                           388176 strings=   853 buckets=anti_debug,license_auth,obfuscation,remote_payload
+Kimi.app/libjailbreak.dylib                       617584 strings=  1731 buckets=anti_debug,dynamic_code,file_theft_filesystem,jailbreak_detect,kb_swipe_env,license_auth,process_spawn,remote_payload
+Kimi.app/libxpf.dylib                             457488 strings=  1582 buckets=anti_debug,jailbreak_detect,kb_swipe_env,license_auth,remote_payload
+
+== union domains (18) ==
+   adcdownload.apple.com
+   api.appledb.dev
+   b.rs
+   com.apple.private.security.no
+   d.fi
+   developer.apple.com
+   download.developer.apple.com
+   g.io
+   glv.io
+   ip.ph
+   kernelstruct.ucred.rw
+   notification.hud.live
+   perf.dev
+   research.com
+   subject.cn
+   woqbefiz.pk
+   www.apple.com
+   y.to
+
+== union urls (4) ==
+   http://www.apple.com/DTDs/PropertyList-1.0.dtd
+   https://api.appledb.dev/ios/%@;%@.json
+   https://api.appledb.dev/ios/main.json.xz
+   https://www.apple.com/appleca/0
+
+== ips (5) == ['120.43.112.1', '120.51.122.2', '120.68.132.1', '5.6.7.8', '7.2.3.4']
+
+== auth-like paths (2) ==
+   /Config
+   /active
+
+== plist targets == ['Kimi.app/Kimi', 'Kimi.app/Info.plist']
