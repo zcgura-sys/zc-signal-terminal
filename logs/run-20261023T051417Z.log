@@ -1,0 +1,24 @@
+ipa_size=30097965
+ipa_md5=e3e7acd40d3c633234551ee73677c519
+payload_ok=yes
+=== SCAN ===
+== summary ==
+app: Kimi.app
+files: 15 bytes: 53426947
+macho: 7
+  Kimi.app/Kimi ERR error('unpack_from requires a buffer of at least 44572160 bytes for unpacking 16 bytes at offset 44572144 (actual buffer size is 44572128)')
+  Kimi.app/libjailbreak.dylib | None None | enc: None | libs: 0 | sects: None
+  Kimi.app/libjailbreak.dylib | None None | enc: None | libs: 0 | sects: None
+  Kimi.app/libxpf.dylib | None None | enc: None | libs: 0 | sects: None
+  Kimi.app/libxpf.dylib | None None | enc: None | libs: 0 | sects: None
+  Kimi.app/libchoma.dylib | None None | enc: None | libs: 0 | sects: None
+  Kimi.app/libchoma.dylib | None None | enc: None | libs: 0 | sects: None
+  Kimi.app/Frameworks/kfd.framework/kfd ERR error('unpack_from requires a buffer of at least 136488 bytes for unpacking 16 bytes at offset 136472 (actual buffer size is 136416)')
+  Kimi.app/Frameworks/DarkSword.framework/DarkSword ERR error('unpack_from requires a buffer of at least 97768 bytes for unpacking 16 bytes at offset 97752 (actual buffer size is 97712)')
+  Kimi.app/Frameworks/ClearSword.framework/ClearSword ERR error('unpack_from requires a buffer of at least 63448 bytes for unpacking 16 bytes at offset 63432 (actual buffer size is 63440)')
+cryptid_any: False
+urls: 1 domains: 4 ips: 3
+privacy: []
+jb: ['JB:Dopamine', 'JB:dyld_get_image_name', 'JB:sysctl']
+dyn: ['DYN:dlopen', 'DYN:dlsym', 'DYN:mach_vm_', 'DYN:mmap', 'DYN:objc_msgSend', 'DYN:pthread_create', 'DYN:vm_protect']
+scan.json -> /home/runner/work/zc-signal-terminal/zc-signal-terminal/logs/audit/scan.json

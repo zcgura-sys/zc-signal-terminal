@@ -1,0 +1,229 @@
+{
+ "app": "Kimi.app",
+ "macho": [
+  {
+   "path": "/tmp/zc-lab/Payload/Kimi.app/Kimi",
+   "size": 44572128,
+   "slices": [],
+   "error": "error('unpack_from requires a buffer of at least 44572160 bytes for unpacking 16 bytes at offset 44572144 (actual buffer size is 44572128)')",
+   "rel": "Kimi.app/Kimi"
+  },
+  {
+   "path": "/tmp/zc-lab/Payload/Kimi.app/libjailbreak.dylib",
+   "size": 617584,
+   "slices": [
+    {
+     "error": "error('unpack_from requires a buffer of at least 617592 bytes for unpacking 16 bytes at offset 617576 (actual buffer size is 617584)')",
+     "offs": 16384
+    },
+    {
+     "error": "error('unpack_from requires a buffer of at least 617624 bytes for unpacking 16 bytes at offset 617608 (actual buffer size is 617584)')",
+     "offs": 311296
+    }
+   ],
+   "fat_archs": [
+    "arm64",
+    "arm64"
+   ],
+   "plist_blobs": [],
+   "rel": "Kimi.app/libjailbreak.dylib"
+  },
+  {
+   "path": "/tmp/zc-lab/Payload/Kimi.app/libxpf.dylib",
+   "size": 457488,
+   "slices": [
+    {
+     "error": "error('unpack_from requires a buffer of at least 457512 bytes for unpacking 16 bytes at offset 457496 (actual buffer size is 457488)')",
+     "offs": 16384
+    },
+    {
+     "error": "error('unpack_from requires a buffer of at least 457544 bytes for unpacking 16 bytes at offset 457528 (actual buffer size is 457488)')",
+     "offs": 229376
+    }
+   ],
+   "fat_archs": [
+    "arm64",
+    "arm64"
+   ],
+   "plist_blobs": [],
+   "rel": "Kimi.app/libxpf.dylib"
+  },
+  {
+   "path": "/tmp/zc-lab/Payload/Kimi.app/libchoma.dylib",
+   "size": 388176,
+   "slices": [
+    {
+     "error": "error('unpack_from requires a buffer of at least 388232 bytes for unpacking 16 bytes at offset 388216 (actual buffer size is 388176)')",
+     "offs": 16384
+    },
+    {
+     "error": "error('unpack_from requires a buffer of at least 388216 bytes for unpacking 16 bytes at offset 388200 (actual buffer size is 388176)')",
+     "offs": 196608
+    }
+   ],
+   "fat_archs": [
+    "arm64",
+    "arm64"
+   ],
+   "plist_blobs": [],
+   "rel": "Kimi.app/libchoma.dylib"
+  },
+  {
+   "path": "/tmp/zc-lab/Payload/Kimi.app/Frameworks/kfd.framework/kfd",
+   "size": 136416,
+   "slices": [],
+   "error": "error('unpack_from requires a buffer of at least 136488 bytes for unpacking 16 bytes at offset 136472 (actual buffer size is 136416)')",
+   "rel": "Kimi.app/Frameworks/kfd.framework/kfd"
+  },
+  {
+   "path": "/tmp/zc-lab/Payload/Kimi.app/Frameworks/DarkSword.framework/DarkSword",
+   "size": 97712,
+   "slices": [],
+   "error": "error('unpack_from requires a buffer of at least 97768 bytes for unpacking 16 bytes at offset 97752 (actual buffer size is 97712)')",
+   "rel": "Kimi.app/Frameworks/DarkSword.framework/DarkSword"
+  },
+  {
+   "path": "/tmp/zc-lab/Payload/Kimi.app/Frameworks/ClearSword.framework/ClearSword",
+   "size": 63440,
+   "slices": [],
+   "error": "error('unpack_from requires a buffer of at least 63448 bytes for unpacking 16 bytes at offset 63432 (actual buffer size is 63440)')",
+   "rel": "Kimi.app/Frameworks/ClearSword.framework/ClearSword"
+  }
+ ],
+ "files": [
+  {
+   "rel": "Kimi.app/Kimi",
+   "size": 44572128
+  },
+  {
+   "rel": "Kimi.app/Assets.car",
+   "size": 7040008
+  },
+  {
+   "rel": "Kimi.app/libjailbreak.dylib",
+   "size": 617584
+  },
+  {
+   "rel": "Kimi.app/libxpf.dylib",
+   "size": 457488
+  },
+  {
+   "rel": "Kimi.app/libchoma.dylib",
+   "size": 388176
+  },
+  {
+   "rel": "Kimi.app/Frameworks/kfd.framework/kfd",
+   "size": 136416
+  },
+  {
+   "rel": "Kimi.app/Frameworks/DarkSword.framework/DarkSword",
+   "size": 97712
+  },
+  {
+   "rel": "Kimi.app/Frameworks/ClearSword.framework/ClearSword",
+   "size": 63440
+  },
+  {
+   "rel": "Kimi.app/AppIcon76x76@2x~ipad.png",
+   "size": 28878
+  },
+  {
+   "rel": "Kimi.app/AppIcon60x60@2x.png",
+   "size": 19838
+  },
+  {
+   "rel": "Kimi.app/Info.plist",
+   "size": 1935
+  },
+  {
+   "rel": "Kimi.app/Frameworks/kfd.framework/Info.plist",
+   "size": 1160
+  },
+  {
+   "rel": "Kimi.app/Frameworks/ClearSword.framework/Info.plist",
+   "size": 1089
+  },
+  {
+   "rel": "Kimi.app/Frameworks/DarkSword.framework/Info.plist",
+   "size": 1087
+  },
+  {
+   "rel": "Kimi.app/PkgInfo",
+   "size": 8
+  }
+ ],
+ "strings_buckets": {
+  "url": {
+   "https://www.apple.com/appleca/0": 2
+  },
+  "domain": {
+   "subject.cn": 9,
+   "www.apple.com": 2,
+   "research.com": 2,
+   "perf.dev": 1
+  },
+  "ip": {
+   "120.43.112.1": 2,
+   "120.51.122.2": 2,
+   "120.68.132.1": 2
+  },
+  "auth": {
+   "sign": 4,
+   "auth": 3,
+   "Auth": 3,
+   "register": 3,
+   "signature": 3,
+   "token": 2,
+   "Token": 2,
+   "timestamp": 2,
+   "serial": 1,
+   "license": 1,
+   "License": 1,
+   "nonce": 1
+  },
+  "suspicious": {
+   "JB:sysctl": 5,
+   "DYN:dlsym": 4,
+   "DYN:pthread_create": 4,
+   "JB:Dopamine": 3,
+   "DYN:objc_msgSend": 2,
+   "DYN:vm_protect": 2,
+   "DYN:mmap": 2,
+   "DYN:mach_vm_": 2,
+   "JB:dyld_get_image_name": 1,
+   "DYN:dlopen": 1
+  }
+ },
+ "api_hits": {},
+ "suspicious_summary": {
+  "cryptid_any": false,
+  "n_macho": 7,
+  "n_url": 1,
+  "n_domain": 4,
+  "n_ip": 3,
+  "privacy_cats": [],
+  "jb_markers": [
+   "JB:Dopamine",
+   "JB:dyld_get_image_name",
+   "JB:sysctl"
+  ],
+  "dyn_markers": [
+   "DYN:dlopen",
+   "DYN:dlsym",
+   "DYN:mach_vm_",
+   "DYN:mmap",
+   "DYN:objc_msgSend",
+   "DYN:pthread_create",
+   "DYN:vm_protect"
+  ]
+ },
+ "ext_stats": {
+  "(none)": 5,
+  ".plist": 4,
+  ".dylib": 3,
+  ".png": 2,
+  ".car": 1
+ },
+ "total_files": 15,
+ "total_bytes": 53426947
+}
