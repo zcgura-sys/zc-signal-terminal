@@ -2,7 +2,7 @@
 """IPA 结构侦察：Info.plist / 可执行文件 / 加密状态 / Framework / 插件 / 资源统计。"""
 import os, sys, json, plistlib, subprocess, collections
 
-LAB = os.path.join(os.environ.get("GITHUB_WORKSPACE", "."), "logs", ".lab")
+LAB = os.environ.get("ZC_LAB", "/tmp/zc-lab")
 PAY = os.path.join(LAB, "Payload")
 
 
