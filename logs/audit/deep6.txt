@@ -1,0 +1,248 @@
+==============================================================================
+R. 包体身份（Info.plist 关键字段）
+==============================================================================
+app bundle: Kimi.app
+  CFBundleIdentifier                     = com.moonshot.kimichat
+  CFBundleName                           = Kimi
+  CFBundleDisplayName                    = Kimi
+  CFBundleExecutable                     = Kimi
+  CFBundleShortVersionString             = 3.0.10
+  CFBundleVersion                        = 1
+  MinimumOSVersion                       = 15.0
+  CFBundlePackageType                    = APPL
+  NSPhotoLibraryUsageDescription         = Kimi needs to access your photo library to support picking a boot logo
+  DTPlatformName                         = iphoneos
+  DTXcode                                = 1640
+  CFBundleSupportedPlatforms             = ['iPhoneOS']
+  其余键 20 个: BuildMachineOSBuild, CADisableMinimumFrameDurationOnPhone, CFBundleDevelopmentRegion, CFBundleIcons, CFBundleIcons~ipad, CFBundleInfoDictionaryVersion, DTCompiler, DTPlatformBuild, DTPlatformVersion, DTSDKBuild, DTSDKName, DTXcodeBuild, LSRequiresIPhoneOS, UIApplicationSceneManifest, UIApplicationSupportsIndirectInputEvents, UIDeviceFamily, UIRequiredDeviceCapabilities, UISupportedInterfaceOrientations~ipad, UISupportedInterfaceOrientations~iphone, UIViewControllerBasedStatusBarAppearance
+
+  --- 所有 *UsageDescription（申请的系统权限）---
+    NSPhotoLibraryUsageDescription = Kimi needs to access your photo library to support picking a boot logo
+
+==============================================================================
+S. 签名材料（entitlements / provisioning / _CodeSignature）
+==============================================================================
+  _CodeSignature 目录: 缺失
+
+==============================================================================
+T. 加载链（LC_LOAD_DYLIB / LC_RPATH / Mach-O flags）
+==============================================================================
+
+--- Kimi.app/Frameworks/ClearSword.framework/ClearSword (MH_MAGIC_64) ---
+  flags=0x100085 [NOUNDEFS, BINDATLOAD, TWOLEVEL, SETUID_SAFE]
+  filetype=6 MH_DYLIB
+  RPATH: @executable_path/Frameworks, @loader_path/Frameworks
+  LOAD_DYLIB (8):
+      @rpath/ClearSword.framework/ClearSword  <== 越狱组件
+      /System/Library/Frameworks/IOSurface.framework/IOSurface
+      /System/Library/Frameworks/IOKit.framework/Versions/A/IOKit
+      @executable_path/libjailbreak.dylib  <== 相对路径注入  <== 越狱组件
+      /System/Library/Frameworks/Foundation.framework/Foundation
+      /usr/lib/libobjc.A.dylib
+      /usr/lib/libSystem.B.dylib
+      /System/Library/Frameworks/CoreFoundation.framework/CoreFoundation
+
+--- Kimi.app/Frameworks/DarkSword.framework/DarkSword (MH_MAGIC_64) ---
+  flags=0x100085 [NOUNDEFS, BINDATLOAD, TWOLEVEL, SETUID_SAFE]
+  filetype=6 MH_DYLIB
+  RPATH: @executable_path/Frameworks, @loader_path/Frameworks
+  LOAD_DYLIB (8):
+      @rpath/DarkSword.framework/DarkSword  <== 越狱组件
+      /System/Library/Frameworks/IOSurface.framework/IOSurface
+      /System/Library/Frameworks/IOKit.framework/Versions/A/IOKit
+      @executable_path/libjailbreak.dylib  <== 相对路径注入  <== 越狱组件
+      /System/Library/Frameworks/Foundation.framework/Foundation
+      /usr/lib/libobjc.A.dylib
+      /usr/lib/libSystem.B.dylib
+      /System/Library/Frameworks/CoreFoundation.framework/CoreFoundation
+
+--- Kimi.app/Frameworks/kfd.framework/kfd (MH_MAGIC_64) ---
+  flags=0x100085 [NOUNDEFS, BINDATLOAD, TWOLEVEL, SETUID_SAFE]
+  filetype=6 MH_DYLIB
+  RPATH: @executable_path/Frameworks, @loader_path/Frameworks
+  LOAD_DYLIB (7):
+      @rpath/kfd.framework/kfd  <== 越狱组件
+      /System/Library/Frameworks/IOSurface.framework/IOSurface
+      /System/Library/Frameworks/IOKit.framework/Versions/A/IOKit
+      @executable_path/libjailbreak.dylib  <== 相对路径注入  <== 越狱组件
+      /System/Library/Frameworks/Foundation.framework/Foundation
+      /usr/lib/libobjc.A.dylib
+      /usr/lib/libSystem.B.dylib
+
+--- Kimi.app/Kimi (MH_MAGIC_64) ---
+  flags=0xa10085 [NOUNDEFS, BINDATLOAD, TWOLEVEL, WEAK_DEFINES, NO_REEXPORTED_DYLIBS, DEAD_STRIPPABLE_DYLIB]
+  filetype=2 MH_EXECUTE
+  RPATH: @executable_path/Frameworks
+  LOAD_DYLIB (35):
+      /System/Library/Frameworks/UIKit.framework/UIKit
+      /System/Library/Frameworks/QuartzCore.framework/QuartzCore
+      /System/Library/Frameworks/CoreGraphics.framework/CoreGraphics
+      /System/Library/Frameworks/CoreImage.framework/CoreImage
+      /System/Library/Frameworks/IOSurface.framework/IOSurface
+      /System/Library/Frameworks/Security.framework/Security
+      /System/Library/Frameworks/ImageIO.framework/ImageIO
+      /System/Library/Frameworks/CoreFoundation.framework/CoreFoundation
+      /System/Library/Frameworks/Foundation.framework/Foundation
+      /System/Library/Frameworks/CoreText.framework/CoreText
+      /System/Library/Frameworks/CoreVideo.framework/CoreVideo
+      /System/Library/Frameworks/Metal.framework/Metal
+      /System/Library/Frameworks/OpenGLES.framework/OpenGLES
+      /usr/lib/libz.1.dylib
+      @loader_path/libxpf.dylib  <== 相对路径注入  <== 越狱组件
+      @loader_path/libchoma.dylib  <== 相对路径注入
+      /System/Library/Frameworks/IOKit.framework/Versions/A/IOKit
+      /usr/lib/libMobileGestalt.dylib
+      @rpath/ClearSword.framework/ClearSword  <== 越狱组件
+      /System/Library/PrivateFrameworks/Preferences.framework/Preferences
+      /usr/lib/libcompression.dylib
+      /System/Library/Frameworks/CoreServices.framework/CoreServices
+      @rpath/DarkSword.framework/DarkSword  <== 越狱组件
+      @loader_path/libjailbreak.dylib  <== 相对路径注入  <== 越狱组件
+      /System/Library/PrivateFrameworks/BackBoardServices.framework/BackBoardServices
+      /System/Library/PrivateFrameworks/SpringBoardServices.framework/SpringBoardServices
+      /System/Library/PrivateFrameworks/GraphicsServices.framework/GraphicsServices
+      /System/Library/PrivateFrameworks/AssertionServices.framework/AssertionServices
+      /System/Library/PrivateFrameworks/MobileContainerManager.framework/MobileContainerManager
+      /System/Library/Frameworks/MetalKit.framework/MetalKit
+      /System/Library/Frameworks/AVFoundation.framework/AVFoundation
+      /usr/lib/libobjc.A.dylib
+      /usr/lib/libc++.1.dylib
+      /usr/lib/libSystem.B.dylib
+      /System/Library/Frameworks/AVFAudio.framework/AVFAudio
+
+--- Kimi.app/libchoma.dylib (FAT_MAGIC) ---
+  flags=0x100085 [NOUNDEFS, BINDATLOAD, TWOLEVEL, SETUID_SAFE]
+  filetype=6 MH_DYLIB
+  LOAD_DYLIB (3):
+      @loader_path/libchoma.dylib  <== 相对路径注入
+      /System/Library/Frameworks/CoreFoundation.framework/CoreFoundation
+      /usr/lib/libSystem.B.dylib
+  flags=0x100085 [NOUNDEFS, BINDATLOAD, TWOLEVEL, SETUID_SAFE]
+  filetype=6 MH_DYLIB
+  LOAD_DYLIB (3):
+      @loader_path/libchoma.dylib  <== 相对路径注入
+      /System/Library/Frameworks/CoreFoundation.framework/CoreFoundation
+      /usr/lib/libSystem.B.dylib
+
+--- Kimi.app/libjailbreak.dylib (FAT_MAGIC) ---
+  flags=0x100085 [NOUNDEFS, BINDATLOAD, TWOLEVEL, SETUID_SAFE]
+  filetype=6 MH_DYLIB
+  LOAD_DYLIB (16):
+      @loader_path/libjailbreak.dylib  <== 相对路径注入  <== 越狱组件
+      /System/Library/Frameworks/Foundation.framework/Foundation
+      /System/Library/Frameworks/CoreServices.framework/CoreServices
+      /System/Library/Frameworks/Security.framework/Security
+      /System/Library/Frameworks/IOKit.framework/Versions/A/IOKit
+      /System/Library/Frameworks/IOSurface.framework/IOSurface
+      /System/Library/PrivateFrameworks/IOMobileFramebuffer.framework/IOMobileFramebuffer
+      /System/Library/Frameworks/CoreGraphics.framework/CoreGraphics
+      /System/Library/Frameworks/ImageIO.framework/ImageIO
+      /usr/lib/libMobileGestalt.dylib
+      /usr/lib/libarchive.2.dylib
+      /usr/lib/libbsm.0.dylib
+      @loader_path/libchoma.dylib  <== 相对路径注入
+      /usr/lib/libobjc.A.dylib
+      /usr/lib/libSystem.B.dylib
+      /System/Library/Frameworks/CoreFoundation.framework/CoreFoundation
+  flags=0x100085 [NOUNDEFS, BINDATLOAD, TWOLEVEL, SETUID_SAFE]
+  filetype=6 MH_DYLIB
+  LOAD_DYLIB (16):
+      @loader_path/libjailbreak.dylib  <== 相对路径注入  <== 越狱组件
+      /System/Library/Frameworks/Foundation.framework/Foundation
+      /System/Library/Frameworks/CoreServices.framework/CoreServices
+      /System/Library/Frameworks/Security.framework/Security
+      /System/Library/Frameworks/IOKit.framework/Versions/A/IOKit
+      /System/Library/Frameworks/IOSurface.framework/IOSurface
+      /System/Library/PrivateFrameworks/IOMobileFramebuffer.framework/IOMobileFramebuffer
+      /System/Library/Frameworks/CoreGraphics.framework/CoreGraphics
+      /System/Library/Frameworks/ImageIO.framework/ImageIO
+      /usr/lib/libMobileGestalt.dylib
+      /usr/lib/libarchive.2.dylib
+      /usr/lib/libbsm.0.dylib
+      @loader_path/libchoma.dylib  <== 相对路径注入
+      /usr/lib/libobjc.A.dylib
+      /usr/lib/libSystem.B.dylib
+      /System/Library/Frameworks/CoreFoundation.framework/CoreFoundation
+
+--- Kimi.app/libxpf.dylib (FAT_MAGIC) ---
+  flags=0x100085 [NOUNDEFS, BINDATLOAD, TWOLEVEL, SETUID_SAFE]
+  filetype=6 MH_DYLIB
+  LOAD_DYLIB (7):
+      @loader_path/libxpf.dylib  <== 相对路径注入  <== 越狱组件
+      /System/Library/Frameworks/Foundation.framework/Foundation
+      /usr/lib/libcompression.dylib
+      @loader_path/libchoma.dylib  <== 相对路径注入
+      /System/Library/Frameworks/Security.framework/Security
+      /usr/lib/libSystem.B.dylib
+      /System/Library/Frameworks/CoreFoundation.framework/CoreFoundation
+  flags=0x100085 [NOUNDEFS, BINDATLOAD, TWOLEVEL, SETUID_SAFE]
+  filetype=6 MH_DYLIB
+  LOAD_DYLIB (7):
+      @loader_path/libxpf.dylib  <== 相对路径注入  <== 越狱组件
+      /System/Library/Frameworks/Foundation.framework/Foundation
+      /usr/lib/libcompression.dylib
+      @loader_path/libchoma.dylib  <== 相对路径注入
+      /System/Library/Frameworks/Security.framework/Security
+      /usr/lib/libSystem.B.dylib
+      /System/Library/Frameworks/CoreFoundation.framework/CoreFoundation
+
+==============================================================================
+U. 授权（卡密）系统关键字分布
+==============================================================================
+
+--- Kimi.app/Frameworks/ClearSword.framework/ClearSword ---
+    （无授权相关字符串）
+
+--- Kimi.app/Frameworks/DarkSword.framework/DarkSword ---
+    （无授权相关字符串）
+
+--- Kimi.app/Frameworks/kfd.framework/kfd ---
+    （无授权相关字符串）
+
+--- Kimi.app/Kimi ---
+    activate         x16
+    vip              x14
+    expiry           x12
+    授权               x10
+    激活               x5
+    activation       x2
+    serial           x2
+
+--- Kimi.app/libchoma.dylib ---
+    （无授权相关字符串）
+
+--- Kimi.app/libjailbreak.dylib ---
+    serial           x4
+
+--- Kimi.app/libxpf.dylib ---
+    license          x6
+
+==============================================================================
+V. 服务器 / 回连证据（域名 + IP 字面量，已排除 Apple 及通用域名）
+==============================================================================
+
+--- Kimi.app/Frameworks/ClearSword.framework/ClearSword ---
+    host  subject.cn                                         x1
+
+--- Kimi.app/Frameworks/DarkSword.framework/DarkSword ---
+    host  subject.cn                                         x1
+
+--- Kimi.app/Frameworks/kfd.framework/kfd ---
+    host  perf.dev                                           x1
+    host  subject.cn                                         x1
+
+--- Kimi.app/Kimi ---
+    host  g.io                                               x14
+    host  glv.io                                             x2
+    host  4.io                                               x1
+    host  subject.cn                                         x1
+
+--- Kimi.app/libchoma.dylib ---
+    host  subject.cn                                         x2
+
+--- Kimi.app/libjailbreak.dylib ---
+    host  subject.cn                                         x2
+
+--- Kimi.app/libxpf.dylib ---
+    host  research.com                                       x2
+    host  subject.cn                                         x2
