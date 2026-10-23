@@ -1,5 +1,0 @@
-ipa_md5=e3e7acd40d3c633234551ee73677c519
-payload_ok=yes
-  File "/usr/lib/python3.12/re/_parser.py", line 366, in _class_escape
-    raise source.error('bad escape %s' % escape, len(escape))
-re.error: bad escape \u at position 13

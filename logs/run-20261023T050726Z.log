@@ -1,9 +1,0 @@
-bash: line 1: cd: /workspace: No such file or directory
-total 24
-drwxr-xr-x 6 runner runner 4096 Oct 23 05:07 .
-drwxr-xr-x 3 runner runner 4096 Oct 23 05:07 ..
-drwxr-xr-x 7 runner runner 4096 Oct 23 05:07 .git
-drwxr-xr-x 3 runner runner 4096 Oct 23 05:07 .github
-drwxr-xr-x 2 runner runner 4096 Oct 23 05:07 logs
-drwxr-xr-x 2 runner runner 4096 Oct 23 05:07 scripts
-tri49.ipa: cannot open `tri49.ipa' (No such file or directory)

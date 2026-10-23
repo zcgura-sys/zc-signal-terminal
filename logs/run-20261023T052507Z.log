@@ -1,4 +1,0 @@
-    b"签名", b"外挂", b"透视", b"自瞄", b"免越狱", b"越狱", b"内核", b"授权",
-    ^^^^^
-SyntaxError: bytes can only contain ASCII literal characters
-wc: logs/audit/deep4.txt: No such file or directory

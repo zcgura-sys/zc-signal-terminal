@@ -1,7 +1,0 @@
-'卡密已过期，剩余0天 hello'
-'！授权失败'
-REGEX_OK
---- run deep8 ---
-ipa_md5=e3e7acd40d3c633234551ee73677c519
-payload_ok=yes
-deep8.txt lines=389 chars=7562
