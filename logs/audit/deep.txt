@@ -1,0 +1,420 @@
+==============================================================================
+A. Mach-O 清单
+==============================================================================
+  Kimi.app/Kimi                                          44572128 B
+  Kimi.app/libchoma.dylib                                  388176 B
+  Kimi.app/libjailbreak.dylib                              617584 B
+  Kimi.app/libxpf.dylib                                    457488 B
+  Kimi.app/Frameworks/kfd.framework/kfd                    136416 B
+  Kimi.app/Frameworks/ClearSword.framework/ClearSword       63440 B
+  Kimi.app/Frameworks/DarkSword.framework/DarkSword         97712 B
+
+==============================================================================
+B. 可疑字符串归属定位（哪个二进制、什么上下文）
+==============================================================================
+
+--- woqbefiz.pk ---
+  (仅在文件系统路径/plist 中出现，二进制内未直接命中)
+
+--- notification.hud.live ---
+  [Kimi.app/Kimi]
+    @0xbc48cf [latin-1] ss.txt.%@.pid.%@.hud-state.plist.%@.hudlog.sock.%@.notification.hud.launched.%@.notification.hud.dismissal.%@.notification.hud.live-mode-changed.%@.notification.hud.settings-changed.%@.notification.hud.state-changed./var/tmp/%@.hudlog.sock.k
+
+--- glv.io ---
+  (仅在文件系统路径/plist 中出现，二进制内未直接命中)
+
+--- b.rs ---
+  (仅在文件系统路径/plist 中出现，二进制内未直接命中)
+
+--- d.fi ---
+  [Kimi.app/Kimi]
+    @0xbc3d63 [latin-1] ord.selectedKernelExploit.live_key.priority.v16@?0@"UIAlertAction"8.examine.v12@?0B8.lock.fill.checkmark.shield.fill.key.fill.checkmark.circle.fill.xmark.circle.fill.v32@?0@"NSString"8@"NSDictionary"16^B24.Loading.transform.
+
+--- g.io ---
+  (仅在文件系统路径/plist 中出现，二进制内未直接命中)
+
+--- y.to ---
+  (仅在文件系统路径/plist 中出现，二进制内未直接命中)
+
+--- ip.ph ---
+  (仅在文件系统路径/plist 中出现，二进制内未直接命中)
+
+--- perf.dev ---
+  [Kimi.app/Frameworks/kfd.framework/kfd]
+    @0x1315a [latin-1] .kfd->perf.shared_page.kaddr.perf_kwrite.(size != 0) && ((size % sizeof(u64)) == 0).perf_init./dev/aes_0.kfd->perf.dev.fd > 0.perf_run.kfd->info.kaddr.current_proc.mh_header[0] == 0xfeedfacf.mh_header[1] == 0x0100000c.kfd->info.
+
+--- research.com ---
+  [Kimi.app/libxpf.dylib]
+    @0x22011 [latin-1] emoryMapStringAddr.xpf_find_txm_trustcache_root.txm_deviceTreeTrustCacheRangeCallerAddr.strWzrAnyAddr.strAddr.research.com.apple.license-to-operate.xpf_find_txm_developer_mode_storage.licenseToOperateStringAddr.licenseToOperateStrin
+    @0x57af9 [latin-1] emoryMapStringAddr.xpf_find_txm_trustcache_root.txm_deviceTreeTrustCacheRangeCallerAddr.strWzrAnyAddr.strAddr.research.com.apple.license-to-operate.xpf_find_txm_developer_mode_storage.licenseToOperateStringAddr.licenseToOperateStrin
+
+--- subject.cn ---
+  (仅在文件系统路径/plist 中出现，二进制内未直接命中)
+
+--- api.appledb.dev ---
+  [Kimi.app/Kimi]
+    @0xbcf4f6 [latin-1] l2: ERROR: Failed to fetch API data: %s..libgrabkernel2: ERROR: Failed to parse API data: %s..sources.https://api.appledb.dev/ios/%@;%@.json.deviceMap.ota.ipsw.type.prerequisiteBuild.links.active.libgrabkernel2: Found firmware URL: %s 
+    @0xbcf58d [latin-1] ota.ipsw.type.prerequisiteBuild.links.active.libgrabkernel2: Found firmware URL: %s (OTA: %s)..yes.no.https://api.appledb.dev/ios/main.json.xz.libgrabkernel2: ERROR: Failed to decompress API data: %s..osStr.build.libgrabkernel2: ERROR:
+
+==============================================================================
+C. 注入组件能力面（关键字命中计数）
+==============================================================================
+
+--- Kimi.app/libchoma.dylib ---
+    mmap                         x4
+    sysctl                       x4
+    choma                        x6
+    config                       x2
+
+--- Kimi.app/libjailbreak.dylib ---
+    dlopen                       x4
+    dlsym                        x4
+    posix_spawn                  x44
+    fork                         x24
+    mach_port                    x22
+    IOSurface                    x124
+    amfi                         x2
+    sysctl                       x8
+    enumeratorAtPath             x4
+    Dopamine                     x12
+    libjailbreak                 x14
+    choma                        x2
+    config                       x4
+    device                       x12
+
+--- Kimi.app/libxpf.dylib ---
+    mmap                         x4
+    IOSurface                    x30
+    amfi                         x4
+    xpf                          x708
+    choma                        x2
+    config                       x28
+    license                      x6
+    device                       x20
+
+--- Kimi.app/Frameworks/kfd.framework/kfd ---
+    dlsym                        x2
+    mach_port                    x2
+    IOSurface                    x31
+    sysctl                       x2
+    Dopamine                     x8
+    kfd                          x30
+    libjailbreak                 x1
+
+--- Kimi.app/Frameworks/ClearSword.framework/ClearSword ---
+    dlsym                        x2
+    mach_port                    x2
+    IOSurface                    x11
+    sysctl                       x2
+    Dopamine                     x29
+    libjailbreak                 x1
+    device                       x2
+
+--- Kimi.app/Frameworks/DarkSword.framework/DarkSword ---
+    dlsym                        x2
+    fork                         x4
+    mach_port                    x2
+    IOSurface                    x23
+    sysctl                       x2
+    Dopamine                     x8
+    libjailbreak                 x1
+    device                       x2
+
+==============================================================================
+D. 主程序 Kimi：LC_LOAD_DYLIB / entitlements / Info.plist
+==============================================================================
+
+-- 内嵌 dylib 加载路径（@rpath / @executable_path / 绝对路径）--
+    @rpath/ClearSword.framework/ClearSword
+    @rpath/DarkSword.framework/DarkSword
+    @executable_path/Frameworks
+
+-- entitlements 关键项 --
+    HIT  com.apple.accessibility.api
+    HIT  backboard.client
+    HIT  platform-application
+    HIT  com.apple.private.security.no-sandbox
+    HIT  kernel
+
+-- 内嵌 plist（entitlements 原文片段）--
+    [plist 0] keys=['application-identifier', 'com.apple.QuartzCore.displayable-context', 'com.apple.QuartzCore.secure-mode', 'com.apple.accessibility.api', 'com.apple.assistivetouch.daemon', 'com.apple.backboard.client', 'com.apple.backboardd.global-pointer-event-routing', 'com.apple.backboardd.launchapplications', 'com.apple.developer.kernel.extended-virtual-addressing', 'com.apple.developer.kernel.increased-memory-limit', 'com.apple.frontboard.debugapplications', 'com.apple.frontboard.launchapplications', 'com.apple.frontboard.systemappservices', 'com.apple.hid.manager.user-access-device', 'com.apple.hid.manager.user-access-keyboard', 'com.apple.hid.system.user-access-service', 'com.apple.private.hid.client.admin', 'com.apple.private.hid.client.authenticated', 'com.apple.private.hid.client.event-dispatch', 'com.apple.private.hid.client.event-filter', 'com.apple.private.hid.client.event-monitor', 'com.apple.private.hid.client.event-reception', 'com.apple.private.hid.client.service-protected', 'com.apple.private.hid.client.unrestricted']
+
+==============================================================================
+E. 授权/卡密相关字符串（全组件，按组件分组）
+==============================================================================
+
+--- Kimi.app/Kimi (588 hits, 显示前 70) ---
+    _activeExploits
+    _device
+    T@"<MTLDevice>",R,N
+    cheatSignatures
+    T@"UIView",W,N,V_card
+    setBorderWidth:
+    Ti,N,V_liveModeNotifyToken
+    T{CGPoint=dd},N,V_cardCenterIdle
+    _appIsActiveCached
+    _cardCenterIdle
+    _logNotifyToken
+    T@"<MTLDevice>",&,N,V_device
+    T@"NSMutableArray",&,N,V_activeExploits
+    setBorderColor:
+    Ti,N,V_logNotifyToken
+    _autoToken
+    _card
+    _liveModeNotifyToken
+    _settingsNotifyToken
+    _sharedDevice
+    activeExploits
+    activeInterfaceOrientation
+    activePrebootPath
+    addTextFieldWithConfigurationHandler:
+    appConfigPlistPath
+    appDocumentsConfigDirectory
+    application:configurationForConnectingSceneSession:options:
+    application:didDiscardSceneSessions:
+    application:didFailToRegisterForRemoteNotificationsWithError:
+    application:didRegisterForRemoteNotificationsWithDeviceToken:
+    application:didRegisterUserNotificationSettings:
+    applicationDidBecomeActive:
+    applicationShouldRequestHealthAuthorization:
+    applicationSignificantTimeChange:
+    applicationWillResignActive:
+    asciiToken:presentInLowerText:
+    buttonWithConfiguration:primaryAction:
+    cardCenterIdle
+    configurationWithPointSize:weight:
+    copyAssignedSenderID
+    currentDevice
+    defaultButtonConfiguration
+    defaultButtonConfigurationWithImagePadding:
+    defaultSessionConfiguration
+    dequeueReusableBufferOfLength:device:
+    device
+    deviceReady
+    ephemeralSessionConfiguration
+    imageWithConfiguration:
+    invocationWithMethodSignature:
+    isHomeButtonDevice
+    isMemberOfClass:
+    isSmallDevice
+    liveModeNotifyToken
+    logNotifyToken
+    matchSignatureCountInText:
+    methodSignatureForSelector:
+    numberWithUnsignedLong:
+    numberWithUnsignedLongLong:
+    orderedSet
+    plainButtonConfiguration
+    prepareResourcesWithDevice:
+    registerClass:forCellWithReuseIdentifier:
+    registerWindow:withController:
+    renderPipelineStateForFramebufferDescriptor:device:
+    resignFirstResponder
+    scanUnsignedLongLong:
+    sceneDidBecomeActive:
+    sceneWillResignActive:
+    sessionWithConfiguration:
+
+--- Kimi.app/libchoma.dylib (34 hits, 显示前 70) ---
+    Embedded signature blob
+    Embedded signature blob (old)
+    Detached signature blob
+    Signature blob
+    Signature slot
+    Code_Signature-Data
+    DMG signature hash
+    LC_PREBIND_CKSUM
+    LC_CODE_SIGNATURE
+    LC_DYLIB_CODE_SIGN_DRS
+    __auth_data
+    __config_data
+    @dyld_stub_binder
+    @__Block_object_assign
+    verify_code_slot
+    ind_code_signature_bounds
+     code_signature
+    !place_code_signature
+    'scan_register_write
+    c_code_signature
+    _csd_code_directory_verify_code_slot
+    _csd_code_directory_verify_code_slots
+    _macho_find_code_signature_bounds
+    _macho_parse_signature_blob_to_der_encoded_data
+    _macho_read_code_signature
+    _macho_replace_code_signature
+    _pfsec_arm64_scan_register_write
+    _update_lc_code_signature
+    __Block_object_assign
+    dyld_stub_binder
+    ___macho_find_code_signature_bounds_block_invoke
+    ___update_lc_code_signature_block_invoke
+    __auth_stubs
+    __auth_got
+
+--- Kimi.app/libjailbreak.dylib (96 hits, 显示前 70) ---
+    kernelSymbol.ml_sign_thread_state
+    kernelSymbol.perfmon_devices
+    kernelGadget.hw_lck_ticket_reserve_orig_allow_invalid_signed
+    kernelStruct.proc_ro.task_tokens
+    kernelStruct.task_token_ro_data.audit_token
+    kernelStruct.task.security_config
+    kernelStruct.TXMCodeRegion.active
+    kernelStruct.TXMCodeRegion.codeSignature
+    caller-token
+    alloc_page_table_unassigned: 
+    alloc_page_table_unassigned: FAIL pmap/ttep 
+    alloc_page_table_unassigned: [
+    alloc_page_table_unassigned: free_lvl2=%p
+    alloc_page_table_unassigned: mlock(%p, 0x4000) ...
+    alloc_page_table_unassigned: mlock 
+    alloc_page_table_unassigned: vtophys_lvl(ttep=0x%llx, va=%p) ...
+    alloc_page_table_unassigned: allocatedPT=0x%llx lvl=%llu ttep_lvl2=0x%llx
+    alloc_page_table_unassigned: FAIL allocatedPT=0 
+    alloc_page_table_unassigned: pagetable_get_refcnt(0x%llx) ...
+    alloc_page_table_unassigned: refcnt=%u
+    PMAP_CS_LOCAL_SIGNING
+    IODeviceTree:/chosen
+    __ZN5dyld413ProcessConfig8Security7getAMFIERKNS0_7ProcessERNS_15SyscallDelegateE
+    DeviceClass
+    numberWithUnsignedInt:
+    numberWithUnsignedLong:
+    numberWithUnsignedLongLong:
+    unsignedLongLongValue
+    _SecCodeCopySigningInformation
+    _SecCodeSignerAddSignatureWithErrors
+    _SecCodeSignerCreate
+    _kSecCodeSignerIdentifier
+    _kSecCodeSignerIdentity
+    _kSecCodeSignerPreserveMetadata
+    _IORegistryEntryCreateCFProperty
+    _IORegistryEntryFromPath
+    _CGColorSpaceCreateDeviceRGB
+    _audit_token_to_pid
+    _macho_read_code_signature
+    __Block_object_assign
+    _posix_spawnattr_set_registered_ports_np
+    _xpc_dictionary_get_audit_token
+    _page_table_unassigned
+    sign_thread
+    de_signature_calculate_adhoc_cdhash
+    d_superblob_is_adhoc_signed
+    signatures
+    d_attach_signature
+    *tr_sign
+    .parse_code_signature
+    _signatures
+    9resign_file
+    _alloc_page_table_unassigned
+    _boomerang_sign_thread
+    _code_signature_calculate_adhoc_cdhash
+    _csd_superblob_is_adhoc_signed
+    _device_supports_physrw_pte
+    _fat_collect_signatures
+    _fd_attach_signature
+    _file_collect_signatures
+    _jbclient_root_sign_thread
+    _kauth_cred_drop
+    _kauth_cred_hold
+    _kauth_cred_ref
+    _kauth_cred_rw
+    _kauth_cred_unref
+    _kptr_sign
+    _macho_parse_code_signature
+    _resign_file
+    _sign_kernel_thread
+
+--- Kimi.app/libxpf.dylib (95 hits, 显示前 70) ---
+    Apple Certification Authority1
+    kernelGadget.hw_lck_ticket_reserve_orig_allow_invalid_signed
+    kernelSymbol.ml_sign_thread_state
+    hw_lck_ticket_reserve_orig_allow_invalid_signed
+    kernelStruct.task.security_config
+    kernelSymbol.perfmon_devices
+    Unsupported memory configuration %lx @%s:%d
+    xpf_find_task_security_config
+    xpf_find_perfmon_devices
+    kernelSymbol.wfe_timeout_configure
+    kernelSymbol.txm_deviceTreeTrustCacheRange
+    xpf_find_wfe_timeout_configure
+    wfe_timeout_configureString
+    wfe_timeout_configure
+    wfe_timeout_configureXrefAddr
+    xpf_find_txm_deviceTreeTrustCacheRange
+    txm_deviceTreeTrustCacheRangeCallerAddr
+    research.com.apple.license-to-operate
+    licenseToOperateStringAddr
+    licenseToOperateStringXrefAddr
+    __auth_stubs
+    Set "%s" is unsupported by this device
+    )Apple Secure Boot Certification Authority
+    _SecKeyVerifySignature
+    _kSecKeyAlgorithmRSASignatureDigestPKCS1v15SHA1
+    __Block_object_assign
+    PayloadItemSpecs
+    PayloadHash
+    verify_signature_with_chain
+    erverAuthentication
+    ensionAppleIDRecordValidationSigning
+    ProfileSigning
+    QAProfileSigning
+    stallerPackagingSigningExternal
+    ApplicationSigning
+    lientAuth
+    odeSigning
+    OCSPSigning
+    ServerAuth
+    verify_signature_rsa
+    _DERImg4DecodePayload
+    _DERImg4PayloadItemSpecs
+    _DERSignedCertCrlItemSpecs
+    _Img4DecodeCopyPayloadHash
+    _Img4DecodeGetPayload
+    _Img4DecodeGetPayloadKeybag
+    _Img4DecodeGetPayloadType
+    _img4_verify_signature_with_chain
+    _oidAppleApplicationSigning
+    _oidAppleCertExtAppleServerAuthentication
+    _oidAppleCertExtensionAppleIDRecordValidationSigning
+    _oidAppleExtendedKeyUsageProfileSigning
+    _oidAppleExtendedKeyUsageQAProfileSigning
+    _oidAppleInstallerPackagingSigningExternal
+    _oidAppleIntmMarkerAppleServerAuthentication
+    _oidAuthorityInfoAccess
+    _oidAuthorityKeyIdentifier
+    _oidExtendedKeyUsageClientAuth
+    _oidExtendedKeyUsageCodeSigning
+    _oidExtendedKeyUsageOCSPSigning
+    _oidExtendedKeyUsageServerAuth
+    _verify_signature_rsa
+    _xpf_item_register
+    _xpf_find_hw_lck_ticket_reserve_orig_allow_invalid_signed
+    _xpf_find_ml_sign_thread_state
+    ___xpf_find_hw_lck_ticket_reserve_orig_allow_invalid_signed_block_invoke
+    ___xpf_find_ml_sign_thread_state_block_invoke
+    _xpf_find_task_security_config
+    _xpf_find_perfmon_devices
+    ___xpf_find_task_security_config_block_invoke
+
+--- Kimi.app/Frameworks/ClearSword.framework/ClearSword (3 hits, 显示前 70) ---
+    et_device_machine
+    _get_device_machine
+    _is_arm64e.onceToken
+
+--- Kimi.app/Frameworks/DarkSword.framework/DarkSword (6 hits, 显示前 70) ---
+    numberWithUnsignedInt:
+    numberWithUnsignedLongLong:
+    unsignedIntValue
+    unsignedLongLongValue
+    18Device
+    _isA18Device
+
+==============================================================================
+F. 数据外传能力分布（按二进制）
+==============================================================================
+  Kimi.app/Kimi                                        NSURLSession, SecItemCopyMatching, kSecReturnData, enumeratorAtPath, NSHomeDirectory, writeToFile, UIAlertController
+  Kimi.app/libchoma.dylib                              -
+  Kimi.app/libjailbreak.dylib                          enumeratorAtPath
+  Kimi.app/libxpf.dylib                                -
+  Kimi.app/Frameworks/kfd.framework/kfd                -
+  Kimi.app/Frameworks/ClearSword.framework/ClearSword  -
+  Kimi.app/Frameworks/DarkSword.framework/DarkSword    -
