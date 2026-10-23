@@ -1,0 +1,204 @@
+==============================================================================
+A. 打包身份真伪：这些 dylib 到底属于谁
+==============================================================================
+
+--- Frameworks/kfd.framework/Info.plist ---
+    BuildMachineOSBuild            24G90
+    CFBundleDevelopmentRegion      en
+    CFBundleDisplayName            kfd
+    CFBundleExecutable             kfd
+    CFBundleIdentifier             com.opa334.kfd
+    CFBundleInfoDictionaryVersion  6.0
+    CFBundleName                   kfd
+    CFBundlePackageType            FMWK
+    CFBundleShortVersionString     1.0
+    CFBundleVersion                1
+    DPExploitType                  Kernel
+    DTCompiler                     com.apple.compilers.llvm.clang.1_0
+    DTPlatformBuild                22F76
+    DTPlatformName                 iphoneos
+    DTPlatformVersion              18.5
+    DTSDKBuild                     22F76
+    DTSDKName                      iphoneos18.5
+    DTXcode                        1640
+    DTXcodeBuild                   16F6
+    MinimumOSVersion               15.0
+
+--- Frameworks/ClearSword.framework/Info.plist ---
+    BuildMachineOSBuild            24G90
+    CFBundleDevelopmentRegion      en
+    CFBundleDisplayName            ClearSword
+    CFBundleExecutable             ClearSword
+    CFBundleIdentifier             com.opa334.ClearSword
+    CFBundleInfoDictionaryVersion  6.0
+    CFBundleName                   ClearSword
+    CFBundlePackageType            FMWK
+    CFBundleShortVersionString     1.0
+    CFBundleVersion                1
+    DPExploitType                  Kernel
+    DTCompiler                     com.apple.compilers.llvm.clang.1_0
+    DTPlatformBuild                22F76
+    DTPlatformName                 iphoneos
+    DTPlatformVersion              18.5
+    DTSDKBuild                     22F76
+    DTSDKName                      iphoneos18.5
+    DTXcode                        1640
+    DTXcodeBuild                   16F6
+    MinimumOSVersion               15.0
+
+--- Frameworks/DarkSword.framework/Info.plist ---
+    BuildMachineOSBuild            24G90
+    CFBundleDevelopmentRegion      en
+    CFBundleDisplayName            DarkSword
+    CFBundleExecutable             DarkSword
+    CFBundleIdentifier             com.opa334.DarkSword
+    CFBundleInfoDictionaryVersion  6.0
+    CFBundleName                   DarkSword
+    CFBundlePackageType            FMWK
+    CFBundleShortVersionString     1.0
+    CFBundleVersion                1
+    DPExploitType                  Kernel
+    DTCompiler                     com.apple.compilers.llvm.clang.1_0
+    DTPlatformBuild                22F76
+    DTPlatformName                 iphoneos
+    DTPlatformVersion              18.5
+    DTSDKBuild                     22F76
+    DTSDKName                      iphoneos18.5
+    DTXcode                        1640
+    DTXcodeBuild                   16F6
+    MinimumOSVersion               15.0
+
+--- 代码签名 / 描述文件 ---
+    _CodeSignature/CodeResources                   缺失
+    embedded.mobileprovision                       缺失
+    SC_Info                                        缺失
+    CodeResources                                  缺失
+
+==============================================================================
+B. 主程序是不是「真的 Kimi」
+==============================================================================
+  主程序可打印字符串总量: 187106
+    Dopamine         165
+    exploit          135
+    jailbreak        92
+    xpf              22
+    kimi             8
+    Kimi             8
+    TrollStore       8
+    kfd              6
+    moonshot         5
+    chat             5
+    Sileo            4
+    bootlogo         2
+    Cydia            2
+    choma            2
+    openai           0
+    boot-logo        0
+
+  -- moonshot / kimi 域名与接口 --
+      http://www.apple.com/DTDs/PropertyList-1.0.dtd
+
+  -- 界面/业务痕迹（判断是聊天 App 还是越狱工具）--
+    [HUD] nimations:completion:.ts_applyPreferredFrameRateToMTKView.ts_cacheAppActiveFromNote:.ts_cleanupDrawVC.ts_closeHUDDrawing.ts_containerFromLSProxy:.ts_containerFromMCM:.ts_containerFromMetadat
+    [selectedKernelExploit] userInfo:repeats:.screen.scrollRangeToVisible:.secondarySubtitleString:.secureContentView.selectKernelExploit.selectedKernelExploit.selectedPACBypass.selectedPPLBypass.self.sendEvent:.sendLo
+    [cheatSignatures] erviceIdentifiers.T@"NSArray",C,N,V_toolHits.bundleWithPath:.T@"NSLayoutConstraint",&,N,V_logHeightConstraint.cheatSignatures.T@"NSMutableArray",&,N,V_bufferCache.cleanup.T@"NSMutableArray",
+    [matchSignatureCountInText] Screen.mainSubtitleString:.makeHeader:withTarget:.makeKeyAndVisible.makeKeyWindow.makeObjectsPerformSelector:.matchSignatureCountInText:.maximumFramesPerSecond.menuColorWithAlpha:.methodForS
+
+==============================================================================
+C. 危险能力分组命中（逐二进制）
+==============================================================================
+
+--- Kimi.app/Frameworks/ClearSword.framework/ClearSword ---
+    内核写入 / 提权:             kwrite x3, kread x3, krw_ x2
+    绕过签名 / 注入:             dylib x3
+    设备指纹 / 追踪:             sysctlbyname x2
+
+--- Kimi.app/Frameworks/DarkSword.framework/DarkSword ---
+    内核写入 / 提权:             kwrite x4, kread x6, krw_ x1
+    绕过签名 / 注入:             dylib x3
+    设备指纹 / 追踪:             sysctlbyname x2
+
+--- Kimi.app/Frameworks/kfd.framework/kfd ---
+    内核写入 / 提权:             kwrite x60, kread x59, pmap x2, ttbr x4
+    绕过签名 / 注入:             dylib x3
+    设备指纹 / 追踪:             sysctlbyname x2
+
+--- Kimi.app/Kimi ---
+    内核写入 / 提权:             kread x8, pmap x6, PAC x21, pte x13
+    NVRAM / 引导链（白苹果直接相关）:  kernelcache x9, SSV x2
+    绕过签名 / 注入:             amfi x4, dylib x9, resign x1
+    文件窃取:                  SecItemCopyMatching x2, kSecClass x4, NSFileManager x2, enumeratorAtPath x1, contentsOfDirectoryAtPath x1, NSHomeDirectory x2, Library/Caches x3, Documents x4
+    设备指纹 / 追踪:             sysctlbyname x2
+    Kimi 正品特征（真伪判定）:       moonshot x5, message x5
+
+--- Kimi.app/libchoma.dylib ---
+    内核写入 / 提权:             pte x6
+    绕过签名 / 注入:             dylib x8, cs_blob x2
+    设备指纹 / 追踪:             sysctlbyname x4
+
+--- Kimi.app/libjailbreak.dylib ---
+    内核写入 / 提权:             kwrite x18, kread x18, physrw x48, pmap x118, PAC x8, pte x34
+    NVRAM / 引导链（白苹果直接相关）:  AMFI x2, trustcache x96
+    绕过签名 / 注入:             AMFI x2, dylib x36, resign x4, cs_blob x10
+    文件窃取:                  NSFileManager x4, enumeratorAtPath x4, Documents x4
+    设备指纹 / 追踪:             sysctlbyname x4, boot_uuid x10
+    Kimi 正品特征（真伪判定）:       message x10, upload x8
+
+--- Kimi.app/libxpf.dylib ---
+    内核写入 / 提权:             physrw x2, pmap x196, PAC x2
+    NVRAM / 引导链（白苹果直接相关）:  kernelcache x4, Img4 x66, img4 x30, AMFI x2, trustcache x10
+    绕过签名 / 注入:             amfi x2, AMFI x2, dylib x12
+    Kimi 正品特征（真伪判定）:       message x2
+
+==============================================================================
+D. 白苹果风险点：NVRAM / 引导链写入证据
+==============================================================================
+  [Kimi.app/Kimi] kernelcache
+  [Kimi.app/libjailbreak.dylib] trustcache
+  [Kimi.app/libxpf.dylib] kernelcache, Img4, img4, trustcache
+
+  -- 关键上下文 --
+  (Kimi.app/libxpf.dylib) Img4
+      ...64...............Content.....B...Integer...Sequence.......................ignedCertCrlItemSpecs...ubjPubKeyInfoItemSpecs...........A..Decode...E...Img4...LengthOf...OidCompare...Parse...RSAPubKeyPKCS1ItemSpecs...S...TBSCertItem
+       get_error..!item_re..!load_img4..!non_ppl_init..!offset_dictionary_add_set..!p..!s..%t..%........_..&sec_decode_pointer..'..AppleSecureBootCA..DER...Img4Decode...ROOT_CA_CERTIFICATE..._oidAppleImg4ManifestCertSpec...c...decompres
+
+==============================================================================
+E. 文件窃取面：敏感容器 / 通讯录 / 相册 / 剪贴板 / 钥匙串
+==============================================================================
+
+  [通讯录]
+      （无命中）
+
+  [相册]
+      （无命中）
+
+  [剪贴板]
+      （无命中）
+
+  [钥匙串]
+      Kimi.app/Kimi                                    SecItemCopyMatching x2, kSecClassGenericPassword x2, kSecReturnData x2, SecItemAdd x2
+
+  [文件遍历]
+      Kimi.app/Kimi                                    enumeratorAtPath x1, contentsOfDirectoryAtPath x1
+      Kimi.app/libjailbreak.dylib                      enumeratorAtPath x4
+
+  [聊天库/第三方App]
+      Kimi.app/Kimi                                    com.tencent x1
+
+  [地理位置]
+      （无命中）
+
+  [麦克风/摄像头]
+      （无命中）
+
+==============================================================================
+F. 唯一真实外联点核对（api.appledb.dev 上下游）
+==============================================================================
+  [Kimi.app/Kimi]
+    (libgrabkernel) FRunLoopTimer=}8.v16@?0@"UITextField"8.adcdownload.apple.com.download.developer.apple.com.developer.apple.com.libgrabkernel2: ERROR: Failed to fetch API data: %s..libgrabkernel2: ERROR: Failed to pars
+    (libgrabkernel) ple.com.download.developer.apple.com.developer.apple.com.libgrabkernel2: ERROR: Failed to fetch API data: %s..libgrabkernel2: ERROR: Failed to parse API data: %s..sources.https://api.appledb.dev/ios/%
+    (appledb) ERROR: Failed to fetch API data: %s..libgrabkernel2: ERROR: Failed to parse API data: %s..sources.https://api.appledb.dev/ios/%@;%@.json.deviceMap.ota.ipsw.type.prerequisiteBuild.links.active.libgrabk
+    (appledb) ipsw.type.prerequisiteBuild.links.active.libgrabkernel2: Found firmware URL: %s (OTA: %s)..yes.no.https://api.appledb.dev/ios/main.json.xz.libgrabkernel2: ERROR: Failed to decompress API data: %s..osS
+    (kernelcache) e-mode-changed.%@.notification.hud.settings-changed.%@.notification.hud.state-changed./var/tmp/%@.hudlog.sock.kernelcache.start.Finish.HOME=.HOME=%@.770b76f7b7b90b1c020ff5111c7b62af.ca905eb4a00d341505
+    (kernelcache) Missing output path!.libgrabkernel2: Downloading BuildManifest.plist....libgrabkernel2: ERROR: Failed to find kernelcache path in BuildManifest.plist!.libgrabkernel2: ERROR: Missing output directory!.
+    (ipsw) rabkernel2: ERROR: Failed to parse API data: %s..sources.https://api.appledb.dev/ios/%@;%@.json.deviceMap.ota.ipsw.type.prerequisiteBuild.links.active.libgrabkernel2: Found firmware URL: %s (OTA: %s).
