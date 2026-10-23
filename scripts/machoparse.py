@@ -76,23 +76,24 @@ def parse_slice(data, off, size):
             if seg64:
                 segname = data[body:body + 16].split(b"\0")[0].decode("utf-8", "replace")
                 vmaddr, vmsize, fileoff, filesize = struct.unpack_from("<QQQQ", data, body + 16)
-                nsects = struct.unpack_from("<I", data, body + 64)[0]
-                sp = body + 72
+                nsects = struct.unpack_from("<I", data, body + 56)[0]
+                sp = body + 64
             else:
                 segname = data[body:body + 16].split(b"\0")[0].decode("utf-8", "replace")
                 vmaddr, vmsize, fileoff, filesize = struct.unpack_from("<IIII", data, body + 16)
-                nsects = struct.unpack_from("<I", data, body + 48)[0]
-                sp = body + 56
+                nsects = struct.unpack_from("<I", data, body + 40)[0]
+                sp = body + 48
             secs = []
             for _i in range(min(nsects, 512)):
                 if sp + (80 if seg64 else 68) > lim:
                     break
                 sname = data[sp:sp + 16].split(b"\0")[0].decode("utf-8", "replace")
                 if seg64:
-                    s_off, s_size = struct.unpack_from("<QQ", data, sp + 40)
+                    s_size = struct.unpack_from("<Q", data, sp + 40)[0]
+                    s_off = struct.unpack_from("<I", data, sp + 48)[0]
                 else:
-                    s_off, s_size = struct.unpack_from("<II", data, sp + 32)
-                secs.append([sname, s_size])
+                    s_size, s_off = struct.unpack_from("<II", data, sp + 36)
+                secs.append([sname, s_size, s_off])
                 sp += 80 if seg64 else 68
             sect_count += nsects
             segs[segname] = {"vmaddr": vmaddr, "vmsize": vmsize, "fileoff": fileoff,
