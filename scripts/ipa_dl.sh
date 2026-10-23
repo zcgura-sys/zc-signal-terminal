@@ -2,7 +2,8 @@
 # 每轮重新拉取目标 IPA 到工作目录（runner 是全新的，不持久）
 set -uo pipefail
 WS="${GITHUB_WORKSPACE:-$(pwd)}"
-LAB="$WS/logs/.lab"
+# 实验目录放 /tmp，避免 30MB 样本被 logs/ 自动提交回仓库
+LAB="${ZC_LAB:-/tmp/zc-lab}"
 mkdir -p "$LAB"
 URL="https://file.upfile.live/uploads/20261022/693ddb9a924f37a7db699be77cd09b30.ipa"
 if [ ! -s "$LAB/tri49.ipa" ]; then
