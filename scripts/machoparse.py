@@ -45,13 +45,14 @@ def parse_slice(data, off, size):
              flags=hex(flags), slice_offset=off, slice_size=size)
 
     libs, rpaths, segs, cmds, sect_count = [], [], {}, [], 0
+    lim = min(end_all := (off + size), len(data))
     p = off + hsize
-    end = p + sizeofcmds
+    end = min(p + sizeofcmds, lim)
     for _ in range(ncmds):
-        if p + 8 > end:
+        if p + 8 > end or p + 8 > lim:
             break
         cmd, csize = struct.unpack_from("<II", data, p)
-        if csize < 8:
+        if csize < 8 or p + csize > lim:
             break
         name = LC.get(cmd, hex(cmd))
         body = p + 8
@@ -61,7 +62,7 @@ def parse_slice(data, off, size):
         elif cmd in (0x1C, 0x8000001C):
             noff = struct.unpack_from("<I", data, body)[0]
             rpaths.append(data[body + noff:p + csize].split(b"\0")[0].decode("utf-8", "replace"))
-        elif cmd == 0x2C:  # LC_ENCRYPTION_INFO_64
+        elif cmd == 0x2C and p + csize >= body + 20:  # LC_ENCRYPTION_INFO_64
             c_off, c_size, c_id, _pad = struct.unpack_from("<IIIi", data, body)
             d.update(crypt_offset=c_off, crypt_size=c_size, crypt_id=c_id, encrypted=(c_id != 0))
         elif cmd == 0x20:  # LC_ENCRYPTION_INFO (32)
@@ -70,7 +71,7 @@ def parse_slice(data, off, size):
         elif cmd == 0x1D:  # LC_CODE_SIGNATURE
             doff, dsize = struct.unpack_from("<II", data, body)
             d.update(cs_offset=doff, cs_size=dsize)
-        elif cmd in (0x19, 0x1):
+        elif cmd in (0x19, 0x1) and p + csize >= body + (72 if cmd == 0x19 else 56):
             seg64 = cmd == 0x19
             if seg64:
                 segname = data[body:body + 16].split(b"\0")[0].decode("utf-8", "replace")
@@ -83,7 +84,9 @@ def parse_slice(data, off, size):
                 nsects = struct.unpack_from("<I", data, body + 48)[0]
                 sp = body + 56
             secs = []
-            for _i in range(nsects):
+            for _i in range(min(nsects, 512)):
+                if sp + (80 if seg64 else 68) > lim:
+                    break
                 sname = data[sp:sp + 16].split(b"\0")[0].decode("utf-8", "replace")
                 if seg64:
                     s_off, s_size = struct.unpack_from("<QQ", data, sp + 40)
@@ -94,13 +97,13 @@ def parse_slice(data, off, size):
             sect_count += nsects
             segs[segname] = {"vmaddr": vmaddr, "vmsize": vmsize, "fileoff": fileoff,
                              "filesize": filesize, "sections": [[a, b] for a, b in secs]}
-        elif cmd == 0x2:  # SYMTAB
+        elif cmd == 0x2 and p + csize >= body + 16:  # SYMTAB
             symoff, nsyms, stroff, strsize = struct.unpack_from("<IIII", data, body)
             d.update(symtab={"symoff": symoff, "nsyms": nsyms, "strsize": strsize})
-        elif cmd == 0x28:  # LC_MAIN
+        elif cmd == 0x28 and p + csize >= body + 16:  # LC_MAIN
             eoff, ssize = struct.unpack_from("<QQ", data, body)
             d.update(entryoff=eoff, stacksize=ssize)
-        elif cmd == 0x32:  # LC_BUILD_VERSION
+        elif cmd == 0x32 and p + csize >= body + 8:  # LC_BUILD_VERSION
             platform, minos = struct.unpack_from("<II", data, body)
             d.update(platform=platform, minos=minos)
         elif cmd in (0x25,):
@@ -159,7 +162,9 @@ def parse_file(path):
         res["fat_archs"] = [CPU.get(c & 0xFFFFFFFF, str(c)) for c, _, _ in ents]
         for cpu, off, size in ents:
             try:
-                res["slices"].append(parse_slice(data, off, size))
+                sl = parse_slice(data, off, min(size, len(data) - off))
+                sl["fat_cputype"] = CPU.get(cpu & 0xFFFFFFFF, str(cpu))
+                res["slices"].append(sl)
             except Exception as e:
                 res["slices"].append({"error": repr(e), "offs": off})
     else:
