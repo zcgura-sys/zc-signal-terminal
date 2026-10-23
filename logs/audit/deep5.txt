@@ -1,0 +1,419 @@
+==============================================================================
+M. 中文 / UTF-8 可读串（UI 层真实身份还原）
+==============================================================================
+
+--- Kimi.app/Frameworks/ClearSword.framework/ClearSword  (中文串 8 条 / 去重 2) ---
+    @0x0000eb45  /Users/mac/Desktop/C内核系列2.0/三角/Application/Dopamine/Exploits/ClearSword/
+    @0x0000ec69  /Users/mac/Desktop/C内核系列2.0/三角/Application/Dopamine/Exploits/ClearSword/exploit/
+
+--- Kimi.app/Frameworks/DarkSword.framework/DarkSword  (中文串 1 条 / 去重 1) ---
+    @0x00017846  /Users/mac/Desktop/C内核系列2.0/三角/Application/Dopamine/Exploits/DarkSword/
+
+--- Kimi.app/Frameworks/kfd.framework/kfd  (中文串 1 条 / 去重 1) ---
+    @0x00020e79  /Users/mac/Desktop/C内核系列2.0/三角/Application/Dopamine/Exploits/kfd/
+
+--- Kimi.app/Kimi  (中文串 2938 条 / 去重 2467) ---
+    @0x0001df02  k鲜Ri
+    @0x0001e43f  R臧rhV
+    @0x0001ef77  R藸rh
+    @0x0001f3b8  讋R(֠rh
+    @0x00034323  r茄RHa
+    @0x000380a5  ͗R衫r
+    @0x000525fe  +*鷑R	Y
+    @0x000581f8  赍R(_
+    @0x0005e8c5  ��R蛺r
+    @0x0005eace  (*ȉ�R謮r
+    @0x00069bdb  k蠞RH
+    @0x0006aeb5  ߁R螺r
+    @0x0007736f  R趱rH
+    @0x0007a7b7  kȺ�R辸r
+    @0x0007a8bb  k蓇R(S
+    @0x0007b44a  (*薙R
+    @0x000800de  **茏Rh
+    @0x0008cea9  �R茫r
+    @0x001b7127  R螪rhB
+    @0x001b7273  R蕴rh
+    @0x001b75fb  R葹rh>
+    @0x001b788f  R螩rhN
+    @0x001b7973  R趽rh
+    @0x001b7a54  (΅R蕧rh
+    @0x001b7eb3  R輳rh
+    @0x001c4585  I3q觟
+    @0x001c85d7  R醽r)
+    @0x001c9a02  (*觓RH
+    @0x001cb8ac  趄R(*
+    @0x001cc526  (*踌Rh
+    @0x001cd466  -*鴙Rii
+    @0x001cf567  kȔ�R若rj
+    @0x001dbaf7  R錤r)
+    @0x001dbc3a  (*辒R
+    @0x001f19d7  R霱r)
+    @0x001f89e3  R醧r)
+    @0x001ff976  (*誊R
+    @0x001ffe1c  )˓R鸠r,
+    @0x00203486  -*觃R(J
+    @0x002162e7  *茏Rh
+    @0x002195b8  i怹hv@
+    @0x00219993  R飨r
+    @0x00219cf0  逎R骶r
+    @0x00219d02  (*蠛R
+    @0x0021bf77  r龂Ri�r)
+    @0x0021cd08  领Ri,
+    @0x0021f072  k齙R)
+    @0x0021f21c  韅R锦r
+    @0x0021f23e  J鉝R
+    @0x00221f8c  髈RIիr
+    @0x002237fe  k逞R	R
+    @0x002249bd  ʗR麣r
+    @0x002263a1  ǙR鑹r)
+    @0x0022748a  k鞋R
+    @0x00227698  雀R颹r
+    @0x002278ea  J阅RI+
+    @0x00228837  R郷r
+    @0x0022911a  *鿐RI
+    @0x00229a1a  k鼖R
+    @0x0022ae56  )*鹗R魠r
+    @0x0022af40  醚RiS
+    @0x0022d3f6  J醆R
+    @0x0022d803  R驳rI
+    @0x0022f514  髜Rig
+    @0x0023025e  k魑R鏾r
+    @0x00230be8  镏R)N
+    @0x00230e8b  R逰rK�R
+    @0x00230fb0  )�R鬣r
+    @0x0023129d  �R鑲r
+    @0x00232988  鑒R)�r
+    @0x0023325c  )�R閨r
+    @0x00233274  ɟ�R骷r
+    @0x002376cc  骁R)7
+    @0x00237ebf  R鱵r)
+    @0x00239776  *齍RIJ
+    @0x0023b562  J雉R
+    @0x0023eb1c  �R鳦r
+    @0x002477b9  ցR雠r
+    @0x0024c684  i搹hvH
+    @0x0024d70a  k闒Ri
+    @0x0025265a  k	̊R鯾r
+    @0x002535f8  讗R(ݢrh
+    @0x0025b8ff  R鴬r)
+    @0x0025c224  鷉R	`
+    @0x0025c603  R錭r)
+    @0x0025e4d7  R韢r
+    @0x00263fc4  龟R	�r
+    @0x0026e016  **舁R
+    @0x0026ffda  (*藄R
+    @0x00273fa9  ��R轥r
+    @0x00274e20  逋RiG
+    @0x0027a0f5  �R馬r)
+    @0x0027e1db  R骤r)
+    @0x00280bfa  k锇R
+    @0x002848db  *貐R(x
+    @0x0028a587  *H܊R赨r
+    @0x0028a9eb  R錦r)
+    @0x00290126  (*腉R
+    @0x00294982  (*菆R
+    @0x00296ebf  kh�R践rH
+    @0x0029a5fa  (*袙Rh
+    @0x0029a70e  (*蒓R(��r
+    @0x0029b3db  k讓R藣r
+    @0x0029dbac  辔Rhy
+    @0x0029fd75  ׌R詽r
+    @0x002a4d10  鳘R)1
+    @0x00303623  R釾r)
+    @0x0030412f  R̃�r鏇R)|
+    @0x003099c9  ?B9苀�
+    @0x0030d338  飙RIF
+    @0x0030d7d0  鴓Rit
+    @0x0030e1e8  鉜RIH
+    @0x0030e21b  R魣r�
+    @0x0030e344  鹘R)n
+    @0x0030e391  �R邱r
+    @0x0030e39d  ��R麭r
+    @0x0030e753  R顡r�
+    @0x00323843  R鋯r)
+    @0x0033abcb  R蜶rh
+    @0x0033e962  **貗R
+    ... 其余 2347 条省略
+
+--- Kimi.app/libchoma.dylib  (中文串 2 条 / 去重 2) ---
+    @0x0002e9e0  jʾӧ9F52謸rd�r
+    @0x0005e885  戸4(*2$
+
+--- Kimi.app/libjailbreak.dylib  (中文串 79 条 / 去重 40) ---
+    @0x0002dbf9  allocate_page_table_range: min=0x%llx max=0x%llx 扫描 [0x%llx, 0x%llx)
+    @0x0002dc42  allocate_page_table_range: 游标起点 0x%llx(取自 max_address=0x%llx 往下 512MB,区间 [0x%llx,0x%llx])
+    @0x0002dcb0  allocate_page_table_range: [游标] 命中 want=0x%llx → 0x%llx
+    @0x0002dcf2  allocate_page_table_range: 游标本轮 4 次未命中(下次继续推进)
+    @0x0002dd3d  allocate_page_table_range: 已达扫描上限 %llu → 放弃
+    @0x0002dd7b  allocate_page_table_range: [FIXED 全局] 命中 0x%llx(第 %llu 次)
+    @0x0002ddc1  allocate_page_table_range: 扫完 %llu 次没有可用块 → NULL
+    @0x0002de04  alloc_page_table_unassigned: 进入 pmap_self()=0x%llx ttep=0x%llx (pmap.ttep=0x%x)
+    @0x0002de58  alloc_page_table_unassigned: FAIL pmap/ttep 为 0 —— pmap_self() 或 vm_map->pmap 偏移不对
+    @0x0002debb  alloc_page_table_unassigned: 原语检查 kalloc_global=%p kalloc_local=%p kcall=%p physaccess_mapped=%p → %s
+    @0x0002df2b  可以自造页表
+    @0x0002df3e  不可用,回退到抢表现有路径
+    @0x0002df64  alloc_page_table_unassigned: [自造] kalloc(size=0x%llx) -> %d va=0x%llx
+    @0x0002dfae  alloc_page_table_unassigned: [自造] kvtophys(0x%llx) = 0x%llx
+    @0x0002dfee  alloc_page_table_unassigned: [自造] 新页非零 8 字节数=%llu (应为 0)
+    @0x0002e03d  alloc_page_table_unassigned: [自造] 已设 pmap=0x%llx vas=0 lvl=2 → 返回 pa=0x%llx
+    @0x0002e097  alloc_page_table_unassigned: [自造] 新页非零,丢弃
+    @0x0002e0d1  alloc_page_table_unassigned: 第 %d 轮, allocate_page_table_range() ...
+    @0x0002e177  alloc_page_table_unassigned: mlock 完成
+    @0x0002e22c  alloc_page_table_unassigned: FAIL allocatedPT=0 → 原版会在 pagetable_get_refcnt(0) 解引用空指针,这里改成重试
+    @0x0002e2ab  alloc_page_table_unassigned: 重试 %d 次仍拿不到页表 → 放弃(返回 0)
+    @0x0002e362  alloc_page_table_unassigned: 第 %d 轮 refcnt=%u | L2表 0x%llx 非零项=%llu 我们的idx=%llu
+    @0x0002e3c4  alloc_page_table_unassigned: 第 %d 轮 refcnt=%u != 1 → 换 L2 块重试 (free_lvl2=0x%llx 保留不归还)
+    @0x0002e433  alloc_page_table_unassigned: 重试 %d 次仍拿不到有效页表 → 放弃(返回 0)
+    @0x0002e48b  === jb build=r5  pmap_expand_range 进入 pmap=0x%llx vaStart=0x%llx size=0x%llx ===
+    @0x0002e63e  is_kcall_available=%d → 走 %s 分支
+    @0x0002e66c  手写页表分配(非 kcall)
+    @0x0002e68a  [非kcall] ENTER probe (no computation)
+    @0x0002e6b2  [非kcall] 0: 进入 else 分支, vaStart=0x%llx size=0x%llx L2_BLOCK_MASK=0x%llx
+    @0x0002e704  [非kcall] 1: l2Start=0x%llx
+    @0x0002e721  [非kcall] 2: l2End=0x%llx
+    @0x0002e73c  [非kcall] l2Start=0x%llx l2End=0x%llx (迭代 %llu 次)
+    @0x0002e775  [非kcall] 迭代 va=0x%llx …
+    @0x0002e795  [非kcall]   vtophys_lvl -> leafLevel=%llu pte=0x%llx
+    @0x0002e7cb  [非kcall]   !! 意外的 leafLevel=%llu
+    @0x0002e7f4  [非kcall]   → pmap_alloc_page_table(pmap=0x%llx, level=%llu, va=0x%llx)
+    @0x0002e83f  [非kcall]   pmap_alloc_page_table -> 0x%llx
+    @0x0002e86c  [非kcall]   WRITE physwrite64(pte=0x%llx, val=0x%llx) [oldEntry=0x%llx]
+    @0x0002e8b5  [非kcall]   WRITE 完成(没 panic)
+    @0x0004a421  )菬��\�
+
+--- Kimi.app/libxpf.dylib  (中文串 5 条 / 去重 2) ---
+    @0x00009802  @9釁R
+    @0x0006fa2d  壈�TY
+
+==============================================================================
+N. 外联地址原文（含非 ASCII 上下文，防被点号掩盖）
+==============================================================================
+
+--- Kimi.app/Frameworks/ClearSword.framework/ClearSword (0) ---
+    （无）
+
+--- Kimi.app/Frameworks/DarkSword.framework/DarkSword (0) ---
+    （无）
+
+--- Kimi.app/Frameworks/kfd.framework/kfd (0) ---
+    （无）
+
+--- Kimi.app/Kimi (3) ---
+    https://api.appledb.dev/ios/%@;%@.json
+    https://api.appledb.dev/ios/main.json.xz
+    http://www.apple.com/DTDs/PropertyList-1.0.dtd
+
+--- Kimi.app/libchoma.dylib (0) ---
+    （无）
+
+--- Kimi.app/libjailbreak.dylib (0) ---
+    （无）
+
+--- Kimi.app/libxpf.dylib (2) ---
+    https://www.apple.com/appleca/0
+
+==============================================================================
+O. ObjC 类名（真实功能面清单）
+==============================================================================
+
+--- Kimi.app/Frameworks/DarkSword.framework/DarkSword  类总数 4 / 自有类 0 ---
+    （无自有类名，可能是 C/C++ 组件）
+
+--- Kimi.app/Kimi  类总数 176 / 自有类 76 ---
+    DOActionMenuButton
+    DOActionMenuView
+    DOAppDelegate
+    DOBlurEffect
+    DOButtonCell
+    DOCreditsCell
+    DOCreditsCellItem
+    DODebugLogView
+    DODoubleHelixIndicator
+    DOEnvironmentManager
+    DOExploit
+    DOExploitManager
+    DOGlobalAppearance
+    DOHeaderCell
+    DOHeaderView
+    DOJailbreakButton
+    DOJailbreaker
+    DOLoadingIndicator
+    DOLogCrashViewController
+    DOLyricsLogItemView
+    DOLyricsLogView
+    DOMainViewController
+    DOModalBackAction
+    DOModalTransitionPush
+    DOModalTransitionScale
+    DONavigationController
+    DOPSExploitListItemsController
+    DOPSJetsamListItemsController
+    DOPSListController
+    DOPSListItemsController
+    DOPanelLogView
+    DOPreferenceManager
+    DOProgressiveBlurView
+    DOSceneDelegate
+    DOSettingsController
+    DOTheme
+    DOThemeManager
+    DOUIManager
+    DOVerifyViewController
+    DrawRootViewController
+    FramebufferDescriptor
+    GameDraw
+    HUDApplication
+    HUDConfig
+    HUDDelegate
+    HUDMainWindow
+    HUDThread
+    HideView
+    LOGRootWindow
+    MTKView
+    MetalBuffer
+    MetalContext
+    NOBLEKEY_
+    PSListController
+    PSListItemsController
+    PSSpecifier
+    PSTableCell
+    Partial
+    ProcessInfo
+    ReadGame
+    TSEventFetcher
+    TSHEnvScan
+    TSHEnvScanResult
+    TSHGameDrawDisplayLinkProxy
+    TSHMenuCaptureView
+    TSHMenuCaptureViewController
+    TSHMenuCaptureWindow
+    TSHOverlayPassthroughView
+    TSHStatusBarBallRoot
+    TSHStatusBarHitView
+    TSHTouchSenderIDMonitor
+    TSHVirtualDigitizer
+    Userinfo
+    c7d3592295f46957f32db580304dba29
+    initializationDefaults
+    ok
+
+--- Kimi.app/libjailbreak.dylib  类总数 9 / 自有类 0 ---
+    （无自有类名，可能是 C/C++ 组件）
+
+==============================================================================
+P. ObjC selector 中的『敏感能力』(偷文件 / 剪贴板 / 通讯录 / 相册)
+==============================================================================
+
+--- Kimi.app/Frameworks/ClearSword.framework/ClearSword ---
+  [越狱检测] 1
+      @executable_path/libjailbreak.dylib
+  [反调试] 1
+      _sysctlbyname
+  [内核] 6
+      _clearsword_kreadbuf
+      _clearsword_kwritebuf
+      _early_kread64
+      _early_kreadbuf
+      _early_kwrite64
+      _early_kwritebuf
+
+--- Kimi.app/Frameworks/DarkSword.framework/DarkSword ---
+  [越狱检测] 1
+      @executable_path/libjailbreak.dylib
+  [反调试] 1
+      _sysctlbyname
+  [内核] 9
+      _kread_ptr
+      _early_kread64
+      _early_kreadbuf
+      _early_kwrite64
+      _early_kwritebuf
+      _darksword_kreadbuf
+
+--- Kimi.app/Frameworks/kfd.framework/kfd ---
+  [越狱检测] 1
+      @executable_path/libjailbreak.dylib
+  [反调试] 1
+      _sysctlbyname
+  [内核] 117
+      @rpath/kfd.framework/kfd
+      @(#)PROGRAM:kfd  PROJECT:Dopamine-1
+      kread_IOSurface_init
+      kread_IOSurface.h
+      kwrite_dup_init
+      kwrite_dup.h
+
+--- Kimi.app/Kimi ---
+  [钥匙串] 3
+      _SecItemAdd
+      _SecItemCopyMatching
+      _kSecClassGenericPassword
+  [文件遍历] 2
+      contentsOfDirectoryAtPath:error:
+      enumeratorAtPath:
+  [上传] 2
+      dataTaskWithURL:completionHandler:
+      _objc_msgSend$dataTaskWithURL:completionHandler:
+  [越狱检测] 17
+      @loader_path/libjailbreak.dylib
+      T@"DOJailbreakButton",&,V_jailbreakBtn
+      _isJailbroken
+      _jailbreakBtn
+      isJailbroken
+      isJailbrokenWithOtherJailbreak
+  [反调试] 2
+      _sysctl
+      _sysctlbyname
+  [内核] 7
+      kfd
+      u^}ukfd^qsRa
+      _boot_manifest_hash
+      _kread32
+      _kread64
+      _kread_ptr
+
+--- Kimi.app/libchoma.dylib ---
+  [反调试] 2
+      @_sysctlbyname
+      _sysctlbyname
+
+--- Kimi.app/libjailbreak.dylib ---
+  [文件遍历] 2
+      enumeratorAtPath:
+      _objc_msgSend$enumeratorAtPath:
+  [上传] 4
+      <upload
+      _trustcache_file_upload
+      _trustcache_file_upload_with_uuid
+      ___trustcache_file_upload_block_invoke
+  [越狱检测] 14
+      @loader_path/libjailbreak.dylib
+      jailbreakInfo.usesPACBypass
+      jailbreakInfo.rootPath
+      jailbreakInfo.appIdentifier
+      jailbreakSettings.markAppsAsDebugged
+      jailbreakSettings.jetsamMultiplier
+  [反调试] 2
+      _sysctl
+      _sysctlbyname
+  [内核] 85
+      kernelSymbol.kalloc_data_external
+      kernelSymbol.txm_trustcache_root
+      kernelStruct.trustcache.nextptr
+      kernelStruct.trustcache.prevptr
+      kernelStruct.trustcache.type
+      kernelStruct.trustcache.size
+
+--- Kimi.app/libxpf.dylib ---
+  [内核] 10
+      kernelSymbol.kalloc_data_external
+      xpf_find_kalloc_data_external
+      kallocDataExternalBlAddr
+      kallocDataExternal
+      kernelSymbol.txm_trustcache_root
+      xpf_find_txm_trustcache_root
+
+==============================================================================
+Q. 高危行判定汇总
+==============================================================================
+  见 P 段：是否有上传 + 剪贴板/通讯录/相册 的组合，即「偷文件」的判定依据。
