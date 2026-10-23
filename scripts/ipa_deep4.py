@@ -160,10 +160,11 @@ def main():
     A("=" * 78)
     A("L. UI 层真实身份：这到底是聊天 App 还是越狱/外挂工具")
     A("=" * 78)
-    UI = [b"Boot Logo", b"boot logo", b"Live Mode", b"Cheat", b"cheat", b"Signature",
-          b"签名", b"外挂", b"透视", b"自瞄", b"免越狱", b"越狱", b"内核", b"授权",
-          b"卡密", b"设备码", b"激活", b"会员", b"启动器", b"注入"]
-    for kw in UI:
+    UI = ["Boot Logo", "boot logo", "Live Mode", "Cheat", "cheat", "Signature",
+          "签名", "外挂", "透视", "自瞄", "免越狱", "越狱", "内核", "授权",
+          "卡密", "设备码", "激活", "会员", "启动器", "注入", "作者", "官方"]
+    for raw_kw in UI:
+        kw = raw_kw.encode()
         n = main_b.count(kw)
         if n:
             A("")
