@@ -31,18 +31,19 @@ FAT = (b"\xca\xfe\xba\xbe", b"\xca\xfe\xba\xbf")
 LC_SYMTAB = 0x2
 LC_LOAD_DYLIB = 0xC
 LC_ID_DYLIB = 0xD
-LC_LOAD_WEAK_DYLIB = 0x8000001C
+LC_LAZY_LOAD_DYLIB = 0x20
+LC_LOAD_WEAK_DYLIB = 0x80000018
 LC_REEXPORT_DYLIB = 0x8000001F
 LC_LOAD_UPWARD_DYLIB = 0x80000023
-LC_RPATH = 0x8000001C | 0x1  # 占位，实际用下面表判定
+LC_RPATH = 0x8000001C
 DYLIB_CMD = {
     LC_LOAD_DYLIB: "LOAD",
     LC_ID_DYLIB: "ID",
+    LC_LAZY_LOAD_DYLIB: "LAZY",
     LC_LOAD_WEAK_DYLIB: "WEAK",
     LC_REEXPORT_DYLIB: "REEXPORT",
     LC_LOAD_UPWARD_DYLIB: "UPWARD",
 }
-RPATH_CMDS = (0x8000001C, 0x80000023, 0x1C)  # 由 cmd 名二次确认
 
 
 def is_macho(head):
@@ -117,14 +118,12 @@ def dylibs_and_rpaths(data, is64):
             name_off = struct.unpack_from("<I", data, off + 8)[0]
             if off + name_off < off + cmdsize and off + name_off < len(data):
                 libs.append((DYLIB_CMD[cmd], read_str(data, off + name_off)))
-        elif cmd in (0x8000001C, 0x1C, 0x80000023):
-            # LC_RPATH 与 LC_LOAD_WEAK_DYLIB 同值 0x8000001C，用内容判别
+        elif cmd == LC_RPATH:
             if off + 12 <= len(data):
                 path_off = struct.unpack_from("<I", data, off + 8)[0]
                 s = read_str(data, off + path_off) if off + path_off < len(data) else ""
-                if s.startswith("@") or s.startswith("/"):
+                if s:
                     rpaths.append(s)
-    # 去重，LC_RPATH 已被上面的弱链接判定污染，交给调用方过滤
     return libs, sorted(set(rpaths))
 
 
