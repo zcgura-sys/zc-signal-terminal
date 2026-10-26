@@ -112,21 +112,29 @@ async function main() {
   const treeSha = commit.tree.sha;
   console.log(`HEAD     : ${commitSha.slice(0, 10)}   tree ${treeSha.slice(0, 10)}`);
 
-  const tree = await gh(`/repos/${owner}/${name}/git/trees/${treeSha}`);
+  const tree = await gh(`/repos/${owner}/${name}/git/trees/${treeSha}?recursive=1`);
   if (tree.truncated) {
     console.warn('⚠️  tree 被 API 截断（>10 万条目），脚本拒绝继续，请改用 git 方式清理。');
     process.exit(1);
   }
 
-  const blobs = [];
-  const submodules = [];
-  let keptCount = 0;
+  const blobs = [];          // 待删除
+  const keepEntries = [];    // 保留（按原 path/mode/sha 写回新 tree）
+  const submodules = [];     // gitlink 子模块，保留不删
   for (const e of tree.tree) {
-    if (e.type === 'commit') { submodules.push(e.path); continue; }
+    if (e.type === 'commit') {
+      submodules.push(e.path);
+      keepEntries.push({ path: e.path, mode: e.mode || '160000', type: 'commit', sha: e.sha });
+      continue;
+    }
     if (e.type !== 'blob') continue;                      // 目录由 API 自动推导，无需列入
-    if (shouldKeep(e.path, args.includeWorkflows)) { keptCount++; continue; }
+    if (shouldKeep(e.path, args.includeWorkflows)) {
+      keepEntries.push({ path: e.path, mode: e.mode || '100644', type: 'blob', sha: e.sha });
+      continue;
+    }
     blobs.push(e);
   }
+  const keptCount = keepEntries.length;
 
   const totalBytes = blobs.reduce((s, b) => s + (b.size || 0), 0);
   console.log(`\n待删除   : ${blobs.length} 个文件（blob），合计 ${fmt(totalBytes)}`);
@@ -155,9 +163,9 @@ async function main() {
   console.log('\n=== 执行清空 ===');
   const newTree = await gh(`/repos/${owner}/${name}/git/trees`, {
     method: 'POST',
-    body: JSON.stringify({ tree: [], base_tree: undefined }),
+    body: JSON.stringify({ tree: keepEntries }),   // 空数组 = 全空树；保留项按原 sha 写回
   });
-  console.log(`新 tree   : ${newTree.sha}`);
+  console.log(`新 tree   : ${newTree.sha}（${keepEntries.length} 项保留）`);
 
   const newCommit = await gh(`/repos/${owner}/${name}/git/commits`, {
     method: 'POST',
