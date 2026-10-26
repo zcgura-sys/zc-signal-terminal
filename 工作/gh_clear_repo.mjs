@@ -190,5 +190,9 @@ main().catch((e) => {
   console.error(`\n❌ 失败：${e.message}`);
   if (e.status === 404) console.error('   （仓库不存在，或 Token 无权访问；私有仓库需要 Contents: Read and write）');
   if (e.status === 403) console.error('   （权限不足或被限流；检查 PAT 是否勾了 Contents 写权限）');
+  if (e.status === 422 || e.status === 409) {
+    console.error('   （更新分支指针被拒：常见原因是分支保护规则 / 只允许 PR 合并。');
+    console.error('    处理：GitHub → 仓库 Settings → Branches 临时关闭保护规则，或改用网页手动删除。）');
+  }
   process.exit(1);
 });
