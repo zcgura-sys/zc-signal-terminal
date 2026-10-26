@@ -1,0 +1,4 @@
+./.github/workflows/zc-signal-terminal.yml:4:#   1) workflow_dispatch —— 供云端执行器（run_command）按需派发命令
+./.github/workflows/zc-signal-terminal.yml:7:  workflow_dispatch:
+./.github/workflows/zc-agent.yml:3:# 让云端执行器（云沙箱）能通过 workflow_dispatch 派发命令
+./.github/workflows/zc-agent.yml:5:  workflow_dispatch:
