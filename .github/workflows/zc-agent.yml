@@ -1,0 +1,72 @@
+name: zc-agent-run
+
+# 让云端执行器（云沙箱）能通过 workflow_dispatch 派发命令
+on:
+  workflow_dispatch:
+    inputs:
+      command:
+        description: '要执行的 shell 命令'
+        required: true
+        default: 'echo hello-from-cloud-runner; uname -a'
+      cwd:
+        description: '工作目录（相对仓库根）'
+        required: false
+        default: '.'
+      timeout_ms:
+        description: '超时（毫秒）'
+        required: false
+        default: '120000'
+  push:
+    branches: [ main ]
+
+permissions:
+  contents: write
+
+jobs:
+  run:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Show environment
+        run: |
+          echo "== runner =="
+          uname -a
+          cat /etc/os-release | head -n 4
+          echo "== toolchain =="
+          python3 --version || true
+          pip3 --version || true
+          node --version || true
+          git --version || true
+
+      - name: Execute command
+        env:
+          ZC_CMD: ${{ inputs.command }}
+          ZC_CWD: ${{ inputs.cwd }}
+          ZC_TIMEOUT_MS: ${{ inputs.timeout_ms }}
+        run: |
+          set -o pipefail
+          WORKDIR="$GITHUB_WORKSPACE/${ZC_CWD:-.}"
+          cd "$WORKDIR" || cd "$GITHUB_WORKSPACE"
+          echo "---- [cwd] $(pwd) ----"
+          echo "---- [cmd] $ZC_CMD ----"
+          bash -lc "$ZC_CMD"
+          echo "---- [exit] $? ----"
+
+      - name: Persist workspace changes
+        if: always()
+        run: |
+          cd "$GITHUB_WORKSPACE"
+          git config user.name  "zc-agent-bot"
+          git config user.email "zc-agent-bot@users.noreply.github.com"
+          if [ -n "$(git status --porcelain)" ]; then
+            git add -A
+            git commit -m "chore(zc-agent): 云端执行后同步产物 [skip ci]" || true
+            git push || true
+          else
+            echo "工作区无改动，跳过提交"
+          fi
